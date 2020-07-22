@@ -17,7 +17,6 @@ module.exports = (db) => {
 
   // ASYNC AWAIT INSTEAD OF .THEN
   // router.get('/', async (req, res) => {
-
   //   const query = {
   //     text: 'SELECT * FROM users;'
   //   };
@@ -28,8 +27,6 @@ module.exports = (db) => {
   //   } catch (err) {
   //     console.log(err);
   //   }
-
-
   // });
 
 
@@ -37,7 +34,8 @@ module.exports = (db) => {
 
     // extract the data from req.body
     const { name, email, password } = req.body;
-
+    console.log("req.body:", req.body);
+    
     console.log({ name }, { email }, { password });
 
     // create an insert query in the db
