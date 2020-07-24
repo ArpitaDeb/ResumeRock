@@ -1,6 +1,7 @@
 import React from 'react';
 import useApplicationData from './hooks/useApplicationData';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const { state, setState } = useApplicationData();
