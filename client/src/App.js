@@ -1,6 +1,7 @@
 import React from 'react';
 import useApplicationData from './hooks/useApplicationData';
 import './App.css';
+import LeftSidebar from '../'
 
 function App() {
   const { state, setState } = useApplicationData();
