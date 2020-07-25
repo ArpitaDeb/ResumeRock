@@ -4,7 +4,8 @@ import Col from 'react-bootstrap/Col';
 
 export default function SummaryForm(props) {
 
-  const [summary, setSummary] = useState({ heading: props.heading, body: props.body });
+  const initialState = props.data || { heading: "", body: "" }
+  const [summary, setSummary] = useState(initialState);
 
   const handleChange = (event) => {
     const name = event.target.id;
