@@ -1,21 +1,18 @@
 import React, { useState, useReducer, useEffect, useContext } from 'react';
-import Summary from '../tabs/Summary';
+import {Nav} from "react-bootstrap";
 
-const tabs = [ 'Summary', 'PersonalInfo' ];
+const tabs = [ 'Summary', 'PersonalInfo', 'Education', 'CoreCompetencies', 'Experience', 'Reference' ];
 
-function reducer(state, action) {
-
-}
 const LeftSidebar = ({page, setPage}) => {
   const renderTabs = tabs.map((tab) => {
     return (
-      <div className={tab === page ? "tab active" : "tab"} onClick={() => setPage(tab)}>
+      <div className={tab === page ? "sidebar_item active" : "sidebar_item"} onClick={() => setPage(tab)}>
         {tab}
       </div>
     )
   })
   return (
-    <div className="leftSidebar">
+    <div className="sidebar">
       {renderTabs}
     </div>
   );
