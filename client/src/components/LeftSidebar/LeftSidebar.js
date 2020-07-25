@@ -6,7 +6,7 @@ const tabs = [ 'Summary', 'PersonalInfo', 'Education', 'CoreCompetencies', 'Expe
 const LeftSidebar = ({page, setPage}) => {
   const renderTabs = tabs.map((tab) => {
     return (
-      <div className={tab === page ? "sidebar_item active" : "sidebar_item"} onClick={() => setPage(tab)}>
+      <div className={tab === page ? " sidebar_item active" : "sidebar_item"} onClick={() => setPage(tab)}>
         {tab}
       </div>
     )
