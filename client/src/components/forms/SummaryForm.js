@@ -23,7 +23,7 @@ export default function SummaryForm(props) {
       </Form.Row>
       <Form.Group controlId="body">
         <Form.Label>Summary of Qualifications</Form.Label>
-        <Form.Control as="textarea" rows="3" placeholder="Briefly introduce yourself" value={summary.body} onChange={handleChange} />
+        <Form.Control as="textarea" rows="5" placeholder="Briefly introduce yourself" value={summary.body} onChange={handleChange} />
       </Form.Group>
     </Form>
   );
