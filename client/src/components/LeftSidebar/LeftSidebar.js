@@ -1,12 +1,11 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
-
 export default function LeftSidebar(props) {
   return (
   
       <Nav className="col-md-12 d-none d-md-block bg-light sidebar"
         activeKey="/home"
-        onSelect={selectedKey => alert(`selected ${selectedKey}`)}
+        onSelect={selectedKey => alert(`selected ${ selectedKey } `)}
       >
         <div className="sidebar-sticky"></div>
         {props.items.map((item) => (
@@ -18,4 +17,3 @@ export default function LeftSidebar(props) {
     
   );
 };
-

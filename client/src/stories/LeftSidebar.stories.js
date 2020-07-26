@@ -1,7 +1,6 @@
 import React from 'react';
 import LeftSidebar from "../components/LeftSidebar/LeftSidebar.js";
 import { action } from '@storybook/addon-actions';
-
 export default {
   title: 'LeftSidebar',
   component: LeftSidebar,
@@ -27,5 +26,4 @@ const items = [{
 {
   title: 'CERTIFICATES'
 }];
-
-export const sidebar = () => <LeftSidebar onUpdate={action('Update Received')} items={items}/>;
+export const sidebar = () => <LeftSidebar onUpdate={action('Update Received')} items={items} />;
