@@ -1,21 +1,21 @@
-import React, { useState, useReducer, useEffect, useContext } from 'react';
-import {Nav} from "react-bootstrap";
+import React from "react";
+import { Nav } from "react-bootstrap";
 
-const tabs = [ 'Summary', 'PersonalInfo', 'Education', 'CoreCompetencies', 'Experience', 'Reference' ];
-
-const LeftSidebar = ({page, setPage}) => {
-  const renderTabs = tabs.map((tab) => {
-    return (
-      <div className={tab === page ? " sidebar_item active" : "sidebar_item"} onClick={() => setPage(tab)}>
-        {tab}
-      </div>
-    )
-  })
+export default function LeftSidebar(props) {
   return (
-    <div className="sidebar">
-      {renderTabs}
-    </div>
+  
+      <Nav className="col-md-12 d-none d-md-block bg-light sidebar"
+        activeKey="/home"
+        onSelect={selectedKey => alert(`selected ${selectedKey}`)}
+      >
+        <div className="sidebar-sticky"></div>
+        {props.items.map((item) => (
+          <Nav.Item>
+            <Nav.Link eventKey="link">{item.title}</Nav.Link>
+          </Nav.Item>
+        ))}
+      </Nav>
+    
   );
-}
+};
 
-export default LeftSidebar;
