@@ -10,6 +10,7 @@ export default function SummaryForm(props) {
 
   const handleChange = (event) => {
     const name = event.target.id;
+    console.log(name);
     setSummary({ ...summary, [name]: event.target.value });
     props.onUpdate(summary);
   }

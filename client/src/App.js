@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
 
   const { state, setState } = useApplicationData();
-  //const userList = state.users.map(user => <li key={user.id}> {user.name} {user.email}</li>)
+  const userList = state.users.map(user => <li key={user.id}> {user.name} {user.email}</li>)
 
   return (
     <>
