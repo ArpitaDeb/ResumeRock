@@ -16,6 +16,18 @@ export const SummaryInContainer = () =>
   </FormContainer>
 
 export const PersonalInfoInContainer = () =>
-<FormContainer title="Personal Information" >
-  <PersonalInfoForm onUpdate={action('Update Received')} />
-</FormContainer>
+  <FormContainer title="Personal Information" >
+    <PersonalInfoForm data={{
+      firstName: "",
+      lastName: "",
+      profTitle: "",
+      email: "",
+      linkedIn: "",
+      phoneNumber: "",
+      addressLine1: "",
+      addressLine2: "",
+      formGridcity: "",
+      formGridProvince: "",
+      formGridZip: ""
+    }} onUpdate={action('Update Received')} />
+  </FormContainer>

@@ -15,7 +15,7 @@ export default function PersonalInfoForm(props) {
     linkedIn: "",
     phoneNumber: "",
     addressLine1: "",
-    addressLine2:"",
+    addressLine2: "",
     formGridcity: "",
     formGridProvince: "",
     formGridZip: ""
@@ -24,6 +24,7 @@ export default function PersonalInfoForm(props) {
 
   const onInputChange = (event) => {
     const updatedVal = event.target.id;
+    console.log(updatedVal);
     setPersonalInfo({ ...PersonalInfo, [updatedVal]: event.target.value });
     props.onUpdate(PersonalInfo);
   }
@@ -57,7 +58,7 @@ export default function PersonalInfoForm(props) {
       <Form.Row>
         <Form.Group as={Col} xs={8} controlId="linkedIn">
           <Form.Label>LINKEDIN PROFILE</Form.Label>
-          <Form.Control required type="email" placeholder="Enter LinkedIn Profile" value={PersonalInfo.linkedIn} onChange={onInputChange} />
+          <Form.Control required type="url" placeholder="Enter LinkedIn Profile" value={PersonalInfo.linkedIn} onChange={onInputChange} />
         </Form.Group>
       </Form.Row>
       <Form.Row>

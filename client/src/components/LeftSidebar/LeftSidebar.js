@@ -10,7 +10,7 @@ export default function LeftSidebar(props) {
       <div className="sidebar-sticky"></div>
       {props.items.map((item) => (
         <Nav.Item>
-          <Nav.Link eventKey="link"><i className="fa fa-envelope fa-fw"></i>{item.title}</Nav.Link>
+          <Nav.Link eventKey="link">{item.title}</Nav.Link>
         </Nav.Item>
       ))}
     </Nav>
