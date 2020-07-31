@@ -4,6 +4,7 @@ import FormContainer from "../components/FormContainer";
 import { action } from '@storybook/addon-actions';
 import SummaryForm from "../components/forms/SummaryForm";
 import PersonalInfoForm from "../components/forms/PersonalInfoForm";
+import CoreCompetencyForm from "../components/forms/CoreCompetencyForm";
 
 export default {
   title: 'FormContainer',
@@ -29,4 +30,9 @@ export const PersonalInfoInContainer = () =>
     formGridProvince: "",
     formGridZip: ""
   }} onUpdate={action('Update Received')} />
+</FormContainer>
+
+export const CoreCompetencyInContainer = () =>
+<FormContainer title="CoreCompetency" >
+  <CoreCompetencyForm data={{ heading: "CoreCompetency"}} onUpdate={action('Update Received')} />
 </FormContainer>
