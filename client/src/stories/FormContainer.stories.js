@@ -30,3 +30,10 @@ export const PersonalInfoInContainer = () =>
     formGridZip: ""
   }} onUpdate={action('Update Received')} />
 </FormContainer>
+
+export const EducationInContainer = () =>
+<FormContainer title="Education" >
+  <EducationForm data={{ heading: "Education"}} onUpdate={action('Update Received')}
+  onEducationChange={action('Education added')}
+  onHeadingChange={action('heading added')} />
+</FormContainer>
