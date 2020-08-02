@@ -100,7 +100,7 @@ export default function CoreCompetencyForm(props) {
       {
         state.skills.map(item => {
           return (
-            <Card border="primary" style={{ width: '18rem', margin: '.5rem' }}>
+            <Card border="primary" style={{ width: '20rem', margin: '.5rem' }}>
               <Card.Body>
                 <Card.Text>
                   {item.name}
@@ -108,10 +108,12 @@ export default function CoreCompetencyForm(props) {
                 <Card.Text>
                   {item.rating}
                 </Card.Text>
-                <Button variant="primary" type="button"
-                  onClick={() => handleEditShow(item.name, item.id)}>Edit</Button>
-                <Button variant="primary" type="button"
-                  onClick={() => deleteItem(item.id)}>Delete</Button>
+                <div style={{ position: 'absolute', right: 0, bottom: '2px' }}>
+                  <Button variant="primary" type="button" style={{ margin: '.2rem' }}
+                    onClick={() => handleEditShow(item.name, item.id)}>Edit</Button>
+                  <Button variant="primary" type="button"
+                    onClick={() => deleteItem(item.id)}>Delete</Button>
+                </div>
               </Card.Body>
             </Card>
           )
@@ -128,14 +130,14 @@ export default function CoreCompetencyForm(props) {
       >
         <Form>
           <Form.Row>
-            <Form.Group controlId="skill">
+            <Form.Group as={Col} xs={5} controlId="skill">
               <Form.Label>Add Skill</Form.Label>
               <Form.Control size="md" type="text" required
                 placeholder="Enter Skills/Expertise"
                 value={state.editName}
                 onChange={onSkillNameChange} />
             </Form.Group>
-            <Form.Group controlId="Rating">
+            <Form.Group as={Col} xs={5} controlId="Rating">
               <Form.Label>Rating</Form.Label>
               <ReactStars
                 count={5}
@@ -156,15 +158,15 @@ export default function CoreCompetencyForm(props) {
       >
         <Form>
           <Form.Row>
-            <Form.Group controlId="skill">
+            <Form.Group as={Col} xs={5} controlId="skill">
               <Form.Label>Edit Skill</Form.Label>
-              <Form.Control size="lg" type="text" required
+              <Form.Control size="md" type="text" required
                 value={state.editName}
                 onChange={onSkillNameChange} />
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group controlId="Rating">
+            <Form.Group as={Col} xs={5} controlId="Rating">
               <Form.Label>Rating</Form.Label>
               <ReactStars
                 count={5}
