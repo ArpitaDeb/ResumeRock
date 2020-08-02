@@ -2,6 +2,7 @@ import React from 'react';
 import useApplicationData from './hooks/useApplicationData';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ResumeBuilder from './components/ResumeBuilder';
 
 function App() {
   const { state, setState } = useApplicationData();
@@ -9,10 +10,7 @@ function App() {
 
   return (
     <>
-      <h1>Users</h1>
-      <ul>
-        {userList}
-      </ul>
+      <ResumeBuilder />
     </>
   );
 }
