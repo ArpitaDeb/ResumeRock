@@ -2,8 +2,6 @@ import React from "react";
 import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 export default function MyModalComponent(props) {
-  console.log(props);
-  console.log(props.children);
   return (
     <div>
       <Modal show={props.show} onHide={() => props.onHide({ msg: 'Cross Icon Clicked!' })}>

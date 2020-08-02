@@ -15,13 +15,16 @@ export const setCoreCompetency = () => (
     onHeadingChange={action('heading added')}
     skills={[{
       id: 1,
-      name: "React"
+      name: "React",
+      ratingText: "Basic"
     }, {
       id: 2,
-      name: "NodeJS"
+      name: "NodeJS",
+      ratingText: "Expert"
     }, {
       id: 3,
-      name: "React Native"
+      name: "React Native",
+      ratingText: "Advanced"
     }]}
     heading="Skills"
   />
