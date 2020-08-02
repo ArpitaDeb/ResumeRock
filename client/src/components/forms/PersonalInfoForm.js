@@ -12,7 +12,7 @@ export default function PersonalInfoForm(props) {
     const updatedVal = event.target.id;
     const newPersonalInfo = { ...personalInfo, [updatedVal]: event.target.value }
     setPersonalInfo(newPersonalInfo);
-    props.onUpdate({personal_info: personalInfo});
+    props.onUpdate({personal_info: newPersonalInfo});
   }
 
   return (

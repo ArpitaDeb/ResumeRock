@@ -8,6 +8,7 @@ import Navigationbar from "../components/Navigationbar";
 import LeftSideBar from "../components/LeftSidebar/LeftSidebar"
 import './ResumeBuilder.css';
 import PersonalInfoForm from "./forms/PersonalInfoForm";
+import Preview from "./preview/Preview"
 
 export default function ResumeBuilder(props) {
   const resumeDB = {
@@ -16,8 +17,7 @@ export default function ResumeBuilder(props) {
   const [resumeData, setResumeData] = useState(resumeDB);
 
   const resumeDataOnUpdate = (data) => {
-    debugger
-    setResumeData({...resumeData, ...data});
+    setResumeData({ ...resumeData, ...data });
   }
 
   const leftSideBarOnUpdate = (value) => {
@@ -58,6 +58,7 @@ export default function ResumeBuilder(props) {
         </Col>
 
         <Col className="bg-light col-5">
+          <Preview resumeData={resumeData}/>
         </Col>
       </Row>
     </>
