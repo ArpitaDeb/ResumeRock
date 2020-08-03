@@ -4,6 +4,7 @@ import FormContainer from "../components/FormContainer";
 import { action } from '@storybook/addon-actions';
 import SummaryForm from "../components/forms/SummaryForm";
 import PersonalInfoForm from "../components/forms/PersonalInfoForm";
+import EducationForm from "../components/forms/EducationForm";
 
 export default {
   title: 'FormContainer',
