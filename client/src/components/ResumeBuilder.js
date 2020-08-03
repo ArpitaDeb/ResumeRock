@@ -9,6 +9,7 @@ import LeftSideBar from "../components/LeftSidebar/LeftSidebar"
 import './ResumeBuilder.css';
 import PersonalInfoForm from "./forms/PersonalInfoForm";
 import Preview from "./preview/Preview"
+import CoreCompetencyForm from "./forms/CoreCompetencyForm"
 
 export default function ResumeBuilder(props) {
   const resumeDB = {
@@ -29,7 +30,7 @@ export default function ResumeBuilder(props) {
     { id: "personal_info", title: "Personal Information", component: <PersonalInfoForm onUpdate={resumeDataOnUpdate} data={resumeData.personal_info}/> },
     { id: "summary", title: "Summary", component: <SummaryForm onUpdate={resumeDataOnUpdate} data={resumeData.summary} /> },
     { id: "education", title: "Education" },
-    { id: "core_competencies", title: "Core Competencies" },
+    { id: "core_competencies", title: "Core Competencies", component: <CoreCompetencyForm onUpdate={resumeDataOnUpdate} data={resumeData.core_competencies} /> },
     { id: "experience", title: "Experience" },
     { id: "references", title: "References" }
   ]
