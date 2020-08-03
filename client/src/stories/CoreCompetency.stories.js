@@ -7,7 +7,7 @@ export default {
 };
 export const CoreCompetency = () => <CoreCompetencyForm
   onSkillChange={action('Skills added')}
-  onHeadingChange={action('heading added')}
+  onUpdate={action('onUpdate')}
 />;
 export const setCoreCompetency = () => (
   <CoreCompetencyForm
