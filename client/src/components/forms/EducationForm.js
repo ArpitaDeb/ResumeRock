@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import YearMonthPicker from 'react-year-month-picker';
-import MyModalComponent from "../MyModalComponent";
+import CustomModal from "../CustomModal";
 import moment from 'moment-timezone';
 //import YearMonthSelector from 'react-year-month-selector';
 //import 'react-year-month-selector/dist/react-year-month-selector.css';
@@ -211,7 +211,7 @@ export default function EducationForm(props) {
       <Button type="button" variant='primary'
         onClick={handleShow}
         size='lg'>+ ADD Education</Button>
-      <MyModalComponent
+      <CustomModal
         show={state.show}
         onClick={handleClose}
         onHide={handleClose}
@@ -288,8 +288,8 @@ export default function EducationForm(props) {
             />
           </Col>
         </Form>
-      </MyModalComponent>
-      <MyModalComponent
+      </CustomModal>
+      <CustomModal
         show={state.editShow}
         onClick={handleClose}
         onHide={handleClose}
@@ -361,7 +361,7 @@ export default function EducationForm(props) {
             />
           </Col>
         </Form>
-      </MyModalComponent >
+      </CustomModal >
     </>
   );
 };
