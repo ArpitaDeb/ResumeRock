@@ -10,6 +10,7 @@ import './ResumeBuilder.css';
 import PersonalInfoForm from "./forms/PersonalInfoForm";
 import Preview from "./preview/Preview"
 import CoreCompetencyForm from "./forms/CoreCompetencyForm"
+import EducationForm from "./forms/EducationForm"
 
 export default function ResumeBuilder(props) {
   const resumeDB = {
@@ -27,9 +28,9 @@ export default function ResumeBuilder(props) {
   }
 
   const sections = [
-    { id: "personal_info", title: "Personal Information", component: <PersonalInfoForm onUpdate={resumeDataOnUpdate} data={resumeData.personal_info}/> },
+    { id: "personal_info", title: "Personal Information", component: <PersonalInfoForm onUpdate={resumeDataOnUpdate} data={resumeData.personal_info} /> },
     { id: "summary", title: "Summary", component: <SummaryForm onUpdate={resumeDataOnUpdate} data={resumeData.summary} /> },
-    { id: "education", title: "Education" },
+    { id: "educations", title: "Education", component: <EducationForm onUpdate={resumeDataOnUpdate} data={resumeData.educations} /> },
     { id: "core_competencies", title: "Core Competencies", component: <CoreCompetencyForm onUpdate={resumeDataOnUpdate} data={resumeData.core_competencies} /> },
     { id: "experience", title: "Experience" },
     { id: "references", title: "References" }
@@ -59,7 +60,7 @@ export default function ResumeBuilder(props) {
         </Col>
 
         <Col className="bg-light col-5">
-          <Preview resumeData={resumeData}/>
+          <Preview resumeData={resumeData} />
         </Col>
       </Row>
     </>

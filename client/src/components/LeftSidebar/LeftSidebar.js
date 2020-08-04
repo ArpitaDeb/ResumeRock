@@ -7,7 +7,7 @@ export default function LeftSidebar(props) {
   return (
     <Nav className="flex-column" onSelect={(selectedItem) => props.onUpdate(selectedItem)}>
       {props.items.map((item) => (
-        <Nav.Item>
+        <Nav.Item key={item.id}>
           <Nav.Link eventKey={item.id}>{item.title}</Nav.Link>
         </Nav.Item>
       ))}
