@@ -10,6 +10,7 @@ import './ResumeBuilder.css';
 import PersonalInfoForm from "./forms/PersonalInfoForm";
 import Preview from "./preview/Preview"
 import CoreCompetencyForm from "./forms/CoreCompetencyForm"
+import ReferenceForm from "./forms/ReferenceForm"
 
 export default function ResumeBuilder(props) {
   const resumeDB = {
@@ -32,7 +33,7 @@ export default function ResumeBuilder(props) {
     { id: "education", title: "Education" },
     { id: "core_competencies", title: "Core Competencies", component: <CoreCompetencyForm onUpdate={resumeDataOnUpdate} data={resumeData.core_competencies} /> },
     { id: "experience", title: "Experience" },
-    { id: "references", title: "References" }
+    { id: "references", title: "References", component: <ReferenceForm onUpdate={resumeDataOnUpdate} data={resumeData.references} /> }
   ]
 
   const findTitleByID = (sectionID) => {

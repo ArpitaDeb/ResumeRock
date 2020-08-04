@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import SummaryForm from "../components/forms/SummaryForm";
 import PersonalInfoForm from "../components/forms/PersonalInfoForm";
 import CoreCompetencyForm from "../components/forms/CoreCompetencyForm";
-
+import ReferenceForm from "../components/forms/ReferenceForm";
 export default {
   title: 'FormContainer',
   component: FormContainer,
@@ -38,5 +38,5 @@ export const CoreCompetencyInContainer = () =>
   </FormContainer>
 export const ReferenceInContainer = () =>
   <FormContainer title="Reference" >
-    <CoreCompetencyForm data={{ heading: "Reference" }} onUpdate={action('Update Received')} />
+    <ReferenceForm data={{ heading: "Reference" }} onUpdate={action('Update Received')} />
   </FormContainer>

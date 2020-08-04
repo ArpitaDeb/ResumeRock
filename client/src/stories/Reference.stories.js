@@ -1,6 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import ReferenceForm from '../components/forms/CoreCompetencyForm';
+import ReferenceForm from '../components/forms/ReferenceForm';
 export default {
   title: 'Reference',
   component: ReferenceForm
@@ -14,8 +14,7 @@ export const setReference = () => (
     onReferenceChange={action('Refs added')}
     onHeadingChange={action('heading added')}
     onUpdate={action('Update Received')}
-    heading="References"
-    references={[{
+    referees={[{
       id: 1,
       name: "Dominic",
       email: "Dom@gmail.com"
@@ -28,5 +27,6 @@ export const setReference = () => (
       name: "Emma",
       email: "ema@gmail.com"
     }]}
+    heading="References"
   />
 );
