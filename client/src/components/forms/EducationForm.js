@@ -7,8 +7,6 @@ import Card from 'react-bootstrap/Card';
 import YearMonthPicker from 'react-year-month-picker';
 import CustomModal from "../CustomModal";
 import moment from 'moment-timezone';
-//import YearMonthSelector from 'react-year-month-selector';
-//import 'react-year-month-selector/dist/react-year-month-selector.css';
 
 export default function EducationForm(props) {
   const [state, setState] = useState({
@@ -48,60 +46,12 @@ export default function EducationForm(props) {
     setState({ ...state, heading: event.target.value });
     props.onHeadingChange(event.target.value);
   }
+
   const onEdValChange = (event) => {
     const updatedVal = event.target.id;
     //console.log('onEdValChange', updatedVal, event.target.value);
     setState({ ...state, [updatedVal]: event.target.value })
     //console.log('editName from onEdValChange',  state);
-  }
-  /*
-  const onEditChange = (event) => {
-    const { name, value } = event.target;
-    setState({ ...state, [name]: value });
-    props.onUpdate(state);
-  }
- const onEditChange  = (event) => {
-  const updatedVal = event.target.id;
-  //console.log('onEdValChange', updatedVal, event.target.value);
-  setState({ ...state, [updatedVal]: event.target.value })
-  //console.log('editName from onEdValChange',  state);
-  }
-
-  const onEditChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    setState({ ...state, [name]: event.target.value })
-  }
-  const handleChange = (event) => {
-    const updatedVal = event.target.id;
-    console.log(updatedVal);
-    setState({ ...state, [updatedVal]: event.target.value });
-    props.onUpdate(state);
-  }
-   */
-  const onEditChange = (event) => {
-    setState({ ...state, editName: event.target.value })
-  }
-  const onEditFieldChange = (event) => {
-    setState({ ...state, editField: event.target.value })
-  }
-  const onEditDegChange = (event) => {
-    setState({ ...state, editDeg: event.target.value })
-  }
-  const onEditGpaChange = (event) => {
-    setState({ ...state, editGpa: event.target.value })
-  }
-  const onEditStartDateChange = (event) => {
-    setState({ ...state, editStartDate: event.target.value })
-  }
-  const onEditEndDateChange = (event) => {
-    setState({ ...state, editEndDate: event.target.value })
-  }
-  const handleEditDateChange = (m, source) => {
-    const month = (m.format('MMM'));
-    const year = (m.format('YYYY'));
-    console.log(month, year, source);
-    setState({ ...state, [source]: `${month} ${year}` })
   }
 
   const handleDateChange = (m, source) => {
@@ -297,37 +247,37 @@ export default function EducationForm(props) {
       >
         <Form>
           <Form.Row>
-            <Form.Group controlId="INSTITUTION">
+            <Form.Group controlId="editName">
               <Form.Label>Edit Institution</Form.Label>
               <Form.Control size="lg" type="text" required
                 value={state.editName}
-                onChange={onEditChange} />
+                onChange={onEdValChange} />
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group controlId="FIELDOFSTUDY">
+            <Form.Group controlId="editField">
               <Form.Label>Edit Field Of Study</Form.Label>
               <Form.Control size="lg" type="text" required
                 value={state.editField}
-                onChange={onEditFieldChange} />
+                onChange={onEdValChange} />
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group as={Col} xs={6} controlId="TYPEOFDEGREE">
+            <Form.Group as={Col} xs={6} controlId="editDeg">
               <Form.Label>Edit Type of Degree</Form.Label>
               <Form.Control size="lg" type="text" required
                 value={state.editDeg}
-                onChange={onEditDegChange} />
+                onChange={onEdValChange} />
             </Form.Group>
-            <Form.Group as={Col} xs={4} controlId="CGPA">
+            <Form.Group as={Col} xs={4} controlId="editGpa">
               <Form.Label>Edit CGPA</Form.Label>
               <Form.Control size="lg" type="text"
                 value={state.editGpa}
-                onChange={onEditGpaChange} />
+                onChange={onEdValChange} />
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group as={Col} xs={6} controlId="STARTDATE">
+            <Form.Group as={Col} xs={6} controlId="editStartDate">
               <Form.Label>Edit Start Date</Form.Label>
               <YearMonthPicker
                 defaultYear={2020}
@@ -335,10 +285,10 @@ export default function EducationForm(props) {
                 minYear={1900}
                 maxYear={2040}
                 closeOnSelect
-                onChange={(m) => handleEditDateChange(m, 'editStartDate')}
+                onChange={(m) => handleDateChange(m, 'editStartDate')}
               />
             </Form.Group>
-            <Form.Group as={Col} xs={6} controlId="ENDDATE">
+            <Form.Group as={Col} xs={6} controlId="editEndDate">
               <Form.Label>Edit End Date</Form.Label>
               <YearMonthPicker
                 defaultYear={2020}
@@ -346,7 +296,7 @@ export default function EducationForm(props) {
                 minYear={1900}
                 maxYear={2040}
                 closeOnSelect
-                onChange={(m) => handleEditDateChange(m, 'editEndDate')}
+                onChange={(m) => handleDateChange(m, 'editEndDate')}
               />
             </Form.Group>
           </Form.Row>
