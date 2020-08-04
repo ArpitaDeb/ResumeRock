@@ -63,6 +63,7 @@ export default function EducationForm(props) {
   const handleSubmit = (fromModal) => {
     //console.log('handleSubmit');
     alert(fromModal.msg);
+    
     const newEducations = [...state.educations,
     {
       id: state.educations.length + 1,
@@ -171,8 +172,7 @@ export default function EducationForm(props) {
           <Form.Row>
             <Form.Group as={Col} xs={12} controlId="INSTITUTION">
               <Form.Label>INSTITUTION</Form.Label>
-              <Form.Control size="lg" type="text" required
-                placeholder="Enter Institution"
+              <Form.Control size="lg" type="text" required placeholder="Enter Institution"
                 value={state.INSTITUTION || ''}
                 onChange={onEdValChange} />
             </Form.Group>
