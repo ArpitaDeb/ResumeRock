@@ -7,16 +7,12 @@ export default {
 };
 export const Education = () => <EducationForm
   onUpdate={action('Update Received')}
-  onEducationChange={action('Education added')}
-  onHeadingChange={action('heading added')}
 />;
 export const setEducation = () => (
   <EducationForm
     onUpdate={action('Update Received')}
-    onEducationChange={action('Education added')}
-    onHeadingChange={action('heading added')}
     heading="Educations"
-    educations={[{
+    educationInfo={[{
       id: 1,
       INSTITUTION: "u OF T",
       FIELDOFSTUDY: "Engineering",
@@ -31,7 +27,7 @@ export const setEducation = () => (
       TYPEOFDEGREE: "Masters",
       CGPA: 3,
       STARTDATE: 'JUNE 2018',
-      ENDDATE: 'JUNE 2020'
+      checked: true,
     }]}
   />
 ); 
