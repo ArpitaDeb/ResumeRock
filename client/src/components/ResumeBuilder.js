@@ -30,7 +30,7 @@ export default function ResumeBuilder(props) {
   const sections = [
     { id: "personal_info", title: "Personal Information", component: <PersonalInfoForm onUpdate={resumeDataOnUpdate} data={resumeData.personal_info}/> },
     { id: "summary", title: "Summary", component: <SummaryForm onUpdate={resumeDataOnUpdate} data={resumeData.summary} /> },
-    // { id: "education", title: "Education", component: <Education onUpdate={resumeDataOnUpdate} data={resumeData.education} />},
+    { id: "education", title: "Education"},
     { id: "core_competencies", title: "Core Competencies", component: <CoreCompetencyForm onUpdate={resumeDataOnUpdate} data={resumeData.core_competencies} /> },
     { id: "experience", title: "Experience", component: <Experience onUpdate={resumeDataOnUpdate} data={resumeData.experience}/> },
     { id: "references", title: "References" }

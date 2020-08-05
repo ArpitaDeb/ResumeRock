@@ -16,9 +16,10 @@ export default function Experience(props) {
 
   const emptyExperience = {
     employer_name: "",
+    employer_description: "",
     job_title: "",
-    start_date: "",
-    end_date: "",
+    start_date: new Date(),
+    end_date: new Date(),
     present: false,
     city: "",
     country: "",
@@ -91,26 +92,24 @@ export default function Experience(props) {
 
 
   const showDateFromTo = (start, end) => {
-
-    const months = {
-      Jan: "1",
-      Feb: "2",
-      Mar: "3",
-      Apr: "4",
-      May: "5",
-      Jun: "6",
-      Jul: "7",
-      Aug: "8",
-      Sep: "9",
-      Oct: "10",
-      Nov: "11",
-      Dec: "12"
-    };
-    const toMonth = (end === "" ? "Present" : Object.keys(months).find(key => months[key] === (end.getMonth() + 1).toString()));
-    const fromMonth = Object.keys(months).find(key => months[key] === (start.getMonth() + 1).toString());
-
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"];
+    const toMonth = (end === "" ? "Present" : months[end.getMonth()]);
+    const fromMonth = months[start.getMonth()];
     return (toMonth === "Present" ? (`${fromMonth} ${start.getFullYear()} - ${toMonth}`) : (`${fromMonth} ${start.getFullYear()} - ${toMonth} ${end.getFullYear()}`));
   }
+
 
   return (
     <>
@@ -187,6 +186,19 @@ export default function Experience(props) {
             />
           </Form.Group>
 
+
+          <Form.Group controlId="employer_description">
+            <Form.Label>Employer Description</Form.Label>
+            <Form.Control
+              placeholder="Introduce the Employer/ Company"
+              size="md"
+              type="text"
+              required
+              onChange={handleNewExperienceChange}
+              value={newExperience.employer_description}
+            />
+          </Form.Group>
+
           <Form.Group controlId="job_title">
             <Form.Label>Job Title</Form.Label>
             <Form.Control
@@ -202,14 +214,14 @@ export default function Experience(props) {
           <Form.Row>
             <Form.Group as={Col} controlId="start_date">
               <Form.Label>Start Date</Form.Label>
-              <DatePicker className={"form-control"} selected={newExperience.start_date}
+              <DatePicker className="form-control" selected={newExperience.start_date}
                 onChange={(start_date) => handleNewExperienceChange({ target: { id: 'start_date', value: start_date } })}
               />
             </Form.Group>
 
             <Form.Group as={Col} controlId="end_date">
               <Form.Label>End Date</Form.Label>
-              <DatePicker className={"form-control"} disabled={newExperience.present} selected={newExperience.end_date}
+              <DatePicker className="form-control" disabled={newExperience.present} selected={newExperience.end_date}
                 onChange={(end_date) => handleNewExperienceChange({ target: { id: 'end_date', value: end_date } })}
               />
             </Form.Group>
@@ -254,6 +266,7 @@ export default function Experience(props) {
           <Form.Group controlId="exampleForm.ControlTextarea1">
             <Form.Label>Responsibilities</Form.Label>
             <ReactListInput
+              placeholder="Enter all your responsibilities"
               initialStagingValue=''
               onChange={(res) => handleNewExperienceChange({ target: { id: 'responsibilities', value: res } })}
               maxItems={5}
@@ -302,6 +315,18 @@ export default function Experience(props) {
             />
           </Form.Group>
 
+          <Form.Group controlId="employer_description">
+            <Form.Label>Employer Description</Form.Label>
+            <Form.Control
+              placeholder="Employer Description"
+              size="md"
+              type="text"
+              required
+              onChange={handleEditExperienceChange}
+              value={editExperience.employer_description}
+            />
+          </Form.Group>
+
           <Form.Group controlId="job_title">
             <Form.Label>Job Title</Form.Label>
             <Form.Control
@@ -317,7 +342,7 @@ export default function Experience(props) {
           <Form.Row>
             <Form.Group as={Col} controlId="start_date">
               <Form.Label>Start Date</Form.Label>
-              <DatePicker selected={editExperience.start_date}
+              <DatePicker className="form-control" selected={editExperience.start_date}
                 onChange={(start_date) => handleEditExperienceChange({ target: { id: 'start_date', value: start_date } })}
                 value={editExperience.start_date}
               />
@@ -325,19 +350,19 @@ export default function Experience(props) {
 
             <Form.Group as={Col} controlId="end_date">
               <Form.Label>End Date</Form.Label>
-              <DatePicker disabled={editExperience.present} selected={editExperience.end_date}
+              <DatePicker className="form-control" disabled={editExperience.present} selected={editExperience.end_date}
                 onChange={(end_date) => handleEditExperienceChange({ target: { id: 'end_date', value: end_date } })}
                 value={editExperience.end_date}
               />
             </Form.Group>
 
-            <Form.Group id="checkbox" controlId="present">
+            <Form.Group className="align-self-end" id="checkbox" controlId="present">
               <Form.Check type="checkbox"
                 label="Present"
                 onChange={handleCheckboxEditExperience}
                 value={editExperience.present}
                 defaultChecked={editExperience.present}
-                 />
+              />
             </Form.Group>
 
           </Form.Row>
@@ -349,7 +374,7 @@ export default function Experience(props) {
                 placeholder="Location"
                 size="md"
                 type="text"
-                required
+                required="true"
                 onChange={handleEditExperienceChange}
                 value={editExperience.city}
               />
