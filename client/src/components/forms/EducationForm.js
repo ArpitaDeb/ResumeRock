@@ -153,7 +153,7 @@ export default function EducationForm(props) {
         )}
       <Button type="button" variant='primary'
         onClick={() => setShowAddModal(true)}
-        size='lg'>+ ADD Education</Button>
+        size='md'>+ ADD Education</Button>
       <CustomModal
         show={showAddModal}
         onClose={() => setShowAddModal(false)}
@@ -163,8 +163,8 @@ export default function EducationForm(props) {
         <Form>
           <Form.Row>
             <Form.Group as={Col} xs={12} controlId="institution">
-              <Form.Label>Institution</Form.Label>
-              <Form.Control size="lg" type="text" required placeholder="Enter Institution"
+              <Form.Label>INSTITUTION</Form.Label>
+              <Form.Control size="md" type="text" required placeholder="Enter Institution"
                 value={educationDetails.institution}
                 onChange={onEdValChange} />
             </Form.Group>
@@ -172,7 +172,7 @@ export default function EducationForm(props) {
           <Form.Row>
             <Form.Group as={Col} xs={12} controlId="fieldOfStudy">
               <Form.Label>FIELD OF STUDY</Form.Label>
-              <Form.Control size="lg" type="text" required
+              <Form.Control size="md" type="text" required
                 placeholder="Enter Field of Study"
                 value={educationDetails.fieldOfStudy}
                 onChange={onEdValChange} />
@@ -181,14 +181,14 @@ export default function EducationForm(props) {
           <Form.Row>
             <Form.Group as={Col} xs={6} controlId="typeOfDegree">
               <Form.Label>TYPE OF DEGREE</Form.Label>
-              <Form.Control size="lg" type="text" required
+              <Form.Control size="md" type="text" required
                 placeholder="Enter Type of Degree"
                 value={educationDetails.typeOfDegree}
                 onChange={onEdValChange} />
             </Form.Group>
             <Form.Group as={Col} xs={4} controlId="CGPA">
               <Form.Label>CGPA</Form.Label>
-              <Form.Control size="lg" type="text"
+              <Form.Control size="md" type="text"
                 placeholder="Enter CGPA"
                 value={educationDetails.CGPA}
                 onChange={onEdValChange} />
@@ -230,8 +230,8 @@ export default function EducationForm(props) {
         <Form>
           <Form.Row>
             <Form.Group as={Col} xs={12} controlId="institution">
-              <Form.Label>Institution</Form.Label>
-              <Form.Control size="lg" type="text" required placeholder="Enter Institution"
+              <Form.Label>INSTITUTION</Form.Label>
+              <Form.Control size="md" type="text" required placeholder="Enter Institution"
                 value={editEducation.institution}
                 onChange={handleEditEduInfoChange} />
             </Form.Group>
@@ -239,7 +239,7 @@ export default function EducationForm(props) {
           <Form.Row>
             <Form.Group as={Col} xs={12} controlId="fieldOfStudy">
               <Form.Label>FIELD OF STUDY</Form.Label>
-              <Form.Control size="lg" type="text" required
+              <Form.Control size="md" type="text" required
                 placeholder="Enter Field of Study"
                 value={editEducation.fieldOfStudy}
                 onChange={handleEditEduInfoChange} />
@@ -248,14 +248,14 @@ export default function EducationForm(props) {
           <Form.Row>
             <Form.Group as={Col} xs={6} controlId="typeOfDegree">
               <Form.Label>TYPE OF DEGREE</Form.Label>
-              <Form.Control size="lg" type="text" required
+              <Form.Control size="md" type="text" required
                 placeholder="Enter Type of Degree"
                 value={editEducation.typeOfDegree}
                 onChange={handleEditEduInfoChange} />
             </Form.Group>
             <Form.Group as={Col} xs={4} controlId="CGPA">
               <Form.Label>CGPA</Form.Label>
-              <Form.Control size="lg" type="text"
+              <Form.Control size="md" type="text"
                 placeholder="Enter CGPA"
                 value={editEducation.CGPA}
                 onChange={handleEditEduInfoChange} />
