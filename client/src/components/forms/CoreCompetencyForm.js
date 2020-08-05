@@ -72,7 +72,7 @@ export default function CoreCompetencyForm(props) {
   return (
     <>
       <Alert variant="primary">
-        <Alert.Heading>YOUR SKILLS-SHOW US WHAT YOU GOT!</Alert.Heading>
+        <Alert.Heading>Your skills show us what you got!</Alert.Heading>
         <p>
           Highlight your proficiency with different skills,
           platforms, and technologies that the company is asking
@@ -122,7 +122,7 @@ export default function CoreCompetencyForm(props) {
         )}
 
       <Button type="button" variant='primary'
-        onClick={() => setShowAddModal(true)} size='lg'>+ ADD SKILL</Button>
+        onClick={() => setShowAddModal(true)} size='m'>+ ADD SKILL</Button>
 
       <CustomModal
         title="Add Skill"
