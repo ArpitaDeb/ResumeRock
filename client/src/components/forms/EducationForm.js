@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -9,7 +9,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import CustomModal from "../CustomModal";
 
 export default function EducationForm(props) {
-
   const [showAddModal, setShowAddModal] = useState(false);
   // showEditModal conatins the id of the selected skill to be editted
   const [showEditModal, setShowEditModal] = useState(false);
@@ -166,7 +165,7 @@ export default function EducationForm(props) {
             <Form.Group as={Col} xs={12} controlId="institution">
               <Form.Label>Institution</Form.Label>
               <Form.Control size="lg" type="text" required placeholder="Enter Institution"
-                value={educationDetails.institution || ''}
+                value={educationDetails.institution}
                 onChange={onEdValChange} />
             </Form.Group>
           </Form.Row>
@@ -175,7 +174,7 @@ export default function EducationForm(props) {
               <Form.Label>FIELD OF STUDY</Form.Label>
               <Form.Control size="lg" type="text" required
                 placeholder="Enter Field of Study"
-                value={educationDetails.fieldOfStudy || ''}
+                value={educationDetails.fieldOfStudy}
                 onChange={onEdValChange} />
             </Form.Group>
           </Form.Row>
@@ -184,14 +183,14 @@ export default function EducationForm(props) {
               <Form.Label>TYPE OF DEGREE</Form.Label>
               <Form.Control size="lg" type="text" required
                 placeholder="Enter Type of Degree"
-                value={educationDetails.typeOfDegree || ''}
+                value={educationDetails.typeOfDegree}
                 onChange={onEdValChange} />
             </Form.Group>
             <Form.Group as={Col} xs={4} controlId="CGPA">
               <Form.Label>CGPA</Form.Label>
               <Form.Control size="lg" type="text"
                 placeholder="Enter CGPA"
-                value={educationDetails.CGPA || ''}
+                value={educationDetails.CGPA}
                 onChange={onEdValChange} />
             </Form.Group>
           </Form.Row>
@@ -233,7 +232,7 @@ export default function EducationForm(props) {
             <Form.Group as={Col} xs={12} controlId="institution">
               <Form.Label>Institution</Form.Label>
               <Form.Control size="lg" type="text" required placeholder="Enter Institution"
-                value={editEducation.institution || ''}
+                value={editEducation.institution}
                 onChange={handleEditEduInfoChange} />
             </Form.Group>
           </Form.Row>
@@ -242,7 +241,7 @@ export default function EducationForm(props) {
               <Form.Label>FIELD OF STUDY</Form.Label>
               <Form.Control size="lg" type="text" required
                 placeholder="Enter Field of Study"
-                value={editEducation.fieldOfStudy || ''}
+                value={editEducation.fieldOfStudy}
                 onChange={handleEditEduInfoChange} />
             </Form.Group>
           </Form.Row>
@@ -251,14 +250,14 @@ export default function EducationForm(props) {
               <Form.Label>TYPE OF DEGREE</Form.Label>
               <Form.Control size="lg" type="text" required
                 placeholder="Enter Type of Degree"
-                value={editEducation.typeOfDegree || ''}
+                value={editEducation.typeOfDegree}
                 onChange={handleEditEduInfoChange} />
             </Form.Group>
             <Form.Group as={Col} xs={4} controlId="CGPA">
               <Form.Label>CGPA</Form.Label>
               <Form.Control size="lg" type="text"
                 placeholder="Enter CGPA"
-                value={editEducation.CGPA || ''}
+                value={editEducation.CGPA}
                 onChange={handleEditEduInfoChange} />
             </Form.Group>
           </Form.Row>
