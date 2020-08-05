@@ -19,7 +19,6 @@ export default function Navigationbar() {
         <Nav.Link href="#home">Build Resume</Nav.Link>
         <Nav.Link href="#features">Login</Nav.Link>
         <Nav.Link href="#register">Register</Nav.Link>
-
       </Nav>
     </Navbar>
   )
