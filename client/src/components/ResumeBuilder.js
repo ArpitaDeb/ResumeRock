@@ -12,6 +12,11 @@ import Preview from "./preview/Preview"
 import CoreCompetencyForm from "./forms/CoreCompetencyForm"
 import EducationForm from "./forms/EducationForm"
 
+import Experience from "./forms/Experience"
+
+import ReferenceForm from "./forms/ReferenceForm"
+
+
 export default function ResumeBuilder(props) {
   const resumeDB = {
   }
@@ -32,8 +37,9 @@ export default function ResumeBuilder(props) {
     { id: "summary", title: "Summary", component: <SummaryForm onUpdate={resumeDataOnUpdate} data={resumeData.summary} /> },
     { id: "educations", title: "Education", component: <EducationForm onUpdate={resumeDataOnUpdate} data={resumeData.educations} /> },
     { id: "core_competencies", title: "Core Competencies", component: <CoreCompetencyForm onUpdate={resumeDataOnUpdate} data={resumeData.core_competencies} /> },
-    { id: "experience", title: "Experience" },
-    { id: "references", title: "References" }
+    { id: "experience", title: "Experience", component: <Experience onUpdate={resumeDataOnUpdate} data={resumeData.experience}/> },
+    { id: "references", title: "References", component: <ReferenceForm onUpdate={resumeDataOnUpdate} data={resumeData.references} /> }
+
   ]
 
   const findTitleByID = (sectionID) => {
@@ -43,7 +49,6 @@ export default function ResumeBuilder(props) {
   const findComponentByID = (sectionID) => {
     return (sections.find(element => element.id === sectionID)).component
   }
-
 
   return (
     <>

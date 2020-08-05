@@ -6,7 +6,7 @@ import SummaryForm from "../components/forms/SummaryForm";
 import PersonalInfoForm from "../components/forms/PersonalInfoForm";
 import EducationForm from "../components/forms/EducationForm";
 import CoreCompetencyForm from "../components/forms/CoreCompetencyForm";
-
+import ReferenceForm from "../components/forms/ReferenceForm";
 export default {
   title: 'FormContainer',
   component: FormContainer,
@@ -42,4 +42,8 @@ export const EducationInContainer = () =>
 export const CoreCompetencyInContainer = () =>
   <FormContainer title="CoreCompetency" >
     <CoreCompetencyForm data={{ heading: "CoreCompetency" }} onUpdate={action('Update Received')} />
+  </FormContainer>
+export const ReferenceInContainer = () =>
+  <FormContainer title="Reference" >
+    <ReferenceForm data={{ heading: "Reference" }} onUpdate={action('Update Received')} />
   </FormContainer>
