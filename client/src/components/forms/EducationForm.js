@@ -10,10 +10,9 @@ import CustomModal from "../CustomModal";
 
 export default function EducationForm(props) {
   const [showAddModal, setShowAddModal] = useState(false);
-  // showEditModal conatins the id of the selected skill to be editted
   const [showEditModal, setShowEditModal] = useState(false);
   const [educations, setEducations] = useState(props.data || { educationInfo: [] });
-  const [educationDetails, setEducationDetails] = useState({ institution: '', fieldOfStudy: '', typeOfDegree: '', CGPA: '', startDate: '', endDate: '', InProgress: false });
+  const [educationDetails, setEducationDetails] = useState({ institution: '', fieldOfStudy: '', typeOfDegree: '', GPA: '', start_date: '', end_date: '', in_progress: false });
   const [editEducation, setEditEducation] = useState({});
 
   const onHeadingChange = (event) => {
@@ -28,25 +27,24 @@ export default function EducationForm(props) {
     setEducationDetails(newEducationToBeAdded);
   }
   const showDateFromTo = (start, end) => {
-    const months = {
-      Jan: "1",
-      Feb: "2",
-      Mar: "3",
-      Apr: "4",
-      May: "5",
-      Jun: "6",
-      Jul: "7",
-      Aug: "8",
-      Sep: "9",
-      Oct: "10",
-      Nov: "11",
-      Dec: "12"
-    };
-    const toMonth = (end === "" ? "InProgress" : Object.keys(months).find(key => months[key] === (end.getMonth() + 1).toString()));
-    const fromMonth = Object.keys(months).find(key => months[key] === (start.getMonth() + 1).toString());
-
-    return (toMonth === "InProgress" ? (`${fromMonth} ${start.getFullYear()} - ${toMonth}`) : (`${fromMonth} ${start.getFullYear()} - ${toMonth} ${end.getFullYear()}`));
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"];
+    const toMonth = (end === "" ? "Present" : months[end.getMonth()]);
+    const fromMonth = months[start.getMonth()];
+    return (toMonth === "Present" ? (`${fromMonth} ${start.getFullYear()} - ${toMonth}`) : (`${fromMonth} ${start.getFullYear()} - ${toMonth} ${end.getFullYear()}`));
   }
+
   function validate() {
     if (!educationDetails.institution) {
       return;
@@ -65,7 +63,7 @@ export default function EducationForm(props) {
     setEducations(newtotalEdInfo);
     props.onUpdate({ educations: newtotalEdInfo });
     setShowAddModal(false);
-    setEducationDetails({ institution: '', fieldOfStudy: '', typeOfDegree: '', CGPA: '', startDate: '', endDate: '', checked: false });
+    setEducationDetails({ institution: '', fieldOfStudy: '', typeOfDegree: '', GPA: '', start_date: '', end_date: '', checked: false });
   }
   const handleEditEduInfoChange = (event) => {
     const name = event.target.id;
@@ -89,11 +87,11 @@ export default function EducationForm(props) {
     props.onUpdate({ educations: remainingEducations });
   }
   const checkboxHandler = () => {
-    const newEdInfo = { ...educationDetails, InProgress: !educationDetails.InProgress, endDate: "" }
+    const newEdInfo = { ...educationDetails, in_progress: !educationDetails.in_progress, end_date: "" }
     setEducationDetails(newEdInfo);
   }
   const editcheckboxHandler = () => {
-    const editedEduInfo = { ...editEducation, InProgress: !editEducation.InProgress, endDate: "" };
+    const editedEduInfo = { ...editEducation, in_progress: !editEducation.in_progress, end_date: "" };
     setEditEducation(editedEduInfo);
   }
   return (
@@ -112,19 +110,14 @@ export default function EducationForm(props) {
       {
         educations.educationInfo.map((item, index) => {
           return (
-            <Card border="primary" style={{ width: '25rem', margin: '.3rem' }}>
+            <Card border="primary" style={{ width: '28rem', margin: '.3rem' }}>
               <Card.Body>
+                <Card.Title>{item.institution}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">
+                  {showDateFromTo(item.start_date, item.end_date)}
+                </Card.Subtitle>
                 <Card.Text>
-                  {item.institution}
-                </Card.Text>
-                <Card.Text>
-                  {item.fieldOfStudy}
-                </Card.Text>
-                <Card.Text>
-                  {item.typeOfDegree}  {item.CGPA}
-                </Card.Text>
-                <Card.Text>
-                  {showDateFromTo(item.startDate, item.endDate)}
+                  {item.typeOfDegree} - {item.fieldOfStudy}
                 </Card.Text>
                 <div>
                   <Button
@@ -186,25 +179,49 @@ export default function EducationForm(props) {
                 value={educationDetails.typeOfDegree}
                 onChange={onEdValChange} />
             </Form.Group>
-            <Form.Group as={Col} xs={4} controlId="CGPA">
+            <Form.Group as={Col} xs={4} controlId="GPA">
               <Form.Label>GPA</Form.Label>
               <Form.Control size="md" type="text"
-                value={educationDetails.CGPA}
+                value={educationDetails.GPA}
                 onChange={onEdValChange} />
             </Form.Group>
           </Form.Row>
+
           <Form.Row>
-            <Form.Group as={Col} xs={6} controlId="startDate">
-              <Form.Label>Start Date</Form.Label>
-              <DatePicker className={"form-control"}
-                selected={educationDetails.startDate}
-                onChange={(startDate) => onEdValChange({ target: { id: 'startDate', value: startDate } })}
+            <Form.Group as={Col} controlId="city">
+              <Form.Label>City</Form.Label>
+              <Form.Control
+                size="md"
+                type="text"
+                required
+                onChange={onEdValChange}
+                value={educationDetails.city}
               />
             </Form.Group>
-            <Form.Group as={Col} xs={6} controlId="endDate">
+            <Form.Group as={Col} controlId="country">
+              <Form.Label>Country</Form.Label>
+              <Form.Control
+                size="md"
+                type="text"
+                required
+                onChange={onEdValChange}
+                value={educationDetails.country}
+              />
+            </Form.Group>
+          </Form.Row>
+
+          <Form.Row>
+            <Form.Group as={Col} xs={6} controlId="start_date">
+              <Form.Label>Start Date</Form.Label>
+              <DatePicker className={"form-control"}
+                selected={educationDetails.start_date}
+                onChange={(start_date) => onEdValChange({ target: { id: 'start_date', value: start_date } })}
+              />
+            </Form.Group>
+            <Form.Group as={Col} xs={6} controlId="end_date">
               <Form.Label>End Date</Form.Label>
-              <DatePicker className={"form-control"} disabled={educationDetails.InProgress} selected={educationDetails.endDate}
-                onChange={(endDate) => onEdValChange({ target: { id: 'endDate', value: endDate } })}
+              <DatePicker className={"form-control"} disabled={educationDetails.in_progress} selected={educationDetails.end_date}
+                onChange={(end_date) => onEdValChange({ target: { id: 'end_date', value: end_date } })}
               />
             </Form.Group>
           </Form.Row>
@@ -214,7 +231,7 @@ export default function EducationForm(props) {
               id="autoSizingCheck"
               className="my-1"
               label="In Progress "
-              checked={educationDetails.InProgress}
+              checked={educationDetails.in_progress}
               onChange={checkboxHandler}
             />
           </Col>
@@ -251,27 +268,27 @@ export default function EducationForm(props) {
                 value={editEducation.typeOfDegree}
                 onChange={handleEditEduInfoChange} />
             </Form.Group>
-            <Form.Group as={Col} xs={4} controlId="CGPA">
+            <Form.Group as={Col} xs={4} controlId="GPA">
               <Form.Label>GPA</Form.Label>
               <Form.Control size="md" type="text"
-                value={editEducation.CGPA}
+                value={editEducation.GPA}
                 onChange={handleEditEduInfoChange} />
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group as={Col} xs={6} controlId="startDate">
+            <Form.Group as={Col} xs={6} controlId="start_date">
               <Form.Label>Start Date</Form.Label>
-              <DatePicker selected={editEducation.startDate}
-                onChange={(startDate) => handleEditEduInfoChange({ target: { id: 'startDate', value: startDate } })}
-                value={editEducation.startDate}
+              <DatePicker selected={editEducation.start_date}
+                onChange={(start_date) => handleEditEduInfoChange({ target: { id: 'start_date', value: start_date } })}
+                value={editEducation.start_date}
               />
             </Form.Group>
-            <Form.Group as={Col} xs={6} controlId="endDate">
+            <Form.Group as={Col} xs={6} controlId="end_date">
               <Form.Label>End Date</Form.Label>
-              <DatePicker disabled={editEducation.InProgress}
-                selected={editEducation.endDate}
-                onChange={(endDate) => handleEditEduInfoChange({ target: { id: 'endDate', value: endDate } })}
-                value={editEducation.endDate}
+              <DatePicker disabled={editEducation.in_progress}
+                selected={editEducation.end_date}
+                onChange={(end_date) => handleEditEduInfoChange({ target: { id: 'end_date', value: end_date } })}
+                value={editEducation.end_date}
               />
             </Form.Group>
             <Col xs="auto" style={{ position: 'absolute', right: '8rem', bottom: '5px' }}>
@@ -280,7 +297,7 @@ export default function EducationForm(props) {
                 id="autoSizingCheck"
                 className="my-1"
                 label="In Progress"
-                checked={editEducation.InProgress}
+                checked={editEducation.in_progress}
                 onChange={editcheckboxHandler}
               />
             </Col>
