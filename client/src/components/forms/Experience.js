@@ -177,7 +177,6 @@ export default function Experience(props) {
           <Form.Group controlId="employer_name">
             <Form.Label>Employer Name</Form.Label>
             <Form.Control
-              placeholder="Employer Name"
               size="md"
               type="text"
               required
@@ -190,7 +189,6 @@ export default function Experience(props) {
           <Form.Group controlId="employer_description">
             <Form.Label>Employer Description</Form.Label>
             <Form.Control
-              placeholder="Introduce the Employer/ Company"
               size="md"
               type="text"
               required
@@ -202,7 +200,6 @@ export default function Experience(props) {
           <Form.Group controlId="job_title">
             <Form.Label>Job Title</Form.Label>
             <Form.Control
-              placeholder="Position"
               size="md"
               type="text"
               required
@@ -242,7 +239,6 @@ export default function Experience(props) {
             <Form.Group as={Col} controlId="city">
               <Form.Label>City</Form.Label>
               <Form.Control
-                placeholder="Location"
                 size="md"
                 type="text"
                 required
@@ -253,7 +249,6 @@ export default function Experience(props) {
             <Form.Group as={Col} controlId="country">
               <Form.Label>Country</Form.Label>
               <Form.Control
-                placeholder="Location"
                 size="md"
                 type="text"
                 required
@@ -306,7 +301,6 @@ export default function Experience(props) {
           <Form.Group controlId="employer_name">
             <Form.Label>Employer Name</Form.Label>
             <Form.Control
-              placeholder="Employer Name"
               size="md"
               type="text"
               required
@@ -318,7 +312,6 @@ export default function Experience(props) {
           <Form.Group controlId="employer_description">
             <Form.Label>Employer Description</Form.Label>
             <Form.Control
-              placeholder="Employer Description"
               size="md"
               type="text"
               required
@@ -330,7 +323,6 @@ export default function Experience(props) {
           <Form.Group controlId="job_title">
             <Form.Label>Job Title</Form.Label>
             <Form.Control
-              placeholder="Position"
               size="md"
               type="text"
               required
@@ -371,7 +363,6 @@ export default function Experience(props) {
             <Form.Group as={Col} controlId="city">
               <Form.Label>City</Form.Label>
               <Form.Control
-                placeholder="Location"
                 size="md"
                 type="text"
                 required="true"
@@ -382,7 +373,6 @@ export default function Experience(props) {
             <Form.Group as={Col} controlId="country">
               <Form.Label>Country</Form.Label>
               <Form.Control
-                placeholder="Location"
                 size="md"
                 type="text"
                 required
