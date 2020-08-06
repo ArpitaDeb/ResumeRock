@@ -4,12 +4,16 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const db = require('./db');
+const cookieSession = require('cookie-session');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
-
+app.use(cookieSession({
+  name: 'session',
+  keys: ['f080ac7b-b838-4c5f-a1f4-b0a9fee10130', 'c3fb18be-448b-4f6e-a377-49373e9b7e1a']
+}))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
