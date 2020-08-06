@@ -38,9 +38,6 @@ export default function ResumeBuilder(props) {
     { id: "core_competencies", title: "Core Competencies", component: <CoreCompetencyForm onUpdate={resumeDataOnUpdate} data={resumeData.core_competencies} /> },
 
     { id: "experience", title: "Experience", component: <Experience onUpdate={resumeDataOnUpdate} data={resumeData.experience}/> },
-    { id: "references", title: "References" }
-
-    { id: "experience", title: "Experience" },
     { id: "references", title: "References", component: <ReferenceForm onUpdate={resumeDataOnUpdate} data={resumeData.references} /> }
 
   ]
