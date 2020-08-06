@@ -3,6 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function CustomModal(props) {
+  
   return (
     <div>
       <Modal show={props.show} onHide={() => props.onClose()}>
@@ -21,4 +22,4 @@ export default function CustomModal(props) {
       </Modal>
     </div >
   );
-}
+} 
