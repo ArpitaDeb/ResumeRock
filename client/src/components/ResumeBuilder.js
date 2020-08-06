@@ -4,17 +4,14 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FormContainer from "./FormContainer";
 import SummaryForm from "./forms/SummaryForm";
-import Navigationbar from "../components/Navigationbar";
+//import Navigationbar from "../components/Navigationbar";
 import LeftSideBar from "../components/LeftSidebar/LeftSidebar"
 import './ResumeBuilder.css';
 import PersonalInfoForm from "./forms/PersonalInfoForm";
 import Preview from "./preview/Preview"
 import CoreCompetencyForm from "./forms/CoreCompetencyForm"
-
 import Experience from "./forms/Experience"
-
 import ReferenceForm from "./forms/ReferenceForm"
-
 
 export default function ResumeBuilder(props) {
   const resumeDB = {
@@ -50,7 +47,6 @@ export default function ResumeBuilder(props) {
 
   return (
     <>
-      <Navigationbar />
       <Row className="rb-container vh-100">
         <Col className="bg-warning col-2">
           <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />
