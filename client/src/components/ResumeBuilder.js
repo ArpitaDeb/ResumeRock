@@ -32,14 +32,17 @@ export default function ResumeBuilder(props) {
   }
 
   const sections = [
-    { id: "personal_info", title: "Personal Information", component: <PersonalInfoForm onUpdate={resumeDataOnUpdate} data={resumeData.personal_info}/> },
+    { id: "personal_info", title: "Personal Information", component: <PersonalInfoForm onUpdate={resumeDataOnUpdate} data={resumeData.personal_info} /> },
     { id: "summary", title: "Summary", component: <SummaryForm onUpdate={resumeDataOnUpdate} data={resumeData.summary} /> },
-    { id: "education", title: "Education"},
+    { id: "education", title: "Education" },
     { id: "core_competencies", title: "Core Competencies", component: <CoreCompetencyForm onUpdate={resumeDataOnUpdate} data={resumeData.core_competencies} /> },
+<<<<<<< HEAD
 
     { id: "experience", title: "Experience", component: <Experience onUpdate={resumeDataOnUpdate} data={resumeData.experience}/> },
+=======
+    { id: "experience", title: "Experience", component: <Experience onUpdate={resumeDataOnUpdate} data={resumeData.experience} /> },
+>>>>>>> master
     { id: "references", title: "References", component: <ReferenceForm onUpdate={resumeDataOnUpdate} data={resumeData.references} /> }
-
   ]
 
   const findTitleByID = (sectionID) => {
@@ -51,24 +54,24 @@ export default function ResumeBuilder(props) {
   }
 
   return (
-    <>
+    <Container fluid>
       <Navigationbar />
       <Row className="rb-container vh-100">
-        <Col className="bg-warning col-2">
+        <Col className="sidebar-container col-2">
           <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />
         </Col>
 
-        <Col className="bg-white gcol-5">
+        <Col className="bg-white col-5">
           <FormContainer title={findTitleByID(selectedSection)}>
             {findComponentByID(selectedSection)}
           </FormContainer>
         </Col>
 
         <Col className="bg-light col-5">
-          <Preview resumeData={resumeData}/>
+          <Preview resumeData={resumeData} />
         </Col>
       </Row>
-    </>
+    </Container>
   );
 
 }

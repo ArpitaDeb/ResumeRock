@@ -59,6 +59,14 @@ export default function ReferenceForm(props) {
 
   return (
     <>
+      <Alert variant="primary">
+        <Alert.Heading>Create a Reference List!</Alert.Heading>
+        <p>
+        Many potential employers ask for a list of references in a job application or at the end of a job interview.
+        That’s why it’s a good idea to have a list of references handy when you’re applying for a new job.
+        </p>
+      </Alert>
+
       <Form>
         <Form.Row>
           <Form.Group as={Col} xs={8} controlId="heading">
@@ -99,7 +107,7 @@ export default function ReferenceForm(props) {
         })
       }
       <Button type="button" variant='primary'
-        onClick={() => setShowAddModal(true)} size='lg'>+ ADD REFERENCE</Button>
+        onClick={() => setShowAddModal(true)} size='m'>+ ADD REFERENCE</Button>
       <CustomModal
         title="Add REFERENCE"
         show={showAddModal}
