@@ -8,12 +8,11 @@ import Card from 'react-bootstrap/Card';
 import CustomModal from "../CustomModal";
 
 export default function ReferenceForm(props) {
-  console.log(props);
   const [showAddModal, setShowAddModal] = useState(false);
   // showEditModal conatins the id of the selected skill to be editted
   const [showEditModal, setShowEditModal] = useState();
   const [reference, setReference] = useState(props.data || { referees: [] });
-  const [newRef, setNewRef] = useState({ name: "", email: "" });
+  const [newRef, setNewRef] = useState({ name: "", email: "", req: false });
   const [editRef, setEditRef] = useState({});
 
   const onHeadingChange = (event) => {
@@ -40,6 +39,19 @@ export default function ReferenceForm(props) {
     setEditRef(editedRef);
   }
 
+
+
+  const handleCheckboxNewRef = () => {
+    const newRefToBeAdded = { ...newRef, req: !newRef.req, name: "", email: "" }
+    setNewRef(newRefToBeAdded);
+  }
+
+  const handleCheckboxEditRef = () => {
+    const edittedRefToBeAdded = { ...editRef, req: !editRef.req, name: "", email: "" }
+    setEditRef(edittedRefToBeAdded);
+  }
+
+
   const submitEdittedRef = (refer) => {
     const totalReferees = [...reference.referees];
     totalReferees[showEditModal - 1] = refer;
@@ -62,8 +74,8 @@ export default function ReferenceForm(props) {
       <Alert variant="primary">
         <Alert.Heading>Create a Reference List!</Alert.Heading>
         <p>
-        Many potential employers ask for a list of references in a job application or at the end of a job interview.
-        That’s why it’s a good idea to have a list of references handy when you’re applying for a new job.
+          Many potential employers ask for a list of references in a job application or at the end of a job interview.
+          That’s why it’s a good idea to have a list of references handy when you’re applying for a new job.
         </p>
       </Alert>
 
@@ -80,30 +92,54 @@ export default function ReferenceForm(props) {
       </Form>
       {
         reference.referees.map((item, index) => {
-          return (
-            <Card border="primary" style={{ width: '20rem', margin: '.5rem' }}>
-              <Card.Body>
-                <Card.Subtitle>Name:</Card.Subtitle>
-                <Card.Text>
-                  {item.name}
-                </Card.Text>
-                <Card.Subtitle>Email:</Card.Subtitle>
-                <Card.Text>
-                  {item.email}
-                </Card.Text>
-                <div>
-                  <Button variant="primary" type="button" style={{ margin: '.2rem' }}
-                    onClick={() => {
-                      setShowEditModal(index + 1)
-                      setEditRef(item)
-                    }
-                    }>Edit</Button>
-                  <Button variant="primary" type="button"
-                    onClick={() => deleteReferee(index)}>Delete</Button>
-                </div>
-              </Card.Body>
-            </Card>
-          )
+          if (!item.name || !item.email) {
+            debugger
+            return (
+              <Card border="primary" style={{ width: '20rem', margin: '.5rem' }}>
+                <Card.Body>
+                  <div>
+                    Reference upon request
+                  </div>
+
+                  <div className="mt-3">
+                    <Button variant="primary" type="button" style={{ margin: '.2rem' }}
+                      onClick={() => {
+                        setShowEditModal(index + 1)
+                        setEditRef(item)
+                      }
+                      }>Edit</Button>
+                    <Button variant="primary" type="button"
+                      onClick={() => deleteReferee(index)}>Delete</Button>
+                  </div>
+                </Card.Body>
+              </Card>
+            );
+          } else {
+            return (
+              <Card border="primary" style={{ width: '20rem', margin: '.5rem' }}>
+                <Card.Body>
+                  <Card.Subtitle>Name:</Card.Subtitle>
+                  <Card.Text>
+                    {item.name}
+                  </Card.Text>
+                  <Card.Subtitle>Email:</Card.Subtitle>
+                  <Card.Text>
+                    {item.email}
+                  </Card.Text>
+                  <div>
+                    <Button variant="primary" type="button" style={{ margin: '.2rem' }}
+                      onClick={() => {
+                        setShowEditModal(index + 1)
+                        setEditRef(item)
+                      }
+                      }>Edit</Button>
+                    <Button variant="primary" type="button"
+                      onClick={() => deleteReferee(index)}>Delete</Button>
+                  </div>
+                </Card.Body>
+              </Card>
+            )
+          }
         })
       }
       <Button type="button" variant='primary'
@@ -122,9 +158,9 @@ export default function ReferenceForm(props) {
                 size="md"
                 type="text"
                 required
-                placeholder="Enter Referees name"
                 onChange={handleRefChange}
                 value={newRef.name}
+                disabled={newRef.req}
               />
             </Form.Group>
             <Form.Group as={Col} xs={5} controlId="email">
@@ -133,12 +169,22 @@ export default function ReferenceForm(props) {
                 size="md"
                 type="email"
                 required
-                placeholder="Enter Referees Email"
                 onChange={handleRefChange}
                 value={newRef.email}
+                disabled={newRef.req}
               />
             </Form.Group>
           </Form.Row>
+          <Form.Group className="align-self-end" id="checkbox" controlId="present">
+            <Form.Check
+              type="checkbox"
+              id="autoSizingCheck"
+              className="my-1"
+              label="Available upon request"
+              checked={newRef.req}
+              onChange={handleCheckboxNewRef}
+            />
+          </Form.Group>
         </Form>
       </CustomModal>
       <CustomModal
@@ -153,7 +199,8 @@ export default function ReferenceForm(props) {
               <Form.Label>Name</Form.Label>
               <Form.Control size="md" type="text" required
                 value={editRef.name}
-                onChange={handleEditRefChange} />
+                onChange={handleEditRefChange}
+              />
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -164,6 +211,16 @@ export default function ReferenceForm(props) {
                 onChange={handleEditRefChange} />
             </Form.Group>
           </Form.Row>
+          <Form.Group className="align-self-end" id="checkbox" controlId="present">
+            <Form.Check
+              type="checkbox"
+              id="autoSizingCheck"
+              className="my-1"
+              label="Available upon request"
+              checked={editRef.req}
+              onChange={handleCheckboxEditRef}
+            />
+          </Form.Group>
         </Form>
       </CustomModal>
     </>
