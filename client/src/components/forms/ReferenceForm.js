@@ -83,11 +83,11 @@ export default function ReferenceForm(props) {
           return (
             <Card border="primary" style={{ width: '20rem', margin: '.5rem' }}>
               <Card.Body>
-                <Card.Subtitle>NAME</Card.Subtitle>
+                <Card.Subtitle>Name:</Card.Subtitle>
                 <Card.Text>
                   {item.name}
                 </Card.Text>
-                <Card.Subtitle>EMAIL</Card.Subtitle>
+                <Card.Subtitle>Email:</Card.Subtitle>
                 <Card.Text>
                   {item.email}
                 </Card.Text>
