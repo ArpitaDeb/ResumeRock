@@ -1,7 +1,23 @@
 .sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
+  margin-top: 2em;
+}
+.sidebar .nav-item a{
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.6);
+  transition: margin-left 0.2s;
+  transition: all 0.2s;
+}
+.sidebar .nav-link.active {
+  color: rgb(255, 255, 255);
+
+}
+.sidebar .nav-link:hover {
+  color: rgb(255, 255, 255);
+  margin-left: 0.8em;
+}
+.sidebar .nav-link {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: .7em;
+  padding-bottom: .7em;
 }

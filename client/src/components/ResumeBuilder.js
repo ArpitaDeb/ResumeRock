@@ -49,14 +49,14 @@ export default function ResumeBuilder(props) {
   }
 
   return (
-    <>
+    <Container fluid>
       <Navigationbar />
       <Row className="rb-container vh-100">
-        <Col className="bg-warning col-2">
+        <Col className="sidebar-container col-2">
           <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />
         </Col>
 
-        <Col className="bg-white gcol-5">
+        <Col className="bg-white col-5">
           <FormContainer title={findTitleByID(selectedSection)}>
             {findComponentByID(selectedSection)}
           </FormContainer>
@@ -66,7 +66,7 @@ export default function ResumeBuilder(props) {
           <Preview resumeData={resumeData} />
         </Col>
       </Row>
-    </>
+    </Container>
   );
 
 }
