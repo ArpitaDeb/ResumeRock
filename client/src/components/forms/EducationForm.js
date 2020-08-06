@@ -89,7 +89,8 @@ export default function EducationForm(props) {
     props.onUpdate({ educations: remainingEducations });
   }
   const checkboxHandler = () => {
-    setEducationDetails({ ...educationDetails, InProgress: true, endDate: "" });
+    const newEdInfo = { ...educationDetails, InProgress: !educationDetails.InProgress, endDate: "" }
+    setEducationDetails(newEdInfo);
   }
   const editcheckboxHandler = () => {
     const editedEduInfo = { ...editEducation, InProgress: !editEducation.InProgress, endDate: "" };
@@ -111,7 +112,7 @@ export default function EducationForm(props) {
       {
         educations.educationInfo.map((item, index) => {
           return (
-            <Card border="primary" style={{ width: '30rem', margin: '.5rem' }}>
+            <Card border="primary" style={{ width: '25rem', margin: '.3rem' }}>
               <Card.Body>
                 <Card.Text>
                   {item.institution}
@@ -125,28 +126,28 @@ export default function EducationForm(props) {
                 <Card.Text>
                   {showDateFromTo(item.startDate, item.endDate)}
                 </Card.Text>
-              </Card.Body>
-              <div style={{ position: 'absolute', right: 0, bottom: '2px' }}>
-                <Button
-                  variant="primary"
-                  type="button"
-                  style={{ margin: '.2rem' }}
-                  onClick={() => {
-                    setShowEditModal(index + 1)
-                    setEditEducation(item)
-                  }
-                  }>
-                  EDIT
+                <div>
+                  <Button
+                    variant="primary"
+                    type="button"
+                    style={{ margin: '.2rem' }}
+                    onClick={() => {
+                      setShowEditModal(index + 1)
+                      setEditEducation(item)
+                    }
+                    }>
+                    EDIT
                   </Button>
-                <Button
-                  variant="danger"
-                  type="button"
-                  onClick={() =>
-                    deleteEdInfo(index)}
-                >
-                  DELETE
+                  <Button
+                    variant="primary"
+                    type="button"
+                    onClick={() =>
+                      deleteEdInfo(index)}
+                  >
+                    DELETE
                     </Button>
-              </div>
+                </div>
+              </Card.Body>
             </Card>
           )
         }

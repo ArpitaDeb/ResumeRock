@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Nav } from "react-bootstrap";
 import "./Leftsidebar.css";
 
-
 export default function LeftSidebar(props) {
   const [selected, setSelected] = useState(props.items[0].id)
   const handleChange = (selectedItem) => {
@@ -16,7 +15,7 @@ export default function LeftSidebar(props) {
       {props.items.map((item) => (
         <Nav.Item>
           <Nav.Link eventKey={item.id} active={item.id === selected}>
-            <Spacer/>
+            <Spacer />
             {item.title}
           </Nav.Link>
         </Nav.Item>
