@@ -1,4 +1,7 @@
-.rb-container .col {
+.rb-container > .col {
   padding-top: 4em;
   overflow: scroll;
+}
+.sidebar-container {
+  background-color: #34495e;
 }
