@@ -9,15 +9,14 @@ export default {
 
 export const PersonalInfo = () => <PersonalInfoForm onUpdate={action('Update Received')} />;
 export const setPersonalInfo = () => <PersonalInfoForm onUpdate={action('Update Received')} data={{
-  firstName: "Arpita",
-  lastName: "Deb",
-  profTitle: "Junior Developer",
+  first_name: "Arpita",
+  last_name: "Deb",
+  prof_title: "Junior Developer",
   email: "arpi@gmail.com",
   linkedIn: "http:linkedin/arpi",
-  phoneNumber: "3062",
-  addressLine1: "Las Terrace",
-  addressLine2: "Beaco hill",
-  formGridcity: "Ottawa",
-  formGridProvince: "Ontario",
-  formGridZip: "K1J8N1"
+  phone_number: "3062",
+  address_line1: "Las Terrace",
+  city: "Ottawa",
+  province: "Ontario",
+  postal_code: "K1J8N1"
 }} />;
