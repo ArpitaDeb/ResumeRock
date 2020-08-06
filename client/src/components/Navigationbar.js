@@ -5,11 +5,12 @@ import Login from "../components/userLR/Login";
 import Registration from "../components/userLR/Registration";
 import ResumeBuilder from "../components/ResumeBuilder";
 import logo from "../img/logo.png";
+import "./NavigationBar.css"
 
 export default function Navigationbar() {
   return (
     <>
-      <Navbar bg="primary" variant="dark" fixed="top">
+      <Navbar className="navigation-bar" variant="dark" fixed="top">
         <Navbar.Brand as={Link} to="/" className="font-weight-bold">
           <img
             alt=""
