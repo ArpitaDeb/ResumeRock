@@ -30,7 +30,7 @@ export const data = {
   },
 
   educations: {
-    heading: 'Education and Qualifications',
+    heading: 'Education & Qualifications',
     educationInfo: [
       {
         "institution": "Mohawk College",
@@ -58,17 +58,16 @@ export const data = {
   },
 
   personal_info: {
-    personal_info: {
-      "first_name": "Mary",
-      "last_name": "Anderson",
-      "prof_title": "Customer Service Professional",
-      "email": "jrichardson@gmail.com",
-      "phone_number": "(404) 292-9090",
-      "address_line1": "342 Rutherford Avenue",
-      "city": "Toronto",
-      "province": "ON",
-      "postal_code": "L6B 0M7"
-    }
+    "first_name": "Mary",
+    "last_name": "Anderson",
+    "prof_title": "Customer Service Professional",
+    "email": "jrichardson@gmail.com",
+    "phone_number": "(404) 292-9090",
+    "address_line1": "342 Rutherford Avenue",
+    "city": "Toronto",
+    "province": "ON",
+    "postal_code": "L6B 0M7"
+
   },
 
   summary: {
@@ -81,7 +80,7 @@ export const data = {
     experiences: [
       {
         "employer_name": "YYZ INC.",
-        "employer_description":"YYZ Inc. is a residential, business, and wholesale telecommunications company.",
+        "employer_description": "YYZ Inc. is a residential, business, and wholesale telecommunications company.",
         "job_title": "Customer Service Agent",
         "start_date": new Date("2018-02-01T05:00:00.000Z"),
         "end_date": "",
@@ -102,7 +101,7 @@ export const data = {
 
       {
         "employer_name": "YYC INC.",
-        "employer_description":"YYV Inc. is an American multi-level marketing company specialized in women's fashion and beauty products.",
+        "employer_description": "YYV Inc. is an American multi-level marketing company specialized in women's fashion and beauty products.",
         "job_title": "Sales Representative",
         "start_date": new Date("2017-01-01T05:00:00.000Z"),
         "end_date": new Date("2018-02-01T05:00:00.000Z"),
@@ -122,7 +121,7 @@ export const data = {
 
       {
         "employer_name": "YYC INC.",
-        "employer_description":"YYC regulates lottery activities in Nigeria.",
+        "employer_description": "YYC regulates lottery activities in Nigeria.",
         "job_title": "Office Support",
         "start_date": new Date("2013-06-01T05:00:00.000Z"),
         "end_date": new Date("2014-03-01T05:00:00.000Z"),

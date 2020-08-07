@@ -8,9 +8,9 @@ import Navigationbar from "../components/Navigationbar";
 import LeftSideBar from "../components/LeftSidebar/LeftSidebar"
 import './ResumeBuilder.css';
 import PersonalInfoForm from "./forms/PersonalInfoForm";
-import Preview from "./preview/Preview"
 import CoreCompetencyForm from "./forms/CoreCompetencyForm"
 import EducationForm from "./forms/EducationForm"
+import CustomerServiceTemplate from "./templates/customerService/CustomerServiceTemplate"
 
 import Experience from "./forms/Experience"
 
@@ -57,14 +57,15 @@ export default function ResumeBuilder(props) {
           <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />
         </Col>
 
-        <Col className="bg-white col-5">
+        <Col className="bg-white col-5 vh-100">
           <FormContainer title={findTitleByID(selectedSection)}>
             {findComponentByID(selectedSection)}
           </FormContainer>
         </Col>
 
-        <Col className="bg-light col-5">
-          <Preview resumeData={resumeData} />
+        <Col className="bg-light col-5" style={{overflow: 'hidden'}}>
+          {/* <Preview resumeData={resumeData} /> */}
+          <CustomerServiceTemplate data={resumeData}/>
         </Col>
       </Row>
     </Container>

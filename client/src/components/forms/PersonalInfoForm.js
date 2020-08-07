@@ -82,7 +82,7 @@ export default function PersonalInfoForm(props) {
             <Form.Control required value={(personalInfo == null) ? "" : personalInfo.postal_code} onChange={onInputChange} />
           </Form.Group>
         </Form.Row>
-        <Button type="submit" variant='primary' size='sm'>Submit</Button>
+        {/* <Button type="submit" variant='primary' size='sm'>Submit</Button> */}
       </Form>
     </>
   );

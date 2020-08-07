@@ -1,6 +1,6 @@
 .main-container{
   background-color: rgb(58, 37, 71);
-  margin: 1em;
+  margin: 0;
   padding: 0;
 }
 
@@ -36,4 +36,14 @@
 .right-content{
   background-color: white;
   border: 2px solid black;
+}
+.page {
+  width: 32.76cm;
+  height: 46.332cm;
+  overflow: scroll;
+  margin: auto;
+  border: 1px #D3D3D3 solid;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }

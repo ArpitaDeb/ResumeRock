@@ -3,13 +3,15 @@ import "./style.css"
 
 export default function ReferenceSection(props) {
 
-  return (
-    <div>
-      <h5 className="text-uppercase mb-2">
-        {props.heading}
-      </h5>
-      {
-        props.referees.map(item => {
+  if(!props.heading && ! props.referees){
+    return "";
+  }
+
+  function printReferences (referees) {
+    if (referees === undefined){
+      return "";
+    }else {
+      const res= referees.map(item => {
           if (item.req) {
             return (
               <div className="ml-4">Available upon request</div>
@@ -23,6 +25,16 @@ export default function ReferenceSection(props) {
             )
           }
         })
+        return res;
+    }
+  }
+  return (
+    <div>
+      <h5 className="text-uppercase bold mb-2">
+        {props.heading===undefined ? "" : props.heading}
+      </h5>
+      {
+        printReferences(props.referees)
       }
     </div>
   );
