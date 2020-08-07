@@ -8,6 +8,7 @@ import TitleSection from "./TitleSection";
 import SummarySection from "./SummarySection";
 import ExperienceSection from "./ExperienceSection"
 import { data } from "./data"
+import classNames from 'classnames';
 
 export default function CustomerServiceTemplate(props) {
   const pageRef = useRef(null);
@@ -22,11 +23,15 @@ export default function CustomerServiceTemplate(props) {
     handleResize()
   }, [])
 
-// comment line below to check an example of full page resume template!
+  // comment line below to check an example of full page resume template!
   const data = props.data;
+  const rightContent = (data.experience || data.summary) ? <div className="p-3 right-content" >
+    <SummarySection heading={data.summary ? data.summary.heading : undefined} body={data.summary ? data.summary.body : undefined} />
+    <ExperienceSection heading={data.experience ? data.experience.heading : undefined} experiences={data.experience ? data.experience.experiences : undefined} />
+  </div> : null
 
   if (!Object.keys(data).length) {
-    return (<div ref={pageRef} style={{ transform: `scale(${ratio * .8})`, transformOrigin: 'top left', overflow: 'hidden' }} className="container-fluid page"/>);
+    return (<div ref={pageRef} style={{ transform: `scale(${ratio * .8})`, transformOrigin: 'top left', overflow: 'hidden' }} className="container-fluid page" />);
   }
   return (
     <div ref={pageRef} style={{ transform: `scale(${ratio * .9})`, transformOrigin: 'top left', overflow: 'hidden' }} className="container-fluid page">
@@ -46,10 +51,7 @@ export default function CustomerServiceTemplate(props) {
           <div className="title">
             <TitleSection personal_info={data.personal_info ? data.personal_info : undefined} />
           </div>
-          <div className="p-3 right-content" >
-            <SummarySection heading={data.summary ? data.summary.heading : undefined} body={data.summary ? data.summary.body : undefined} />
-            <ExperienceSection heading={data.experience ? data.experience.heading : undefined} experiences={data.experience ? data.experience.experiences : undefined} />
-          </div>
+          {rightContent}
         </div>
 
       </div>
