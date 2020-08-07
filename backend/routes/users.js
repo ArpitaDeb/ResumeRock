@@ -41,6 +41,7 @@ module.exports = db => {
   //     console.log(err);
   //   }
   // });
+  
   router.post('/', (req, res) => {
     // extract the data from req.body
     const { userName, email, password } = req.body;
@@ -57,8 +58,9 @@ module.exports = db => {
       .catch(err => console.log(err));
     // return the newly created user back
   });
+
   //display the register form
-  router.get("/register", (req, res) => {
+  router.get('/register', (req, res) => {
     console.log(req.body);
   });
   // Handling the register form
@@ -107,14 +109,14 @@ module.exports = db => {
         return res.status(422).json({ error: error.message });
       });
   });
-  router.get("/login", (req, res) => {
+  router.get('/login', (req, res) => {
     let templateVars = {
       errorMsg: null,
       user: req.session
     };
     res.status("login").json(templateVars);
   });
-  router.post("/login", (req, res) => {
+  router.post('/login', (req, res) => {
     console.log(req.body);
     res.json({ key: 'hi' });
     const { email, password } = req.body;
