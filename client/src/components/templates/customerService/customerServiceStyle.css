@@ -1,0 +1,39 @@
+.main-container{
+  background-color: rgb(58, 37, 71);
+  margin: 1em;
+  padding: 0;
+}
+
+.borderd{
+  border-style: solid;
+  border-width: 10px;
+  border-color: white;
+}
+.no-padding{
+  padding: 0;
+}
+.left-container{
+  background-color: #eeeeee;
+  border-top: 10px solid white;
+  border-bottom: 10px solid white;
+}
+.left-container > div {
+  margin: 10px;
+  background-color: white;
+  border: 2px solid black;
+  padding-top: 1em;
+  padding-left: 0.5em;
+  padding-bottom: 1em;
+}
+.right-container {
+  border-top: 10px solid white;
+  border-bottom: 10px solid white;
+}
+.title{
+  color: white;
+  border-bottom: 10px solid white;
+}
+.right-content{
+  background-color: white;
+  border: 2px solid black;
+}

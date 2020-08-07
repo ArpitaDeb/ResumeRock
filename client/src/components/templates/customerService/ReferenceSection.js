@@ -5,9 +5,9 @@ export default function ReferenceSection(props) {
 
   return (
     <div>
-      <h4 className="text-uppercase mb-4">
+      <h5 className="text-uppercase mb-2">
         {props.heading}
-      </h4>
+      </h5>
       {
         props.referees.map(item => {
           if (item.req) {

@@ -1,7 +1,9 @@
 import React from "react";
 import "./style.css"
-export default function ExperienceSection(props) {
 
+
+export default function ExperienceSection(props) {
+  
   const showDateFromTo = (start, end) => {
 
     const months = [
@@ -27,14 +29,14 @@ export default function ExperienceSection(props) {
   return (
     <>
       <div>
-        <h3 className="text-uppercase mb-4">
+        <h3 className="text-uppercase mb-2">
           {props.heading}
         </h3>
 
         {
           props.experiences.map((item, index) => {
             return (
-              <div>
+              <div className="mb-4">
                 <div>
                   <span className="bold">{item.job_title}</span>
                   <Spacer />
@@ -49,7 +51,7 @@ export default function ExperienceSection(props) {
                 </div>
 
                 <div className="ml-4">
-                  <div className="bold-italic mt-3">Responsibilities:</div>
+                  <div className="bold-italic mt-2">Responsibilities:</div>
                   {
                     item.responsibilities.map((res) => {
                       return (
@@ -62,7 +64,7 @@ export default function ExperienceSection(props) {
                 </div>
 
                 <div className="ml-4">
-                <div className="bold-italic mt-3">Achievements:</div>
+                <div className="bold-italic mt-2">Achievements:</div>
                   {
                     item.achievements.map((res) => {
                       return (
