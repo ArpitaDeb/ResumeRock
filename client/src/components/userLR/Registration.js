@@ -21,29 +21,12 @@ export default function Registration() {
     return state.email.length > 0 && state.password.length > 0 && state.userName.length > 0;
   }
   const history = useHistory();
-  
-  /*
-  const redirectTo = useCallback((url) => {
-    history.push(url);
-  }, [useHistory]);
-  redirectTo('/')
-  */
-
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(state);
     axios.post(
       '/users/register', { email: state.email, password: state.password, userName: state.userName }
     ).then(() => history.push('/'));
-    /*
-        axios({
-          method: 'POST',
-          url: '/register'
-        })
-            setState(prev => ({ ...prev, users: result.data })))
-          .catch(err => console.log(err));
-      }, [])
-      */
   }
 
   return (

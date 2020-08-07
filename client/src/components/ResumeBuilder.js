@@ -11,7 +11,6 @@ import PersonalInfoForm from "./forms/PersonalInfoForm";
 import Preview from "./preview/Preview"
 import CoreCompetencyForm from "./forms/CoreCompetencyForm"
 import EducationForm from "./forms/EducationForm"
-
 import Experience from "./forms/Experience"
 import ReferenceForm from "./forms/ReferenceForm"
 
@@ -20,11 +19,9 @@ export default function ResumeBuilder(props) {
   }
   const [selectedSection, setSelectedSection] = useState('personal_info');
   const [resumeData, setResumeData] = useState(resumeDB);
-
   const resumeDataOnUpdate = (data) => {
     setResumeData({ ...resumeData, ...data });
   }
-
   const leftSideBarOnUpdate = (value) => {
     console.log("Selected item: ", value);
     setSelectedSection(value);

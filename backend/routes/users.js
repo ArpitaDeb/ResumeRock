@@ -3,22 +3,28 @@ const router = express.Router();
 
 module.exports = db => {
   const getUserByEmail = function (email) {
-    return db.query(`
-    SELECT * FROM users WHERE email = $2;
-    `, [email])
-      .then(res => {
-        console.log(res);
-        return res.rowCount > 0 ? res.rows[0] : null
-      });
+    const query = {
+      text: `SELECT * FROM users WHERE email = $1;`,
+      values: [email]
+    };
+    return db
+      .query(query)
+      .then(result => {
+        return result[0];
+      })
   };
   const registerUser = function (user) {
-    return db.query(`
-    INSERT INTO users(userName, password, email)
-    VALUES($1, $2, $3)
-    RETURNING *;`, [user.userName, user.password, user.email])
-      .then(res => res.rows);
+    console.log('user', user.userName);
+    const query = {
+      text: `INSERT INTO users (userName, email, password) VALUES ($1, $2, $3) RETURNING *;`,
+      values: [user.userName, user.email, user.password]
+    };
+    return db
+      .query(query)
+      .then(rows => {
+        return rows[0];
+      })
   };
-
   /* GET users listing. */
   router.get('/', (req, res) => {
     const query = {
@@ -28,20 +34,7 @@ module.exports = db => {
       .then(result => res.json(result))
       .catch(err => console.log(err));
   });
-  // ASYNC AWAIT INSTEAD OF .THEN
-  // router.get('/', async (req, res) => {
-  //   const query = {
-  //     text: 'SELECT * FROM users;'
-  //   };
 
-  //   try {
-  //     const users = await db.query(query);
-  //     res.json(users);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // });
-  
   router.post('/', (req, res) => {
     // extract the data from req.body
     const { userName, email, password } = req.body;
@@ -65,47 +58,23 @@ module.exports = db => {
   });
   // Handling the register form
   router.post('/register', (req, res) => {
-    console.log('gettingpost', req.body);
     const { userName, email, password } = req.body;
     if (!userName || !email || !password) {
       let templateVars = {
         errorMsg: "Please fill in all details to register"
       };
-
       return res.json(templateVars)
     };
-    //res.cookie('user_id', 'anything');
-    //res.json('reg successful');
-    console.log("getemail", email);
-    db.query(`
-    SELECT * FROM users WHERE email = $1;`, [email])
-      .then(res => {
-        console.log("res", res);
-        return res.rowCount > 0 ? res.rows[0] : null
-      });
-    /*
-    //getUserByEmail(email)
-      .then(user => {
-        console.log('post', user);
-        if (user.length > 0 && user[0].email === email) {
-          let templateVars = {
-            errorMsg: 'Email is already taken',
-          };
-          return res.json(templateVars)
-        }
-      })
-      .catch(console.log);
-      */
-
-    const values = [userName, email, password];
+    const values = { userName, email, password };
     registerUser(values)
       .then((newUser) => {
-        console.log(newUser);
+        console.log('line104', newUser);
         req.session['user_id'] = newUser.id;
         req.session.userName = newUser.userName;
-        return res.send({});
+        return res.json({});
       })
       .catch((error) => {
+        console.log(error);
         return res.status(422).json({ error: error.message });
       });
   });
@@ -114,18 +83,16 @@ module.exports = db => {
       errorMsg: null,
       user: req.session
     };
-    res.status("login").json(templateVars);
+    return res.json(templateVars);
   });
   router.post('/login', (req, res) => {
-    console.log(req.body);
-    res.json({ key: 'hi' });
     const { email, password } = req.body;
     if (!email || !password) {
       let templateVars = {
         errorMsg: "Please fill in all details to login",
         user: req.session
       };
-      res.status("login").json(templateVars);
+      return res.status(401).json(templateVars);
     };
     getUserByEmail(email)
       .then(user => {
@@ -134,18 +101,22 @@ module.exports = db => {
             errorMsg: 'Email is not registered with us',
             user: req.session
           };
-          res.status("login").json(templateVars);
+          return res.status(401).json(templateVars);
         } else if (user.password !== password) {
           let templateVars = {
             errorMsg: 'Invalid credentials,please try again',
             user: req.session
           };
-          res.status("login").json(templateVars);
+          return res.status(401).json(templateVars);
         } else {
           req.session['user_id'] = user.id;
           req.session.userName = user.userName;
+          return res.json({});
         }
-      }).catch(console.log);
+      }).catch((error) => {
+        console.log(error);
+        res.status(500).end();
+      });
   });
   return router;
 };
