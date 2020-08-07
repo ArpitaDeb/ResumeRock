@@ -27,21 +27,21 @@ export default function PersonalInfoForm(props) {
 
       <Form onSubmit={event => event.preventDefault()} autoComplete="off">
         <Form.Row>
-          <Form.Group as={Col} xs={8} controlId="firstName">
+          <Form.Group as={Col} xs={8} controlId="first_name">
             <Form.Label>First Name</Form.Label>
-            <Form.Control required type="text"  value={(personalInfo == null) ? "" : personalInfo.firstName} onChange={onInputChange} />
+            <Form.Control required type="text"  value={(personalInfo == null) ? "" : personalInfo.first_name} onChange={onInputChange} />
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group as={Col} xs={8} controlId="lastName">
+          <Form.Group as={Col} xs={8} controlId="last_name">
             <Form.Label>Last Name</Form.Label>
-            <Form.Control required type="text" value={(personalInfo == null) ? "" : personalInfo.lastName} onChange={onInputChange} />
+            <Form.Control required type="text" value={(personalInfo == null) ? "" : personalInfo.last_name} onChange={onInputChange} />
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group as={Col} xs={8} controlId="profTitle">
+          <Form.Group as={Col} xs={8} controlId="prof_title">
             <Form.Label>Professional Title</Form.Label>
-            <Form.Control required type="text" value={(personalInfo == null) ? "" : personalInfo.profTitle} onChange={onInputChange} />
+            <Form.Control required type="text" value={(personalInfo == null) ? "" : personalInfo.prof_title} onChange={onInputChange} />
           </Form.Group>
         </Form.Row>
         <Form.Row>
@@ -57,29 +57,29 @@ export default function PersonalInfoForm(props) {
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group as={Col} xs={8} controlId="phoneNumber">
+          <Form.Group as={Col} xs={8} controlId="phone_number">
             <Form.Label>Phone Number</Form.Label>
-            <Form.Control required type="phone" value={(personalInfo == null) ? "" : personalInfo.phoneNumber} onChange={onInputChange} />
+            <Form.Control placeholder="E.g. (404) 292-9090" required type="phone" value={(personalInfo == null) ? "" : personalInfo.phone_number} onChange={onInputChange} />
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group as={Col} xs={8} controlId="addressLine1">
+          <Form.Group as={Col} xs={8} controlId="address_line1">
             <Form.Label>Address Line 1</Form.Label>
-            <Form.Control required value={(personalInfo == null) ? "" : personalInfo.addressLine1} onChange={onInputChange} />
+            <Form.Control placeholder="E.g. 110 Kent Street" required value={(personalInfo == null) ? "" : personalInfo.address_line1} onChange={onInputChange} />
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group as={Col} controlId="formGridcity">
+          <Form.Group as={Col} controlId="city">
             <Form.Label>City</Form.Label>
-            <Form.Control required value={(personalInfo == null) ? "" : personalInfo.formGridcity} onChange={onInputChange} />
+            <Form.Control required value={(personalInfo == null) ? "" : personalInfo.city} onChange={onInputChange} />
           </Form.Group>
-          <Form.Group as={Col} controlId="formGridProvince">
+          <Form.Group as={Col} controlId="province">
             <Form.Label>Province</Form.Label>
-            <Form.Control required value={(personalInfo == null) ? "" : personalInfo.formGridProvince} onChange={onInputChange} />
+            <Form.Control required value={(personalInfo == null) ? "" : personalInfo.province} onChange={onInputChange} />
           </Form.Group>
-          <Form.Group as={Col} controlId="formGridZip">
+          <Form.Group as={Col} controlId="postal_code">
             <Form.Label>Postal Code</Form.Label>
-            <Form.Control required value={(personalInfo == null) ? "" : personalInfo.formGridZip} onChange={onInputChange} />
+            <Form.Control placeholder="E.g. K2P 0LM" required value={(personalInfo == null) ? "" : personalInfo.postal_code} onChange={onInputChange} />
           </Form.Group>
         </Form.Row>
         <Button type="submit" variant='primary' size='sm'>Submit</Button>
