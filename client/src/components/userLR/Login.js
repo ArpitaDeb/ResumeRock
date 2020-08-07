@@ -10,18 +10,29 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
   const [error, setError] = useState("");
 
   const history = useHistory();
-  const validateForm = () => {
-    return email.length > 0 && password.length > 0;
-  }
 
+  const validateForm = () => {
+    if (!email) {
+      setError("email cannot be blank");
+      return false;
+    }
+    setError("");
+    if (!password) {
+      setError("password cannot be blank");
+      return false;
+    }
+    return true;
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post(
-      '/users/login', { email: email, password: password }
-    ).then(() => {
-      history.push('/');
-      setIsLoggedIn(true);
-    }).catch(error=> setError('please enter necessary details'));
+    if (validateForm) {
+      axios.post(
+        '/users/login', { email: email, password: password }
+      ).then(() => {
+        history.push('/');
+        setIsLoggedIn(true);
+      }).catch(error => setError(error.response.data.errorMsg));
+    }
   }
 
   return (
@@ -45,9 +56,10 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
               type="password"
             />
           </FormGroup>
-          <Button block bssize="large" disabled={!validateForm()} type="submit">
+          <Button block bssize="large" type="submit">
             Login
         </Button>
+          <div className='error'>{error}</div>
         </form>
       </div>
     </>
