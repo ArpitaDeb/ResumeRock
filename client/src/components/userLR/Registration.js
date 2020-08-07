@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import './Login.css';
 
 export default function Registration() {
@@ -18,16 +20,37 @@ export default function Registration() {
   const validateForm = () => {
     return state.email.length > 0 && state.password.length > 0 && state.userName.length > 0;
   }
+  const history = useHistory();
+  
+  /*
+  const redirectTo = useCallback((url) => {
+    history.push(url);
+  }, [useHistory]);
+  redirectTo('/')
+  */
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(state);
+    axios.post(
+      '/users/register', { email: state.email, password: state.password, userName: state.userName }
+    ).then(() => history.push('/'));
+    /*
+        axios({
+          method: 'POST',
+          url: '/register'
+        })
+            setState(prev => ({ ...prev, users: result.data })))
+          .catch(err => console.log(err));
+      }, [])
+      */
   }
 
   return (
     <>
       <div className="login">
         <form onSubmit={handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
+          <FormGroup controlId="email" bssize="large">
             <FormLabel>Email</FormLabel>
             <FormControl
               autoFocus
@@ -44,7 +67,7 @@ export default function Registration() {
               type="password"
             />
           </FormGroup>
-          <FormGroup controlId="userName" bsSize="large">
+          <FormGroup controlId="userName" bssize="large">
             <FormLabel>User Name</FormLabel>
             <FormControl
               value={state.userName}
@@ -52,7 +75,7 @@ export default function Registration() {
               type="text"
             />
           </FormGroup>
-          <Button block bsSize="large" disabled={!validateForm()} type="submit">
+          <Button block bssize="large" disabled={!validateForm()} type="submit">
             Register
         </Button>
         </form>

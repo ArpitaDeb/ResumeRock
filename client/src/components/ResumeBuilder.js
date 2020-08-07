@@ -50,7 +50,6 @@ export default function ResumeBuilder(props) {
   return (
     <>
       <Container fluid>
-        <Navigationbar />
         <Row className="rb-container vh-100">
           <Col className="sidebar-container col-2">
             <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />

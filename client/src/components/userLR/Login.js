@@ -1,24 +1,30 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import './Login.css';
 
-export default function Login() {
+export default function Login({ isLoggedIn, setIsLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const history = useHistory();
   const validateForm = () => {
     return email.length > 0 && password.length > 0;
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    axios.post(
+      '/users/login', { email: email, password: password }
+    ).then(() => history.push('/'));
+    setIsLoggedIn(true);
   }
 
   return (
     <>
       <div className="login">
         <form onSubmit={handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
+          <FormGroup controlId="email" bssize="large">
             <FormLabel>Email</FormLabel>
             <FormControl
               autoFocus
@@ -27,7 +33,7 @@ export default function Login() {
               onChange={(event) => setEmail(event.target.value)}
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
+          <FormGroup controlId="password" bssize="large">
             <FormLabel>Password</FormLabel>
             <FormControl
               value={password}
@@ -35,7 +41,7 @@ export default function Login() {
               type="password"
             />
           </FormGroup>
-          <Button block bsSize="large" disabled={!validateForm()} type="submit">
+          <Button block bssize="large" disabled={!validateForm()} type="submit">
             Login
         </Button>
         </form>

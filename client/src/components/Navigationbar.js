@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navbar, FormControl, Button, Nav, Form } from "react-bootstrap";
 import { Switch, Route, Link } from "react-router-dom";
 import Login from "../components/userLR/Login";
 import Registration from "../components/userLR/Registration";
 import ResumeBuilder from "../components/ResumeBuilder";
+import { useHistory } from 'react-router-dom';
 import logo from "../img/logo.png";
 import "./NavigationBar.css"
 
 export default function Navigationbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const history = useHistory();
+  const handleLogout = (event) => {
+    event.preventDefault();
+    setIsLoggedIn(false);
+    history.replace('/Login');
+  }
   return (
     <>
       <Navbar className="navigation-bar" variant="dark" fixed="top">
@@ -23,13 +31,19 @@ export default function Navigationbar() {
         </Navbar.Brand>
         <Nav className="ml-auto">
           <Nav.Link as={Link} to="/">Build Resume</Nav.Link>
-          <Nav.Link as={Link} to="/Login">Login</Nav.Link>
+          {isLoggedIn ?
+            <Button onClick={handleLogout}>Logout</Button>
+            :
+            <Nav.Link as={Link} to="/Login">Login</Nav.Link>
+          }
           <Nav.Link as={Link} to="/Registration">Register</Nav.Link>
         </Nav>
       </Navbar>
       <Switch>
         <Route path="/Login">
-          <Login />
+          <Login isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+          />
         </Route>
         <Route path="/Registration">
           <Registration />
