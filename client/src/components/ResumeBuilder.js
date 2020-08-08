@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -19,13 +19,23 @@ export default function ResumeBuilder(props) {
   }
   const [selectedSection, setSelectedSection] = useState('personal_info');
   const [resumeData, setResumeData] = useState(resumeDB);
-  const resumeDataOnUpdate = (data) => {
+  const resumeDataOnUpdate = (data, id) => {
     setResumeData({ ...resumeData, ...data });
-    axios.post("/users/resumes",{
-      //data: resumedata
-    }).then(() => { 
-    }).catch(error => console.log(error));
+    axios.post('/users/resumes/${id}', {
+      data: resumeData,
+      id: id
+    })
+      .then((response) => console.log(response))
+      .catch(error => console.log(error));
   }
+  // axios data request
+  useEffect((id) => {
+    axios.get("/users/resumes/${id}").then((response) => {
+      console.log(response);
+    }).catch((error) => {
+      console.log(error);
+    })
+  }, []);
   const leftSideBarOnUpdate = (value) => {
     console.log("Selected item: ", value);
     setSelectedSection(value);
@@ -62,7 +72,7 @@ export default function ResumeBuilder(props) {
         </Col>
 
         <Col className="bg-light col-5 preview-container vh-100">
-          <CustomerServiceTemplate data={resumeData}/>
+          <CustomerServiceTemplate data={resumeData} />
         </Col>
       </Row>
     </Container>

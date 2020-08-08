@@ -110,6 +110,7 @@ module.exports = db => {
           return res.status(401).json(templateVars);
         } else {
           req.session['user_id'] = user.id;
+          console.log('113',user.id);
           req.session.userName = user.userName;
           return res.json({});
         }
@@ -118,8 +119,32 @@ module.exports = db => {
         res.status(500).end();
       });
   });
-  router.post('/resumes', (req, res) => {
-    const {resumedata} = req.body
+  router.post('/resumes/:id', (req, res) => {
+    console.log('line122', req.session.user_id);
+    console.log('response from resume route');
+    const { data} = req.body;
+    const query = {
+      text: `INSERT INTO resumes ( user_id, resumedata) VALUES ($1::integer, $2:: jsonb) RETURNING *;`,
+      values: [req.session.user_id, data]
+    }
+    return db
+      .query(query)
+      .then(result => {
+        console.log(result);
+        return res.json(result[0]);
+      })
+  });
+  router.get('/resumes/:id', (req, res) => {
+    //const { } = req.body;
+    const query = {
+      text: `SELECT * FROM resumes JOIN users ON users.id = resumes.user_id WHERE user_id = $1::integer LIMIT 1 ORDER BY id DESC;`,
+      values: [req.session.user_id]
+    };
+    return db.query(query)
+      .then(result => {
+        console.log(result);
+        res.json(result)})
+      .catch(err => console.log(err));
   });
   return router;
 };
