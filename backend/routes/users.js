@@ -118,5 +118,8 @@ module.exports = db => {
         res.status(500).end();
       });
   });
+  router.post('/resumes', (req, res) => {
+    const {resumedata} = req.body
+  });
   return router;
 };

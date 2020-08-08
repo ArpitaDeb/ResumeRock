@@ -46,7 +46,8 @@ export default function Navigationbar() {
           />
         </Route>
         <Route path="/Registration">
-          <Registration />
+          <Registration isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn} />
         </Route>
         <Route path="/">
           <ResumeBuilder />
