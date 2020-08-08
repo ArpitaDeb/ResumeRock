@@ -2,7 +2,7 @@ import React from "react";
 export default function ContactsSection(props) {
   const data = props.personal_info;
 
-  if (!data.address_line1 && !data.city && !data.province && !data.phone_number && !data.postal_code ) {
+  if (!data.address_line1 && !data.city && !data.province && !data.phone_number && !data.postal_code && !data.email) {
     return ""
   } else {
     return (
