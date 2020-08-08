@@ -5,15 +5,14 @@ import Col from 'react-bootstrap/Col';
 import FormContainer from "./FormContainer";
 import SummaryForm from "./forms/SummaryForm";
 import axios from "axios";
-//import Navigationbar from "../components/Navigationbar";
 import LeftSideBar from "../components/LeftSidebar/LeftSidebar";
 import './ResumeBuilder.css';
 import PersonalInfoForm from "./forms/PersonalInfoForm";
-import Preview from "./preview/Preview";
-import CoreCompetencyForm from "./forms/CoreCompetencyForm";
-import EducationForm from "./forms/EducationForm";
-import Experience from "./forms/Experience";
-import ReferenceForm from "./forms/ReferenceForm";
+import CoreCompetencyForm from "./forms/CoreCompetencyForm"
+import EducationForm from "./forms/EducationForm"
+import CustomerServiceTemplate from "./templates/customerService/CustomerServiceTemplate"
+import Experience from "./forms/Experience"
+import ReferenceForm from "./forms/ReferenceForm"
 
 export default function ResumeBuilder(props) {
   const resumeDB = {
@@ -50,24 +49,23 @@ export default function ResumeBuilder(props) {
   }
 
   return (
-    <>
-      <Container fluid>
-        <Row className="rb-container vh-100">
-          <Col className="sidebar-container col-2">
-            <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />
-          </Col>
-          <Col className="bg-white col-5">
-            <FormContainer title={findTitleByID(selectedSection)}>
-              {findComponentByID(selectedSection)}
-            </FormContainer>
-          </Col>
+    <Container fluid>
+      <Row className="rb-container vh-100">
+        <Col className="sidebar-container col-2 vh-100">
+          <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />
+        </Col>
 
-          <Col className="bg-light col-5">
-            <Preview resumeData={resumeData} />
-          </Col>
-        </Row>
-      </Container>
-    </>
+        <Col className="bg-white col-5 vh-100">
+          <FormContainer title={findTitleByID(selectedSection)}>
+            {findComponentByID(selectedSection)}
+          </FormContainer>
+        </Col>
+
+        <Col className="bg-light col-5 preview-container vh-100">
+          <CustomerServiceTemplate data={resumeData}/>
+        </Col>
+      </Row>
+    </Container>
   );
 
 }
