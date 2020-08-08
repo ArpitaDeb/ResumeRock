@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomModal from "../CustomModal";
+import Alert from 'react-bootstrap/Alert';
 
 export default function EducationForm(props) {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -96,6 +97,15 @@ export default function EducationForm(props) {
   }
   return (
     <>
+      <Alert variant="primary">
+        <Alert.Heading> Writing education in resume is mandatory!</Alert.Heading>
+        <p>
+        Share the degrees you’ve earned and schools you’ve attended. 
+        Remember, learning doesn’t stop when you graduate.
+        This is a great place to add in any courses you’ve taken or certifications you’ve earned in the professional world as well!
+        </p>
+      </Alert>
+
       <Form>
         <Form.Row>
           <Form.Group as={Col} xs={8} controlId="heading">
