@@ -4,29 +4,28 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FormContainer from "./FormContainer";
 import SummaryForm from "./forms/SummaryForm";
-import Navigationbar from "../components/Navigationbar";
-import LeftSideBar from "../components/LeftSidebar/LeftSidebar"
+import axios from "axios";
+import LeftSideBar from "../components/LeftSidebar/LeftSidebar";
 import './ResumeBuilder.css';
 import PersonalInfoForm from "./forms/PersonalInfoForm";
 import CoreCompetencyForm from "./forms/CoreCompetencyForm"
 import EducationForm from "./forms/EducationForm"
 import CustomerServiceTemplate from "./templates/customerService/CustomerServiceTemplate"
-
 import Experience from "./forms/Experience"
-
 import ReferenceForm from "./forms/ReferenceForm"
-
 
 export default function ResumeBuilder(props) {
   const resumeDB = {
   }
   const [selectedSection, setSelectedSection] = useState('personal_info');
   const [resumeData, setResumeData] = useState(resumeDB);
-
   const resumeDataOnUpdate = (data) => {
     setResumeData({ ...resumeData, ...data });
+    axios.post("/users/resumes",{
+      //data: resumedata
+    }).then(() => { 
+    }).catch(error => console.log(error));
   }
-
   const leftSideBarOnUpdate = (value) => {
     console.log("Selected item: ", value);
     setSelectedSection(value);
@@ -37,7 +36,7 @@ export default function ResumeBuilder(props) {
     { id: "summary", title: "Summary", component: <SummaryForm onUpdate={resumeDataOnUpdate} data={resumeData.summary} /> },
     { id: "educations", title: "Education", component: <EducationForm onUpdate={resumeDataOnUpdate} data={resumeData.educations} /> },
     { id: "core_competencies", title: "Core Competencies", component: <CoreCompetencyForm onUpdate={resumeDataOnUpdate} data={resumeData.core_competencies} /> },
-    { id: "experience", title: "Experience", component: <Experience onUpdate={resumeDataOnUpdate} data={resumeData.experience}/> },
+    { id: "experience", title: "Experience", component: <Experience onUpdate={resumeDataOnUpdate} data={resumeData.experience} /> },
     { id: "references", title: "References", component: <ReferenceForm onUpdate={resumeDataOnUpdate} data={resumeData.references} /> }
   ]
 
@@ -51,7 +50,6 @@ export default function ResumeBuilder(props) {
 
   return (
     <Container fluid>
-      <Navigationbar />
       <Row className="rb-container vh-100">
         <Col className="sidebar-container col-2 vh-100">
           <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />
@@ -64,7 +62,6 @@ export default function ResumeBuilder(props) {
         </Col>
 
         <Col className="bg-light col-5 preview-container vh-100">
-          {/* <Preview resumeData={resumeData} /> */}
           <CustomerServiceTemplate data={resumeData}/>
         </Col>
       </Row>

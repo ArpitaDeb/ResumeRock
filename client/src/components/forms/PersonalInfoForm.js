@@ -59,7 +59,7 @@ export default function PersonalInfoForm(props) {
         <Form.Row>
           <Form.Group as={Col} xs={8} controlId="phone_number">
             <Form.Label>Phone Number</Form.Label>
-            <Form.Control required type="phone" value={(personalInfo == null) ? "" : personalInfo.phone_number} onChange={onInputChange} />
+            <Form.Control placeholder="E.g. (404) 292-9090" required type="phone" value={(personalInfo == null) ? "" : personalInfo.phone_number} onChange={onInputChange} />
           </Form.Group>
         </Form.Row>
         <Form.Row>
@@ -79,7 +79,7 @@ export default function PersonalInfoForm(props) {
           </Form.Group>
           <Form.Group as={Col} controlId="postal_code">
             <Form.Label>Postal Code</Form.Label>
-            <Form.Control required value={(personalInfo == null) ? "" : personalInfo.postal_code} onChange={onInputChange} />
+            <Form.Control placeholder="E.g. K2P 0LM" required value={(personalInfo == null) ? "" : personalInfo.postal_code} onChange={onInputChange} />
           </Form.Group>
         </Form.Row>
         {/* <Button type="submit" variant='primary' size='sm'>Submit</Button> */}
