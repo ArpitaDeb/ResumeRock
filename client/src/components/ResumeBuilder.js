@@ -4,15 +4,16 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FormContainer from "./FormContainer";
 import SummaryForm from "./forms/SummaryForm";
+import axios from "axios";
 //import Navigationbar from "../components/Navigationbar";
-import LeftSideBar from "../components/LeftSidebar/LeftSidebar"
+import LeftSideBar from "../components/LeftSidebar/LeftSidebar";
 import './ResumeBuilder.css';
 import PersonalInfoForm from "./forms/PersonalInfoForm";
-import Preview from "./preview/Preview"
-import CoreCompetencyForm from "./forms/CoreCompetencyForm"
-import EducationForm from "./forms/EducationForm"
-import Experience from "./forms/Experience"
-import ReferenceForm from "./forms/ReferenceForm"
+import Preview from "./preview/Preview";
+import CoreCompetencyForm from "./forms/CoreCompetencyForm";
+import EducationForm from "./forms/EducationForm";
+import Experience from "./forms/Experience";
+import ReferenceForm from "./forms/ReferenceForm";
 
 export default function ResumeBuilder(props) {
   const resumeDB = {
@@ -21,6 +22,10 @@ export default function ResumeBuilder(props) {
   const [resumeData, setResumeData] = useState(resumeDB);
   const resumeDataOnUpdate = (data) => {
     setResumeData({ ...resumeData, ...data });
+    axios.post("/users/resumes",{
+      //data: resumedata
+    }).then(() => { 
+    }).catch(error => console.log(error));
   }
   const leftSideBarOnUpdate = (value) => {
     console.log("Selected item: ", value);

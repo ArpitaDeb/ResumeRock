@@ -4,12 +4,13 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import './Login.css';
 
-export default function Registration() {
+export default function Registration({ isLoggedIn, setIsLoggedIn }) {
   const [state, setState] = useState({
     email: "",
     password: "",
     userName: ""
   })
+  const [error, setError] = useState("");
   const handleChange = (e) => {
     const { id, value } = e.target
     setState(prevState => ({
@@ -26,7 +27,10 @@ export default function Registration() {
     console.log(state);
     axios.post(
       '/users/register', { email: state.email, password: state.password, userName: state.userName }
-    ).then(() => history.push('/'));
+    ).then(() => {
+      history.push('/');
+      setIsLoggedIn(true);
+    }).catch(error => setError(error.response.data.errorMsg));
   }
 
   return (
@@ -42,7 +46,7 @@ export default function Registration() {
               onChange={handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
+          <FormGroup controlId="password" bssize="large">
             <FormLabel>Password</FormLabel>
             <FormControl
               value={state.password}
@@ -61,6 +65,7 @@ export default function Registration() {
           <Button block bssize="large" disabled={!validateForm()} type="submit">
             Register
         </Button>
+          <div className='error'>{error}</div>
         </form>
       </div>
     </>
