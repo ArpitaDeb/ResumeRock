@@ -53,7 +53,7 @@ export default function ResumeBuilder(props) {
     <Container fluid>
       <Navigationbar />
       <Row className="rb-container vh-100">
-        <Col className="sidebar-container col-2">
+        <Col className="sidebar-container col-2 vh-100">
           <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />
         </Col>
 
@@ -63,7 +63,7 @@ export default function ResumeBuilder(props) {
           </FormContainer>
         </Col>
 
-        <Col className="bg-light col-5" style={{overflow: 'hidden'}}>
+        <Col className="bg-light col-5 preview-container vh-100">
           {/* <Preview resumeData={resumeData} /> */}
           <CustomerServiceTemplate data={resumeData}/>
         </Col>

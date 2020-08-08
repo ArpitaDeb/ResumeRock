@@ -8,7 +8,6 @@ import TitleSection from "./TitleSection";
 import SummarySection from "./SummarySection";
 import ExperienceSection from "./ExperienceSection"
 import { data } from "./data"
-import classNames from 'classnames';
 
 export default function CustomerServiceTemplate(props) {
   const pageRef = useRef(null);
@@ -24,20 +23,24 @@ export default function CustomerServiceTemplate(props) {
   }, [])
 
   // comment line below to check an example of full page resume template!
-  const data = props.data;
-  const rightContent = (data.experience || data.summary) ? <div className="p-3 right-content" >
-    <SummarySection heading={data.summary ? data.summary.heading : undefined} body={data.summary ? data.summary.body : undefined} />
-    <ExperienceSection heading={data.experience ? data.experience.heading : undefined} experiences={data.experience ? data.experience.experiences : undefined} />
-  </div> : null
+  // const data = props.data;
 
+  const rightContent = (data.experience || data.summary) ?
+    <div className="p-3 right-content" >
+      <SummarySection heading={data.summary ? data.summary.heading : undefined} body={data.summary ? data.summary.body : undefined} />
+      <ExperienceSection heading={data.experience ? data.experience.heading : undefined} experiences={data.experience ? data.experience.experiences : undefined} />
+    </div> : null
+
+//At first, when the data is an empty object, the users should see a blank resume template
   if (!Object.keys(data).length) {
-    return (<div ref={pageRef} style={{ transform: `scale(${ratio * .8})`, transformOrigin: 'top left', overflow: 'hidden' }} className="container-fluid page" />);
+    return (<div ref={pageRef} style={{ transform: `scale(${ratio * .9})`, transformOrigin: 'top left', overflow: 'hidden' }} className="container-fluid page"/>);
   }
+
   return (
-    <div ref={pageRef} style={{ transform: `scale(${ratio * .9})`, transformOrigin: 'top left', overflow: 'hidden' }} className="container-fluid page">
+    <div ref={pageRef} style={{ transform: `scale(${ratio * .9})`, transformOrigin: 'top left ', overflow: 'hidden' }} className="container-fluid page">
       <div className="container-fluid row main-container">
 
-        <div className="col-4 borderd d-flex flex-column justify-content-around no-padding">
+        <div className="col-4 borderd d-flex flex-column justify-content-around no-padding ">
           <div className="left-container">
             <CoreCompetenciesSection heading={data.core_competencies ? data.core_competencies.heading : undefined} skills={data.core_competencies ? data.core_competencies.skills : undefined} />
             <EducationSection heading={data.educations ? data.educations.heading : undefined} educationInfo={data.educations ? data.educations.educationInfo : undefined} />

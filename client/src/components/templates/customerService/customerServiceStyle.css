@@ -28,6 +28,7 @@
 .right-container {
   border-top: 10px solid white;
   border-bottom: 10px solid white;
+  overflow: hidden;
 }
 .title{
   color: white;
@@ -38,6 +39,11 @@
   border: 2px solid black;
 }
 .page {
+  margin: auto;
+  width: 32.76cm;
+  height: 46.332cm;
+}
+.page1 {
   width: 32.76cm;
   height: 46.332cm;
   overflow: scroll;
