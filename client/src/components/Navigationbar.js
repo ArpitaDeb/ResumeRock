@@ -10,12 +10,20 @@ import "./NavigationBar.css"
 
 export default function Navigationbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+
   const history = useHistory();
   const handleLogout = (event) => {
     event.preventDefault();
     setIsLoggedIn(false);
+    setIsRegistered(false);
     history.replace('/Login');
   }
+
+  const handleShowingRegistrationBtn = (data) => {
+    setIsRegistered(data);
+  }
+
   return (
     <>
       <Navbar className="navigation-bar" variant="dark" fixed="top">
@@ -32,17 +40,22 @@ export default function Navigationbar() {
         <Nav className="ml-auto">
           <Nav.Link as={Link} to="/">Build Resume</Nav.Link>
           {isLoggedIn ?
-            <Button onClick={handleLogout}>Logout</Button>
+            <Button variant="outline-secondary" onClick={handleLogout}>Logout</Button>
             :
             <Nav.Link as={Link} to="/Login">Login</Nav.Link>
           }
-          <Nav.Link as={Link} to="/Registration">Register</Nav.Link>
+          {!isRegistered ?
+            <Nav.Link as={Link} to="/Registration">Register</Nav.Link>
+            :
+            null
+          }
         </Nav>
       </Navbar>
       <Switch>
         <Route path="/Login">
           <Login isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
+            onUpdate={handleShowingRegistrationBtn}
           />
         </Route>
         <Route path="/Registration">

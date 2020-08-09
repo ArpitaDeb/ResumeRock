@@ -4,7 +4,8 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import './Login.css';
 
-export default function Login({ isLoggedIn, setIsLoggedIn }) {
+export default function Login(props) {
+  const { isLoggedIn, setIsLoggedIn, onUpdate } = props
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -29,8 +30,10 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
       axios.post(
         '/users/login', { email: email, password: password }
       ).then(() => {
+        debugger;
         history.push('/');
         setIsLoggedIn(true);
+        onUpdate(true);
       }).catch(error => setError(error.response.data.errorMsg));
     }
   }
