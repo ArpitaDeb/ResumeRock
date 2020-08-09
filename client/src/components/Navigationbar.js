@@ -53,7 +53,7 @@ export default function Navigationbar() {
       </Navbar>
       <Switch>
         <Route path="/Login">
-          <Login isLoggedIn={isLoggedIn}
+          <Login
             setIsLoggedIn={setIsLoggedIn}
             onUpdate={handleShowingRegistrationBtn}
           />

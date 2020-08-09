@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import './Login.css';
 
 export default function Login(props) {
-  const { isLoggedIn, setIsLoggedIn, onUpdate } = props
+  const { setIsLoggedIn, onUpdate } = props
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
