@@ -7,6 +7,7 @@ import ResumeBuilder from "../components/ResumeBuilder";
 import { useHistory } from 'react-router-dom';
 import logo from "../img/logo.png";
 import "./NavigationBar.css"
+import Landing from "../components/landingPage/Landing"
 
 export default function Navigationbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -42,29 +43,34 @@ export default function Navigationbar() {
           {isLoggedIn ?
             <Button variant="outline-secondary" onClick={handleLogout}>Logout</Button>
             :
-            <Nav.Link as={Link} to="/Login">Login</Nav.Link>
+            <Nav.Link as={Link} to="/login">Login</Nav.Link>
           }
           {!isRegistered ?
-            <Nav.Link as={Link} to="/Registration">Register</Nav.Link>
+            <Nav.Link as={Link} to="/registration">Register</Nav.Link>
             :
             null
           }
         </Nav>
       </Navbar>
       <Switch>
-        <Route path="/Login">
+        <Route path="/login">
           <Login
             setIsLoggedIn={setIsLoggedIn}
             onUpdate={handleShowingRegistrationBtn}
           />
         </Route>
-        <Route path="/Registration">
+        <Route path="/registration">
           <Registration isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn} />
         </Route>
-        <Route path="/">
-          <ResumeBuilder />
+        <Route path="/resume">
+          <ResumeBuilder/>
         </Route>
+        <Route path="/">
+          {isLoggedIn ? <ResumeBuilder /> : <Landing />}
+        </Route>
+
+
       </Switch>
     </>
   )

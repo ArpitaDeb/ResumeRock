@@ -13,6 +13,7 @@ import EducationForm from "./forms/EducationForm"
 import CustomerServiceTemplate from "./templates/customerService/CustomerServiceTemplate"
 import Experience from "./forms/Experience"
 import ReferenceForm from "./forms/ReferenceForm"
+import Navigationbar from "../components/Navigationbar";
 
 export default function ResumeBuilder(props) {
   const resumeDB = {
@@ -23,7 +24,7 @@ export default function ResumeBuilder(props) {
     setResumeData({ ...resumeData, ...data });
     axios.post("/users/resumes",{
       //data: resumedata
-    }).then(() => { 
+    }).then(() => {
     }).catch(error => console.log(error));
   }
   const leftSideBarOnUpdate = (value) => {

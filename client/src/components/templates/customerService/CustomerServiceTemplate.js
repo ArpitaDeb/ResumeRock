@@ -15,7 +15,9 @@ export default function CustomerServiceTemplate(props) {
 
   const handleResize = () => {
     console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
-    setRatio(pageRef.current.parentElement.offsetWidth / pageRef.current.offsetWidth)
+    if (pageRef.current && pageRef.current.parentElement && pageRef.current.parentElement.offsetWidth){
+      setRatio(pageRef.current.parentElement.offsetWidth / pageRef.current.offsetWidth)
+    }
   }
   useEffect(() => {
     window.addEventListener('resize', handleResize)
