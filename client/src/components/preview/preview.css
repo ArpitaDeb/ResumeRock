@@ -1,0 +1,11 @@
+.previw-bar > button {
+  background-color: white;
+
+}
+
+.bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+}

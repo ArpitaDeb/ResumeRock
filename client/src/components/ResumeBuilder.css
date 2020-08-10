@@ -7,4 +7,5 @@
 }
 .preview-container {
   overflow: hidden !important;
+  background-color: #34495e;
 }
