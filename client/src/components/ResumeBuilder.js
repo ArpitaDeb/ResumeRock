@@ -64,7 +64,7 @@ export default function ResumeBuilder(props) {
         </Col>
 
         <Col className="col-5 preview-container vh-100">
-          <Preview data={resumeData}/>
+          <Preview onUpdate={resumeDataOnUpdate} data={resumeData}/>
         </Col>
       </Row>
     </Container>

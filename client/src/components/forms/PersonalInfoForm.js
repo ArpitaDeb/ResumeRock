@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -6,8 +6,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
 
 export default function PersonalInfoForm(props) {
-
-  const [personalInfo, setPersonalInfo] = useState(props.data);
+  const [personalInfo, setPersonalInfo] = useState(null);
+  useEffect(()=>{
+    setPersonalInfo(props.data)
+  },[props.data])
 
   const onInputChange = (event) => {
     const updatedVal = event.target.id;

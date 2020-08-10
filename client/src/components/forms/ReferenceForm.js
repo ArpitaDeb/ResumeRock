@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
@@ -11,9 +11,13 @@ export default function ReferenceForm(props) {
   const [showAddModal, setShowAddModal] = useState(false);
   // showEditModal conatins the id of the selected skill to be editted
   const [showEditModal, setShowEditModal] = useState();
-  const [reference, setReference] = useState(props.data || { referees: [] });
+  const [reference, setReference] = useState(null);
   const [newRef, setNewRef] = useState({ name: "", email: "", req: false });
   const [editRef, setEditRef] = useState({});
+
+  useEffect(()=>{
+    setReference(props.data)
+  },[props.data])
 
   const onHeadingChange = (event) => {
     const newRefHead = { ...reference, heading: event.target.value }
@@ -90,10 +94,9 @@ export default function ReferenceForm(props) {
           </Form.Group>
         </Form.Row>
       </Form>
-      {
+      { (reference == null) ? "" :
         reference.referees.map((item, index) => {
           if (!item.name || !item.email) {
-            debugger
             return (
               <Card border="primary" style={{ width: '20rem', margin: '.5rem' }}>
                 <Card.Body>

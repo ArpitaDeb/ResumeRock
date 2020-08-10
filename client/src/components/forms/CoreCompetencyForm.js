@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
@@ -20,9 +20,13 @@ export default function CoreCompetencyForm(props) {
   const [showAddModal, setShowAddModal] = useState(false);
   // showEditModal conatins the id of the selected skill to be editted
   const [showEditModal, setShowEditModal] = useState();
-  const [coreCompetencies, setCoreCompetencies] = useState(props.data || { skills: [] });
+  const [coreCompetencies, setCoreCompetencies] = useState(null);
   const [newSkill, setNewSkill] = useState({ name: "", rating: 1 });
   const [editSkill, setEditSkill] = useState({});
+
+  useEffect(()=>{
+    setCoreCompetencies(props.data)
+  },[props.data])
 
   const onHeadingChange = (event) => {
     const newCoreCompetencies = { ...coreCompetencies, heading: event.target.value }
@@ -92,7 +96,7 @@ export default function CoreCompetencyForm(props) {
           </Form.Group>
         </Form.Row>
       </Form>
-      {
+      { (coreCompetencies == null) ? "" :
         coreCompetencies.skills.map((item, index) => {
           return (
             <Card border="primary" style={{ width: '20rem', margin: '.5rem' }}>

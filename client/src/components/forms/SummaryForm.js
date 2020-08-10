@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 
 export default function SummaryForm(props) {
 
-  const [summary, setSummary] = useState(props.data);
+  const [summary, setSummary] = useState(null);
+  useEffect(()=>{
+    setSummary(props.data)
+  },[props.data])
 
   const handleChange = (event) => {
     const name = event.target.id;
