@@ -32,7 +32,6 @@ export default function CustomerServiceTemplate(props) {
       <SummarySection heading={data.summary ? data.summary.heading : undefined} body={data.summary ? data.summary.body : undefined} />
       <ExperienceSection heading={data.experience ? data.experience.heading : undefined} experiences={data.experience ? data.experience.experiences : undefined} />
     </div> : null
-
 //At first, when the data is an empty object, the users should see a blank resume template
   if (!Object.keys(data).length) {
     return (<div ref={pageRef} style={{ transform: `scale(${ratio * .9})`, transformOrigin: 'top left', overflow: 'hidden' }} className="container-fluid page"/>);
