@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Alert from 'react-bootstrap/Alert';
 import ReactListInput from 'react-list-input';
 import { Item, StagingItem } from "../../helpers/reactListInputHelper"
+import showDateFromTo from "../../helpers/dateUtils";
 
 
 export default function Experience(props) {
@@ -31,9 +32,13 @@ export default function Experience(props) {
   // showEditModal conatins the id of the selected experience to be editted
   const [showEditModal, setShowEditModal] = useState();
 
-  const [experienceData, setExperienceData] = useState(props.data || { heading: "", experiences: [] });
+  const [experienceData, setExperienceData] = useState(null);
   const [newExperience, setNewExperience] = useState(emptyExperience);
   const [editExperience, setEditExperience] = useState({});
+
+  useEffect(()=>{
+    setExperienceData(props.data)
+  },[props.data])
 
   const onHeadingChange = (event) => {
     const newExperiece = { ...experienceData, heading: event.target.value }
@@ -90,27 +95,6 @@ export default function Experience(props) {
     setShowEditModal(false);
   }
 
-
-  const showDateFromTo = (start, end) => {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"];
-    const toMonth = (end === "" ? "Present" : months[end.getMonth()]);
-    const fromMonth = months[start.getMonth()];
-    return (toMonth === "Present" ? (`${fromMonth} ${start.getFullYear()} - ${toMonth}`) : (`${fromMonth} ${start.getFullYear()} - ${toMonth} ${end.getFullYear()}`));
-  }
-
-
   return (
     <>
       <Alert variant="primary">
@@ -134,7 +118,7 @@ export default function Experience(props) {
       </Form>
 
 
-      {
+      { (experienceData == null) ? "" :
         (experienceData.experiences || []).map((item, index) => {
           return (
             <Card border="primary" style={{ width: '28rem', margin: '.3rem' }}>

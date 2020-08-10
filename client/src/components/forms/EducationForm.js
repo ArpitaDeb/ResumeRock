@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -8,13 +8,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomModal from "../CustomModal";
 import Alert from 'react-bootstrap/Alert';
+import showDateFromTo from "../../helpers/dateUtils";
 
 export default function EducationForm(props) {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [educations, setEducations] = useState(props.data || { educationInfo: [] });
+  const [educations, setEducations] = useState(null);
   const [educationDetails, setEducationDetails] = useState({ institution: '', fieldOfStudy: '', typeOfDegree: '', GPA: '', start_date: '', end_date: '', in_progress: false });
   const [editEducation, setEditEducation] = useState({});
+
+  useEffect(()=>{
+    setEducations(props.data)
+  },[props.data])
 
   const onHeadingChange = (event) => {
     const newEduHead = { ...educations, heading: event.target.value }
@@ -26,24 +31,6 @@ export default function EducationForm(props) {
     const name = event.target.id;
     const newEducationToBeAdded = { ...educationDetails, [name]: event.target.value }
     setEducationDetails(newEducationToBeAdded);
-  }
-  const showDateFromTo = (start, end) => {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"];
-    const toMonth = (end === "" ? "Present" : months[end.getMonth()]);
-    const fromMonth = months[start.getMonth()];
-    return (toMonth === "Present" ? (`${fromMonth} ${start.getFullYear()} - ${toMonth}`) : (`${fromMonth} ${start.getFullYear()} - ${toMonth} ${end.getFullYear()}`));
   }
 
   function validate() {
@@ -117,7 +104,7 @@ export default function EducationForm(props) {
           </Form.Group>
         </Form.Row>
       </Form>
-      {
+      { (educations == null) ? "" :
         educations.educationInfo.map((item, index) => {
           return (
             <Card border="primary" style={{ width: '28rem', margin: '.3rem' }}>

@@ -37,7 +37,6 @@ export default function Login(props) {
         '/users/login', { email: email, password: password }
       ).then(() => {
         history.push('/');
-        debugger
         setIsLoggedIn(true);
         onUpdate(true);
       }).catch(error => setError(error.response.data.errorMsg));
