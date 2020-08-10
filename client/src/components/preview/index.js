@@ -25,7 +25,7 @@ export default function Preview(props) {
     <div>
       {showMenu ?
         <div className="bar-container">
-          <ButtonGroup className="previw-bar">
+          <ButtonGroup className="previw-bar mt-2">
             <Button variant="light">Export to PDF</Button>
             <Button variant="light">Fullscreen</Button>
             <Button
@@ -44,7 +44,7 @@ export default function Preview(props) {
         </div>
         : showImportBtn ?
           <div className="bar-container">
-            <ButtonGroup className="previw-bar">
+            <ButtonGroup className="previw-bar mt-3">
               <Button
                 variant="light"
                 onClick={() => { setShowImportBtn(false) ; setShowUpload(true)}}
