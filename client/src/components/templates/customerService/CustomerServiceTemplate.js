@@ -25,7 +25,7 @@ export default function CustomerServiceTemplate(props) {
   }, [])
 
   // comment line below to check an example of full page resume template!
-  const data = props.data;
+  // const data = props.data;
 
   const rightContent = (data.experience || data.summary) ?
     <div className="p-3 right-content" >

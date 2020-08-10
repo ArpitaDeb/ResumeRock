@@ -13,7 +13,8 @@ import EducationForm from "./forms/EducationForm"
 import CustomerServiceTemplate from "./templates/customerService/CustomerServiceTemplate"
 import Experience from "./forms/Experience"
 import ReferenceForm from "./forms/ReferenceForm"
-import Navigationbar from "../components/Navigationbar";
+import Preview from "./preview";
+
 
 export default function ResumeBuilder(props) {
   const resumeDB = {
@@ -62,8 +63,8 @@ export default function ResumeBuilder(props) {
           </FormContainer>
         </Col>
 
-        <Col className="bg-light col-5 preview-container vh-100">
-          <CustomerServiceTemplate data={resumeData}/>
+        <Col className="col-5 preview-container vh-100">
+          <Preview data={resumeData}/>
         </Col>
       </Row>
     </Container>

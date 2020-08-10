@@ -28,6 +28,7 @@
 .right-container {
   border-top: 10px solid white;
   border-bottom: 10px solid white;
+  border-right: 10px solid white;
   overflow: hidden;
 }
 .title{
