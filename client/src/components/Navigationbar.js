@@ -39,7 +39,7 @@ export default function Navigationbar() {
         YourResume.Rock
         </Navbar.Brand>
         <Nav className="ml-auto">
-          <Nav.Link as={Link} to="/">Build Resume</Nav.Link>
+          <Nav.Link as={Link} to="/resume">Build Resume</Nav.Link>
           {isLoggedIn ?
             <Button variant="outline-secondary" onClick={handleLogout}>Logout</Button>
             :
