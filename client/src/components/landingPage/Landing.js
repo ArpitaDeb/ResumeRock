@@ -24,9 +24,6 @@ import ResumeBuilder from "../ResumeBuilder";
 
 export default function Landing(props) {
 
-  const handleClick = (event) => {
-
-  }
 
   return (
     <div className="landing-container">
@@ -56,13 +53,11 @@ export default function Landing(props) {
               <CardBody>
                 <img className={"resumeTemplates"} src={sample1} />
                 <div className="text-center">
-                  <Button
-                    className="mt-4"
-                    color="primary"
-                    onClick={e => e.preventDefault()}
-                  >
-                    Select template 1
-                          </Button>
+                  <div className="btn-wrapper">
+                    <Link to="/resume" className="template-btn" style={{
+                      backgroundColor: "#ffc107"
+                    }}>Select template 1</Link>
+                  </div>
                 </div>
               </CardBody>
             </Card>
@@ -72,13 +67,13 @@ export default function Landing(props) {
               <CardBody>
                 <img className={"resumeTemplates"} src={sample2} />
                 <div className="text-center">
-                  <Button
-                    className="mt-4"
-                    color="warning"
-                    onClick={e => e.preventDefault()}
-                  >
-                    Select template 2
-                          </Button>
+                  <div className="btn-wrapper">
+                    <Link to="/resume" className="template-btn"
+                    style={{
+                      backgroundColor: "#007bff"
+                    }}
+                    >Select template 2</Link>
+                  </div>
                 </div>
               </CardBody>
             </Card>
@@ -88,13 +83,9 @@ export default function Landing(props) {
               <CardBody>
                 <img className={"resumeTemplates"} src={sample3} />
                 <div className="text-center">
-                  <Button
-                    className="mt-4"
-                    color="success"
-                    onClick={e => e.preventDefault()}
-                  >
-                    Select template 3
-                          </Button>
+                  <div className="btn-wrapper">
+                    <Link to="/resume" className="template-btn">Select template 3</Link>
+                  </div>
                 </div>
               </CardBody>
             </Card>
