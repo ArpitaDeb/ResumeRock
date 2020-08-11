@@ -23,13 +23,12 @@ export default function ResumeBuilder(props) {
   const [resumeData, setResumeData] = useState(resumeDB);
   const resumeDataOnUpdate = (data) => {
     setResumeData({ ...resumeData, ...data });
-    axios.post("/users/resumes",{
+    axios.post("/users/resumes", {
       //data: resumedata
     }).then(() => {
     }).catch(error => console.log(error));
   }
   const leftSideBarOnUpdate = (value) => {
-    console.log("Selected item: ", value);
     setSelectedSection(value);
   }
 
@@ -51,23 +50,30 @@ export default function ResumeBuilder(props) {
   }
 
   return (
-    <Container fluid>
-      <Row className="rb-container vh-100">
-        <Col className="sidebar-container col-2 vh-100">
-          <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />
-        </Col>
+    <>
+      <Container fluid className="non-printable">
+        <Row className="rb-container vh-100 ">
+          <Col className="sidebar-container col-2 vh-100">
+            <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />
+          </Col>
 
-        <Col className="bg-white col-5 vh-100">
-          <FormContainer title={findTitleByID(selectedSection)}>
-            {findComponentByID(selectedSection)}
-          </FormContainer>
-        </Col>
+          <Col className="bg-white col-5 vh-100">
+            <FormContainer title={findTitleByID(selectedSection)}>
+              {findComponentByID(selectedSection)}
+            </FormContainer>
+          </Col>
 
-        <Col className="col-5 preview-container vh-100">
-          <Preview onUpdate={resumeDataOnUpdate} data={resumeData}/>
-        </Col>
-      </Row>
-    </Container>
+          <Col className="col-5 preview-container vh-100">
+            <Preview onUpdate={resumeDataOnUpdate} data={resumeData} />
+          </Col>
+        </Row>
+
+      </Container>
+
+      <div className="print-preview overlay-white">
+        <CustomerServiceTemplate data={resumeData} noScale />
+      </div>
+    </>
   );
 
 }

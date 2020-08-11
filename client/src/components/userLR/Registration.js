@@ -10,7 +10,7 @@ import {
 import avatar from "../../img/avatar.png";
 
 
-export default function Registration({ isLoggedIn, setIsLoggedIn }) {
+export default function Registration(props) {
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -36,7 +36,7 @@ export default function Registration({ isLoggedIn, setIsLoggedIn }) {
       '/users/register', { email: state.email, password: state.password, userName: state.email }
     ).then(() => {
       history.push('/');
-      setIsLoggedIn(true);
+      props.onUpdate(true);
     }).catch(error => setError(error.response.data.errorMsg));
   }
 

@@ -9,14 +9,16 @@ import CustomModal from "../CustomModal";
 
 export default function ReferenceForm(props) {
   const [showAddModal, setShowAddModal] = useState(false);
-  // showEditModal conatins the id of the selected skill to be editted
+  // showEditModal contains the id of the selected skill to be editted
   const [showEditModal, setShowEditModal] = useState();
-  const [reference, setReference] = useState(null);
+  const [reference, setReference] = useState({ referees: [] });
   const [newRef, setNewRef] = useState({ name: "", email: "", req: false });
   const [editRef, setEditRef] = useState({});
 
   useEffect(()=>{
-    setReference(props.data)
+    if (props.data){
+      setReference(props.data);
+    }
   },[props.data])
 
   const onHeadingChange = (event) => {
@@ -94,7 +96,7 @@ export default function ReferenceForm(props) {
           </Form.Group>
         </Form.Row>
       </Form>
-      { (reference == null) ? "" :
+      { (reference == null) ? null :
         reference.referees.map((item, index) => {
           if (!item.name || !item.email) {
             return (
@@ -148,7 +150,7 @@ export default function ReferenceForm(props) {
       <Button type="button" variant='primary'
         onClick={() => setShowAddModal(true)} size='m'>+ ADD REFERENCE</Button>
       <CustomModal
-        title="Add REFERENCE"
+        title="Add Reference"
         show={showAddModal}
         onClose={() => setShowAddModal(false)}
         onSubmit={() => submitNewRef(newRef)}

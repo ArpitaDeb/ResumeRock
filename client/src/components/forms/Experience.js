@@ -32,13 +32,15 @@ export default function Experience(props) {
   // showEditModal conatins the id of the selected experience to be editted
   const [showEditModal, setShowEditModal] = useState();
 
-  const [experienceData, setExperienceData] = useState(null);
+  const [experienceData, setExperienceData] = useState({ experiences: [] });
   const [newExperience, setNewExperience] = useState(emptyExperience);
   const [editExperience, setEditExperience] = useState({});
 
-  useEffect(()=>{
-    setExperienceData(props.data)
-  },[props.data])
+  useEffect(() => {
+    if (props.data) {
+      setExperienceData(props.data)
+    }
+  }, [props.data])
 
   const onHeadingChange = (event) => {
     const newExperiece = { ...experienceData, heading: event.target.value }
@@ -118,7 +120,7 @@ export default function Experience(props) {
       </Form>
 
 
-      { (experienceData == null) ? "" :
+      {(experienceData == null) ? "" :
         (experienceData.experiences || []).map((item, index) => {
           return (
             <Card border="primary" style={{ width: '28rem', margin: '.3rem' }}>
