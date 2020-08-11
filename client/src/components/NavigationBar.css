@@ -2,3 +2,11 @@
   background-color: #2c3e50;
   z-index: 2;
 }
+@media print {
+  .non-printable {
+    display: none;
+  }
+  .printable {
+    display: block;
+  }
+}

@@ -7,9 +7,11 @@ import Alert from 'react-bootstrap/Alert';
 
 export default function PersonalInfoForm(props) {
   const [personalInfo, setPersonalInfo] = useState(null);
-  useEffect(()=>{
-    setPersonalInfo(props.data)
-  },[props.data])
+  useEffect(() => {
+    if (props.data) {
+      setPersonalInfo(props.data)
+    }
+  }, [props.data])
 
   const onInputChange = (event) => {
     const updatedVal = event.target.id;
@@ -23,7 +25,7 @@ export default function PersonalInfoForm(props) {
       <Alert variant="primary">
         <Alert.Heading>Tell us about yourself!</Alert.Heading>
         <p>
-        This section lets employers know who you are and how to get in touch with you.
+          This section lets employers know who you are and how to get in touch with you.
         </p>
       </Alert>
 
@@ -31,7 +33,7 @@ export default function PersonalInfoForm(props) {
         <Form.Row>
           <Form.Group as={Col} xs={8} controlId="first_name">
             <Form.Label>First Name</Form.Label>
-            <Form.Control required type="text"  value={(personalInfo == null) ? "" : personalInfo.first_name} onChange={onInputChange} />
+            <Form.Control required type="text" value={(personalInfo == null) ? "" : personalInfo.first_name} onChange={onInputChange} />
           </Form.Group>
         </Form.Row>
         <Form.Row>

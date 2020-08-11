@@ -13,13 +13,15 @@ import showDateFromTo from "../../helpers/dateUtils";
 export default function EducationForm(props) {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [educations, setEducations] = useState(null);
+  const [educations, setEducations] = useState({educationInfo:[]});
   const [educationDetails, setEducationDetails] = useState({ institution: '', fieldOfStudy: '', typeOfDegree: '', GPA: '', start_date: '', end_date: '', in_progress: false });
   const [editEducation, setEditEducation] = useState({});
 
-  useEffect(()=>{
-    setEducations(props.data)
-  },[props.data])
+  useEffect(() => {
+    if (props.data) {
+      setEducations(props.data)
+    }
+  }, [props.data])
 
   const onHeadingChange = (event) => {
     const newEduHead = { ...educations, heading: event.target.value }
@@ -33,18 +35,18 @@ export default function EducationForm(props) {
     setEducationDetails(newEducationToBeAdded);
   }
 
-  function validate() {
-    if (!educationDetails.institution) {
-      return;
-    }
-    if (!educationDetails.fieldOfStudy) {
-      return;
-    }
-    if (!educationDetails.typeOfDegree) {
-      return;
-    }
-    submitNewEdInfo(educationDetails);
-  }
+  // function validate() {
+  //   if (!educationDetails.institution) {
+  //     return;
+  //   }
+  //   if (!educationDetails.fieldOfStudy) {
+  //     return;
+  //   }
+  //   if (!educationDetails.typeOfDegree) {
+  //     return;
+  //   }
+  //   submitNewEdInfo(educationDetails);
+  // }
   const submitNewEdInfo = (EdInfo) => {
     const totalEdInfo = [...educations.educationInfo, EdInfo]
     const newtotalEdInfo = { ...educations, educationInfo: totalEdInfo };
@@ -87,9 +89,13 @@ export default function EducationForm(props) {
       <Alert variant="primary">
         <Alert.Heading> Writing education in resume is mandatory!</Alert.Heading>
         <p>
+          Share the degrees you’ve earned and schools you’ve attended.
         Share the degrees you’ve earned and schools you’ve attended. 
-        Remember, learning doesn’t stop when you graduate.
-        This is a great place to add in any courses you’ve taken or certifications you’ve earned in the professional world as well!
+          Share the degrees you’ve earned and schools you’ve attended.
+        Share the degrees you’ve earned and schools you’ve attended. 
+          Share the degrees you’ve earned and schools you’ve attended.
+          Remember, learning doesn’t stop when you graduate.
+          This is a great place to add in any courses you’ve taken or certifications you’ve earned in the professional world as well!
         </p>
       </Alert>
 
@@ -104,7 +110,7 @@ export default function EducationForm(props) {
           </Form.Group>
         </Form.Row>
       </Form>
-      { (educations == null) ? "" :
+      {(educations == null) ? "" :
         educations.educationInfo.map((item, index) => {
           return (
             <Card border="primary" style={{ width: '28rem', margin: '.3rem' }}>
@@ -149,7 +155,7 @@ export default function EducationForm(props) {
         title="Add Education"
         show={showAddModal}
         onClose={() => setShowAddModal(false)}
-        onSubmit={() => validate(educationDetails)}
+        onSubmit={() => submitNewEdInfo(educationDetails)}
       >
 
         <Form>

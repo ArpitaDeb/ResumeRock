@@ -25,9 +25,14 @@ export default function Navigationbar() {
     setIsRegistered(data);
   }
 
+  const handleRegisteredUsers = (data) => {
+    setIsLoggedIn(data);
+    setIsRegistered(data)
+  }
+
   return (
     <>
-      <Navbar className="navigation-bar" variant="dark" fixed="top">
+      <Navbar className="navigation-bar non-printable" variant="dark" fixed="top">
         <Navbar.Brand as={Link} to="/" className="font-weight-bold">
           <img
             alt=""
@@ -42,8 +47,8 @@ export default function Navigationbar() {
           <Nav.Link as={Link} to="/resume">Build Resume</Nav.Link>
           {isLoggedIn ?
             <Button variant="outline-secondary" onClick={handleLogout}>Logout</Button>
-            :
-            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+            : isRegistered ? null :
+              <Nav.Link as={Link} to="/login">Login</Nav.Link>
           }
           {!isRegistered ?
             <Nav.Link as={Link} to="/registration">Register</Nav.Link>
@@ -60,11 +65,12 @@ export default function Navigationbar() {
           />
         </Route>
         <Route path="/registration">
-          <Registration isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn} />
+          <Registration
+            onUpdate={handleRegisteredUsers} 
+            />
         </Route>
         <Route path="/resume">
-          <ResumeBuilder/>
+          <ResumeBuilder />
         </Route>
         <Route path="/">
           {isLoggedIn ? <ResumeBuilder /> : <Landing />}

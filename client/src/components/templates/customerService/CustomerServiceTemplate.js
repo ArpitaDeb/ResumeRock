@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./customerServiceStyle.css";
+import "../../NavigationBar.css"
 import CoreCompetenciesSection from "./CoreCompetenciesSection";
 import EducationSection from "./EducationSection";
 import ReferenceSection from "./ReferenceSection";
@@ -12,7 +13,8 @@ import { data } from "./data"
 export default function CustomerServiceTemplate(props) {
   const pageRef = useRef(null);
   const [ratio, setRatio] = useState()
-
+  const scaleStyle ={ transform: `scale(${ratio * .9})`, transformOrigin: 'top left ', overflow: 'hidden' }
+  const noScaleStyle = { transform: `scale(${0.64})`, transformOrigin: 'top left ', overflow: 'hidden'  }
   const handleResize = () => {
     console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
     if (pageRef.current && pageRef.current.parentElement && pageRef.current.parentElement.offsetWidth){
@@ -38,8 +40,8 @@ export default function CustomerServiceTemplate(props) {
   }
 
   return (
-    <div ref={pageRef} style={{ transform: `scale(${ratio * .9})`, transformOrigin: 'top left ', overflow: 'hidden' }} className="container-fluid page">
-      <div className="container-fluid row main-container">
+    <div ref={pageRef} style={ props.noSclae? noScaleStyle:scaleStyle} className="container-fluid page printable">
+      <div className="container-fluid row main-container" ref={props._ref}>
 
         <div className="col-4 borderd d-flex flex-column justify-content-around no-padding ">
           <div className="left-container">
