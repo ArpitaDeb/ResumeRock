@@ -13,7 +13,7 @@ export default function LeftSidebar(props) {
   return (
     <Nav className="flex-column sidebar" onSelect={handleChange} >
       {props.items.map((item) => (
-        <Nav.Item>
+        <Nav.Item key={item.id}>
           <Nav.Link eventKey={item.id} active={item.id === selected}>
             <Spacer />
             {item.title}

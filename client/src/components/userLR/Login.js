@@ -30,6 +30,7 @@ export default function Login(props) {
     }
     return true;
   }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateForm) {

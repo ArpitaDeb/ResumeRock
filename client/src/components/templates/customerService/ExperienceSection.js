@@ -15,7 +15,7 @@ export default function ExperienceSection(props) {
     } else {
       const res = exps.map((item, index) => {
         return (
-          <div className="mb-4">
+          <div key={item.employer_name} className="mb-4">
             <div>
               <span className="bold">{item.job_title}</span>
               <Spacer />

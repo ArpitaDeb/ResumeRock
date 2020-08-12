@@ -21,8 +21,7 @@ export default function Preview(props) {
   const onFileImported = (data) => {
     setShowMenu(true);
     setShowUpload(false)
-    props.onUpdate(JSON.parse(data))
-  }
+    props.onUpdate(JSON.parse(data))  }
 
   const handleClose = (e) => {
     e.target.style.display = 'none';
@@ -71,7 +70,7 @@ export default function Preview(props) {
           </Button>
                 <Button
                   variant="light"
-                  onClick={() => { setShowMenu(false); setShowUpload(true) }}
+                  onClick={() => { setShowMenu(false); setShowUpload(true)}}
                 >
                   Import JSON
             </Button>
