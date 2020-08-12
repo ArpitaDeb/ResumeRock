@@ -1,26 +1,25 @@
 INSERT INTO
-  users (id, username, email, password)
+  users (username, email, password)
 VALUES
-  (1, 'SuperMario', 'mario@nintendo.com', 'test');
+  ('SuperMario', 'mario@nintendo.com', 'test');
 
 INSERT INTO
-  users (id, username, email, password)
+  users (username, email, password)
 VALUES
-  (2, 'Luigi', 'luigi@nintendo.com', 'test');
+  ('Luigi', 'luigi@nintendo.com', 'test');
 
 INSERT INTO
-  users (id, username, email, password)
+  users (username, email, password)
 VALUES
-  (3, 'Peach', 'peach@nintendo.com', 'test');
+  ('Peach', 'peach@nintendo.com', 'test');
 
 INSERT INTO
-  resumes(id, user_id, resumedata)
+  resume(user_id, resumedata)
 VALUES
   (
     1,
-    1,
     '{
-    "personalInfo": {"first_name": "ARPITA",
+    "personal_info": {"first_name": "ARPITA",
 		"last_name": "DEB",
     "prof_title": "Mrs.",
 		"email": "arpitadeb1990@gmail.com",
@@ -97,5 +96,30 @@ VALUES
 		],
 		"heading": "Reference"
 	}
-  }' :: jsonb
+  }'
+  );
+
+
+
+INSERT INTO
+  resume(user_id,resumedata)
+VALUES
+  (2,
+    '{
+    "personalInfo": {"first_name": "Ghazal",
+		"last_name": "F",
+    "prof_title": "Data Scientist",
+		"email": "g@f",
+    "linkedIn": "a.com",
+		"phone_number": "613",
+		"address_line1": "111 kent",
+		"city": "Gloucester",
+		"province": "ON",
+		"postal_code": "K1J8N1"
+	},
+	"summary": {
+		"heading": "summary",
+		"body": "I am beginner"
+	}
+  }'
   );

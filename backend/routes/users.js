@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = db => {
+
   const getUserByEmail = function (email) {
     const query = {
       text: `SELECT * FROM users WHERE email = $1;`,
@@ -13,6 +14,7 @@ module.exports = db => {
         return result[0];
       })
   };
+
   const registerUser = function (user) {
     console.log('user', user.userName);
     const query = {
@@ -25,15 +27,17 @@ module.exports = db => {
         return rows[0];
       })
   };
-  /* GET users listing. */
-  router.get('/', (req, res) => {
+
+  const createEmptyResume = function (userID) {
     const query = {
-      text: 'SELECT * FROM users;'
+      text: `INSERT INTO resume (user_id) VALUES ($1) RETURNING *;`,
+      values: [userID]
     };
-    db.query(query)
-      .then(result => res.json(result))
-      .catch(err => console.log(err));
-  });
+    console.log("Query to create empthy resume", query)
+    console.log("HERE!!!!!")
+    return db
+      .query(query)
+  };
 
   router.post('/', (req, res) => {
     // extract the data from req.body
@@ -52,10 +56,6 @@ module.exports = db => {
     // return the newly created user back
   });
 
-  //display the register form
-  router.get('/register', (req, res) => {
-    console.log(req.body);
-  });
   // Handling the register form
   router.post('/register', (req, res) => {
     const { userName, email, password } = req.body;
@@ -68,7 +68,12 @@ module.exports = db => {
     const values = { userName, email, password };
     registerUser(values)
       .then((newUser) => {
-        console.log('line104', newUser);
+        createEmptyResume(newUser.id)
+        console.log("CREATE EMPTY RESUME")
+        return newUser
+      })
+      .then((newUser) => {
+        console.log('User Info: ', newUser);
         req.session['user_id'] = newUser.id;
         req.session.userName = newUser.userName;
         return res.json({});
@@ -78,13 +83,7 @@ module.exports = db => {
         return res.status(422).json({ error: error.message });
       });
   });
-  router.get('/login', (req, res) => {
-    let templateVars = {
-      errorMsg: null,
-      user: req.session
-    };
-    return res.json(templateVars);
-  });
+
   router.post('/login', (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -117,9 +116,6 @@ module.exports = db => {
         console.log(error);
         res.status(500).end();
       });
-  });
-  router.post('/resumes', (req, res) => {
-    const {resumedata} = req.body
   });
   return router;
 };

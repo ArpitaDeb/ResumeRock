@@ -14,7 +14,7 @@ export default function EducationForm(props) {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [educations, setEducations] = useState({educationInfo:[]});
-  const [educationDetails, setEducationDetails] = useState({ institution: '', fieldOfStudy: '', typeOfDegree: '', GPA: '', start_date: '', end_date: '', in_progress: false });
+  const [educationDetails, setEducationDetails] = useState({ institution: '', fieldOfStudy: '', typeOfDegree: '', GPA: '', start_date: new Date(), end_date: new Date(), in_progress: false });
   const [editEducation, setEditEducation] = useState({});
 
   useEffect(() => {
@@ -113,7 +113,7 @@ export default function EducationForm(props) {
       {(educations == null) ? "" :
         educations.educationInfo.map((item, index) => {
           return (
-            <Card border="primary" style={{ width: '28rem', margin: '.3rem' }}>
+            <Card key={item.institution} border="primary" style={{ width: '28rem', margin: '.3rem' }}>
               <Card.Body>
                 <Card.Title>{item.institution}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
@@ -242,7 +242,7 @@ export default function EducationForm(props) {
       </CustomModal>
       <CustomModal
         title="Edit Education"
-        show={showEditModal}
+        show={!!showEditModal}
         onClose={() => setShowEditModal(false)}
         onSubmit={() => submitEdittedEduInfo(editEducation)}
       >
@@ -281,17 +281,17 @@ export default function EducationForm(props) {
           <Form.Row>
             <Form.Group as={Col} xs={6} controlId="start_date">
               <Form.Label>Start Date</Form.Label>
-              <DatePicker selected={editEducation.start_date}
+              <DatePicker selected={(typeof editEducation.start_date === 'string')? new Date(editEducation.start_date):editEducation.start_date}
                 onChange={(start_date) => handleEditEduInfoChange({ target: { id: 'start_date', value: start_date } })}
-                value={editEducation.start_date}
+                value={(typeof editEducation.start_date === 'string')? new Date(editEducation.start_date):editEducation.start_date}
               />
             </Form.Group>
             <Form.Group as={Col} xs={6} controlId="end_date">
               <Form.Label>End Date</Form.Label>
               <DatePicker disabled={editEducation.in_progress}
-                selected={editEducation.end_date}
+                selected={editEducation.end_date ? new Date(editEducation.end_date):new Date()}
                 onChange={(end_date) => handleEditEduInfoChange({ target: { id: 'end_date', value: end_date } })}
-                value={editEducation.end_date}
+                value={editEducation.end_date ? new Date(editEducation.end_date):new Date()}
               />
             </Form.Group>
             <Col xs="auto" style={{ position: 'absolute', right: '8rem', bottom: '5px' }}>

@@ -31,7 +31,6 @@ export default function Registration(props) {
   const history = useHistory();
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(state);
     axios.post(
       '/users/register', { email: state.email, password: state.password, userName: state.email }
     ).then(() => {

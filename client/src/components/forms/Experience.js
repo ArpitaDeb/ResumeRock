@@ -14,7 +14,6 @@ import showDateFromTo from "../../helpers/dateUtils";
 
 
 export default function Experience(props) {
-
   const emptyExperience = {
     employer_name: "",
     employer_description: "",
@@ -32,7 +31,7 @@ export default function Experience(props) {
   // showEditModal conatins the id of the selected experience to be editted
   const [showEditModal, setShowEditModal] = useState();
 
-  const [experienceData, setExperienceData] = useState({ experiences: [] });
+  const [experienceData, setExperienceData] = useState({ heading:'',experiences: [] });
   const [newExperience, setNewExperience] = useState(emptyExperience);
   const [editExperience, setEditExperience] = useState({});
 
@@ -58,7 +57,6 @@ export default function Experience(props) {
   }
 
   const handleNewExperienceChange = (event) => {
-    console.log("event:  ", event.target)
     const name = event.target.id;
     const newExperienceToBeAdded = { ...newExperience, [name]: event.target.value }
     setNewExperience(newExperienceToBeAdded);
@@ -113,7 +111,7 @@ export default function Experience(props) {
             <Form.Label>Heading</Form.Label>
             <Form.Control type="text"
               placeholder="E.g. Experience, Work Experience"
-              value={(experienceData == null) ? "" : experienceData.heading}
+              value={experienceData.heading}
               onChange={onHeadingChange} />
           </Form.Group>
         </Form.Row>
@@ -123,7 +121,7 @@ export default function Experience(props) {
       {(experienceData == null) ? "" :
         (experienceData.experiences || []).map((item, index) => {
           return (
-            <Card border="primary" style={{ width: '28rem', margin: '.3rem' }}>
+            <Card key={item.employer_name} border="primary" style={{ width: '28rem', margin: '.3rem' }}>
               <Card.Body>
                 <Card.Title>{item.employer_name}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
@@ -253,7 +251,7 @@ export default function Experience(props) {
               maxItems={5}
               ItemComponent={Item}
               StagingComponent={StagingItem}
-              value={newExperience.responsibilities}
+              value={newExperience.responsibilities || []}
             />
           </Form.Group>
 
@@ -267,7 +265,7 @@ export default function Experience(props) {
               maxItems={5}
               ItemComponent={Item}
               StagingComponent={StagingItem}
-              value={newExperience.achievements}
+              value={newExperience.achievements || []}
             />
           </Form.Group>
 
@@ -278,7 +276,7 @@ export default function Experience(props) {
 
       <CustomModal
         title="Edit Experience"
-        show={showEditModal}
+        show={!!showEditModal}
         onClose={() => setShowEditModal(false)}
         onSubmit={() => saveEdittedExperience(editExperience)}
       >
@@ -320,17 +318,20 @@ export default function Experience(props) {
           <Form.Row>
             <Form.Group as={Col} controlId="start_date">
               <Form.Label>Start Date</Form.Label>
-              <DatePicker className="form-control" selected={editExperience.start_date}
+              <DatePicker className="form-control" 
+              // selected={new Date(editExperience.start_date)}
+              selected={(typeof editExperience.start_date === 'string')? new Date(editExperience.start_date):editExperience.start_date}
                 onChange={(start_date) => handleEditExperienceChange({ target: { id: 'start_date', value: start_date } })}
-                value={editExperience.start_date}
+                value={new Date(editExperience.start_date)}
               />
             </Form.Group>
 
             <Form.Group as={Col} controlId="end_date">
               <Form.Label>End Date</Form.Label>
-              <DatePicker className="form-control" disabled={editExperience.present} selected={editExperience.end_date}
+              <DatePicker className="form-control" disabled={editExperience.present} 
+              selected={editExperience.end_date ? new Date(editExperience.end_date):new Date()}
                 onChange={(end_date) => handleEditExperienceChange({ target: { id: 'end_date', value: end_date } })}
-                value={editExperience.end_date}
+                value={new Date(editExperience.end_date)}
               />
             </Form.Group>
 
@@ -351,7 +352,7 @@ export default function Experience(props) {
               <Form.Control
                 size="md"
                 type="text"
-                required="true"
+                required={true}
                 onChange={handleEditExperienceChange}
                 value={editExperience.city}
               />
@@ -376,7 +377,7 @@ export default function Experience(props) {
               maxItems={5}
               ItemComponent={Item}
               StagingComponent={StagingItem}
-              value={editExperience.responsibilities}
+              value={editExperience.responsibilities || []}
             />
           </Form.Group>
 
@@ -390,7 +391,7 @@ export default function Experience(props) {
               maxItems={5}
               ItemComponent={Item}
               StagingComponent={StagingItem}
-              value={editExperience.achievements}
+              value={editExperience.achievements || []}
             />
           </Form.Group>
         </Form>

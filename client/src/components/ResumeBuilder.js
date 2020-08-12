@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,20 +14,47 @@ import CustomerServiceTemplate from "./templates/customerService/CustomerService
 import Experience from "./forms/Experience"
 import ReferenceForm from "./forms/ReferenceForm"
 import Preview from "./preview";
+import { debounce } from "lodash";
+
 
 
 export default function ResumeBuilder(props) {
-  const resumeDB = {
-  }
+
   const [selectedSection, setSelectedSection] = useState('personal_info');
-  const [resumeData, setResumeData] = useState(resumeDB);
-  const resumeDataOnUpdate = (data) => {
-    setResumeData({ ...resumeData, ...data });
-    axios.post("/users/resumes", {
-      //data: resumedata
-    }).then(() => {
+  const [resumeData, setResumeData] = useState({});
+  const sendData = (newData)=> {
+    axios.post(
+      '/resume', { resumeData: newData }
+    ).then(() => {
+      console.log("Sent data seccessfully!")
     }).catch(error => console.log(error));
   }
+  const sendDataDebounced = useRef(debounce(sendData,1000)).current
+  const resumeDataOnUpdate = (data) => {
+    const newData ={ ...resumeData, ...data }
+    setResumeData(newData);
+    sendDataDebounced(newData)
+  }
+
+  //Get the resume data
+  useEffect(() => {
+    axios.get('/resume').then(response => {
+      setResumeData(response.data[0] ? response.data[0].resumedata:{})
+    });
+  }, []);
+
+  // //Update the resume data every 5 seconds
+  //   useEffect(() => {
+  //     const interval = setInterval(() => {
+  //       console.log('This will run every 5 seconds! ResumeData:', resumeData);
+  //       axios.post(
+  //         '/resume', {resumeData:resumeData }
+  //       ).then(() => {
+  //         console.log("Sent data seccessfully!")
+  //       }).catch(error => console.log(error));
+  //     }, 5000);
+  //   }, []);
+
   const leftSideBarOnUpdate = (value) => {
     setSelectedSection(value);
   }
