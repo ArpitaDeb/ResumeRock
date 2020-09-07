@@ -121,7 +121,7 @@ export default function Experience(props) {
       {(experienceData == null) ? "" :
         (experienceData.experiences || []).map((item, index) => {
           return (
-            <Card key={item.employer_name} border="primary" style={{ width: '28rem', margin: '.3rem' }}>
+            <Card key={item.description} border="primary" style={{ width: '28rem', margin: '.3rem' }}>
               <Card.Body>
                 <Card.Title>{item.employer_name}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">

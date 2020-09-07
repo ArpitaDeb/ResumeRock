@@ -113,7 +113,7 @@ export default function EducationForm(props) {
       {(educations == null) ? "" :
         educations.educationInfo.map((item, index) => {
           return (
-            <Card key={item.institution} border="primary" style={{ width: '28rem', margin: '.3rem' }}>
+            <Card key={item.fieldOfStudy} border="primary" style={{ width: '28rem', margin: '.3rem' }}>
               <Card.Body>
                 <Card.Title>{item.institution}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">

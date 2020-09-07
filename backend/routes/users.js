@@ -117,5 +117,25 @@ module.exports = db => {
         res.status(500).end();
       });
   });
+
+
+  router.get('/', (req, res) => {
+    const user_id = req.session['user_id'];
+    const query = {
+      text: 'SELECT * FROM users WHERE id = $1;',
+      values: [userID]
+    };
+    db.query(query)
+      .then(result => res.json(result))
+      .catch(err => console.log(err));
+
+  });
+  router.get('/logout', (req,res)=>{
+    req.session['user_id'] = null;
+    req.session.userName = null;
+    res.status(200).end();
+
+  })
+
   return router;
 };

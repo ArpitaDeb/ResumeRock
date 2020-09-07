@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import logo from "../img/logo.png";
 import "./NavigationBar.css"
 import Landing from "../components/landingPage/Landing"
+import axios from 'axios';
 
 export default function Navigationbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,9 +17,15 @@ export default function Navigationbar() {
   const history = useHistory();
   const handleLogout = (event) => {
     event.preventDefault();
-    setIsLoggedIn(false);
-    setIsRegistered(false);
-    history.replace('/Login');
+    axios.get(
+      '/users/logout'
+    ).then(() => {
+      setIsLoggedIn(false);
+      setIsRegistered(false);
+      history.replace('/Login');
+    }).catch(error => console.log(error));
+
+
   }
 
   const handleShowingRegistrationBtn = (data) => {
@@ -44,7 +51,9 @@ export default function Navigationbar() {
         YourResume.Rock
         </Navbar.Brand>
         <Nav className="ml-auto">
-          <Nav.Link as={Link} to="/resume">Build Resume</Nav.Link>
+        {!isLoggedIn || !isRegistered ?
+          <Nav.Link as={Link} to="/resume">Build Resume</Nav.Link> : null
+        }
           {isLoggedIn ?
             <Button variant="outline-secondary" onClick={handleLogout}>Logout</Button>
             : isRegistered ? null :

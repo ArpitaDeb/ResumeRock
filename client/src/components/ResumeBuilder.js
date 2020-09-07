@@ -43,21 +43,10 @@ export default function ResumeBuilder(props) {
     });
   }, []);
 
-  // //Update the resume data every 5 seconds
-  //   useEffect(() => {
-  //     const interval = setInterval(() => {
-  //       console.log('This will run every 5 seconds! ResumeData:', resumeData);
-  //       axios.post(
-  //         '/resume', {resumeData:resumeData }
-  //       ).then(() => {
-  //         console.log("Sent data seccessfully!")
-  //       }).catch(error => console.log(error));
-  //     }, 5000);
-  //   }, []);
-
   const leftSideBarOnUpdate = (value) => {
     setSelectedSection(value);
   }
+
 
   const sections = [
     { id: "personal_info", title: "Personal Information", component: <PersonalInfoForm onUpdate={resumeDataOnUpdate} data={resumeData.personal_info} /> },
@@ -81,7 +70,7 @@ export default function ResumeBuilder(props) {
       <Container fluid className="non-printable">
         <Row className="rb-container vh-100 ">
           <Col className="sidebar-container col-2 vh-100">
-            <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />
+            <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate}/>
           </Col>
 
           <Col className="bg-white col-5 vh-100">
