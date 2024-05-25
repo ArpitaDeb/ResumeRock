@@ -182,6 +182,7 @@ export default function CoreCompetencyForm(props) {
             <Form.Group as={Col} xs={5} controlId="rating">
               <Form.Label>Rating</Form.Label>
               <ReactStars
+                half={false}
                 value={editSkill.rating}
                 count={5}
                 onChange={(rating) => handleEditSkillChange({ target: { id: 'rating', value: rating } })}

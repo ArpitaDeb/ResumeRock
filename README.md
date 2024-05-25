@@ -1,5 +1,5 @@
 # ResumeRock
-YourResume.Rock is a free and open-source resume builder. You can create multiple resumes, update them, and download them in PDF format as easily as 1, 2, or 3!
+YourResume.Rock is a free and open-source fully functional resume builder web application that takes users information and let them create and download resume based on the selected template. You can create multiple resumes, update them, and download them in PDF format as easily as 1, 2, or 3!
 
 ## Features
 * Resume content can be edited just like a normal document editor (cut, copy, undo, etc)

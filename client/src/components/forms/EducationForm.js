@@ -90,10 +90,6 @@ export default function EducationForm(props) {
         <Alert.Heading> Writing education in resume is mandatory!</Alert.Heading>
         <p>
           Share the degrees you’ve earned and schools you’ve attended.
-        Share the degrees you’ve earned and schools you’ve attended. 
-          Share the degrees you’ve earned and schools you’ve attended.
-        Share the degrees you’ve earned and schools you’ve attended. 
-          Share the degrees you’ve earned and schools you’ve attended.
           Remember, learning doesn’t stop when you graduate.
           This is a great place to add in any courses you’ve taken or certifications you’ve earned in the professional world as well!
         </p>
