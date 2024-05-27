@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8001",
+  "proxy": "https://resume-rock.vercel.app/",
   "dependencies": {
     "@react-pdf/renderer": "^1.6.10",
     "@testing-library/jest-dom": "^4.2.4",
