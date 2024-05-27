@@ -1,17 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-
-// module.exports = (db) => {
-//   db.supabase
-//   .from('users')
-//   .select()
-//   .then(res => {
-//     console.log(res)
-// })
-// .catch(err => {
-//     console.error(err)
-// })
 module.exports = (db) => {
   const getUserByEmail = async (email) => {
     const { data, error } = await db.supabase
@@ -23,12 +12,11 @@ module.exports = (db) => {
     if (error) {
       throw error;
     }
-
     return data;
   };
 
   const registerUser = async (user) => {
-    console.log('user', user.username, user.email,  user.password);
+
     const { data, error } = await db.supabase
       .from('users')
       .insert([{ username: user.username, email: user.email, password: user.password }])
@@ -38,7 +26,6 @@ module.exports = (db) => {
     if (error) {
       throw error;
     }
-    console.log('New user created:', data);
     return data;
   };
 
@@ -51,25 +38,19 @@ module.exports = (db) => {
     if (error) {
       throw error;
     }
-    console.log('Empty resume created for user:', data);
     return data;
   };
 
   router.post('/', async (req, res) => {
     const { username, email, password } = req.body;
-    console.log("req.body:", req.body);
-    console.log({ username }, { email }, { password });
-
     try {
       const { data, error } = await db.supabase
         .from('users')
         .insert([{ username, email, password }])
         .single();
-
       if (error) {
         throw error;
       }
-
       res.json(data);
     } catch (err) {
       console.error(err);
@@ -85,20 +66,15 @@ module.exports = (db) => {
       };
       return res.json(templateVars);
     }
-
     const values = { username, email, password };
     
     try {
       const newUser = await registerUser(values);
-      console.error('User registration failed:', newUser);
       if (!newUser || !newUser.id) {
         throw new Error('User registration failed.');
       }
-
       await createEmptyResume(newUser.id);
-      console.log("CREATE EMPTY RESUME");
-
-      console.log('User Info: ', newUser);
+    
       req.session['user_id'] = newUser.id;
       req.session.username = newUser.username;
       res.json({});

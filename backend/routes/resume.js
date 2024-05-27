@@ -24,8 +24,7 @@ module.exports = (db) => {
   
 
   router.post('/', async (req, res) => {
-    console.log("post to resume: req.body", req.body);
- 
+    
     const { resumeData } = req.body;
     const userID = req.session.user_id;
 
@@ -44,7 +43,6 @@ module.exports = (db) => {
         .eq('user_id', userID);
 
       if (error) {
-        console.log("post err", error);
         throw error;
       }
 
