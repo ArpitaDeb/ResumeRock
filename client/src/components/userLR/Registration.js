@@ -14,7 +14,7 @@ export default function Registration(props) {
   const [state, setState] = useState({
     email: "",
     password: "",
-    userName: "",
+    username: "",
     confirm_password: ""
   })
   const [error, setError] = useState("");
@@ -32,7 +32,7 @@ export default function Registration(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post(
-      '/users/register', { email: state.email, password: state.password, userName: state.email }
+      '/users/register', { email: state.email, password: state.password, username: state.email }
     ).then(() => {
       history.push('/');
       props.onUpdate(true);

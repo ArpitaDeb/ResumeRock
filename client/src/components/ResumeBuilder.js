@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -15,31 +15,41 @@ import Experience from "./forms/Experience"
 import ReferenceForm from "./forms/ReferenceForm"
 import Preview from "./preview";
 import { debounce } from "lodash";
-
-
+import initialResumeData from "./InitialResumeData"
 
 export default function ResumeBuilder(props) {
 
   const [selectedSection, setSelectedSection] = useState('personal_info');
-  const [resumeData, setResumeData] = useState({});
-  const sendData = (newData)=> {
-    axios.post(
-      '/resume', { resumeData: newData }
-    ).then(() => {
-      console.log("Sent data seccessfully!")
-    }).catch(error => console.log(error));
-  }
-  const sendDataDebounced = useRef(debounce(sendData,1000)).current
+  const [resumeData, setResumeData] = useState(initialResumeData);
+  const sendData = useCallback((newData) => {
+    axios.post('/resume', { resumeData: newData })
+      .then(() => {
+        console.log("Sent data successfully!");
+      })
+      .catch(error => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    const debouncedSendData = debounce((newData) => {
+      sendData(newData);
+    }, 1000);
+
+    debouncedSendData(resumeData);
+
+    // Cleanup function to cancel any pending debounced calls on unmount
+    return () => {
+      debouncedSendData.cancel();
+    };
+  }, [resumeData, sendData]);
+
   const resumeDataOnUpdate = (data) => {
-    const newData ={ ...resumeData, ...data }
-    setResumeData(newData);
-    sendDataDebounced(newData)
+    setResumeData((prevData) => ({ ...prevData, ...data }));
   }
 
   //Get the resume data
   useEffect(() => {
     axios.get('/resume').then(response => {
-      setResumeData(response.data[0] ? response.data[0].resumedata:{})
+      setResumeData(response.data[0] ? response.data[0].resumedata : initialResumeData)
     });
   }, []);
 
@@ -70,7 +80,7 @@ export default function ResumeBuilder(props) {
       <Container fluid className="non-printable">
         <Row className="rb-container vh-100 ">
           <Col className="sidebar-container col-2 vh-100">
-            <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate}/>
+            <LeftSideBar items={sections} onUpdate={leftSideBarOnUpdate} />
           </Col>
 
           <Col className="bg-white col-5 vh-100">
@@ -83,7 +93,6 @@ export default function ResumeBuilder(props) {
             <Preview onUpdate={resumeDataOnUpdate} data={resumeData} />
           </Col>
         </Row>
-
       </Container>
 
       <div className="print-preview overlay-white">
@@ -91,5 +100,4 @@ export default function ResumeBuilder(props) {
       </div>
     </>
   );
-
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
@@ -7,45 +7,36 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import CustomModal from "../CustomModal";
 
-export default function ReferenceForm(props) {
+export default function ReferenceForm({ data, onUpdate }) {
+  console.log("fatt", data)
+  const initialRef = { name: "", email: "" };
   const [showAddModal, setShowAddModal] = useState(false);
   // showEditModal contains the id of the selected skill to be editted
   const [showEditModal, setShowEditModal] = useState();
-  const [reference, setReference] = useState({ referees: [] });
-  const [newRef, setNewRef] = useState({ name: "", email: "", req: false });
+  const [newRef, setNewRef] = useState(initialRef);
   const [editRef, setEditRef] = useState({});
 
-  useEffect(()=>{
-    if (props.data){
-      setReference(props.data);
-    }
-  },[props.data])
-
   const onHeadingChange = (event) => {
-    const newRefHead = { ...reference, heading: event.target.value }
-    setReference(newRefHead);
-    props.onUpdate({ references: newRefHead });
+    const newRefHead = { ...data, heading: event.target.value }
+    onUpdate({ references: newRefHead });
   }
   const handleRefChange = (event) => {
-    const updatedVal = event.target.id;
-    const addedRef = { ...newRef, [updatedVal]: event.target.value }
-    setNewRef(addedRef);
+    const name = event.target.id;
+    const value = event.target.value;
+    setNewRef((prev) => ({ ...prev, [name]: value }));
   }
-  const submitNewRef = (refer) => {
-    const totalReferees = [...reference.referees, refer]
-    const newTotalReferees = { ...reference, referees: totalReferees };
-    setReference(newTotalReferees);
-    props.onUpdate({ references: newTotalReferees });
+  const submitNewRef = () => {
+    const totalReferees = [...data.referees, newRef]
+    const newTotalReferees = { ...data, referees: totalReferees };
+    onUpdate({ references: newTotalReferees });
     setShowAddModal(false);
     setNewRef({ name: "", email: '' });
   }
   const handleEditRefChange = (event) => {
     const name = event.target.id;
-    const editedRef = { ...editRef, [name]: event.target.value }
-    setEditRef(editedRef);
+    const value = event.target.value;
+    setEditRef((prev) => ({ ...prev, [name]: value }));
   }
-
-
 
   const handleCheckboxNewRef = () => {
     const newRefToBeAdded = { ...newRef, req: !newRef.req, name: "", email: "" }
@@ -58,31 +49,29 @@ export default function ReferenceForm(props) {
   }
 
 
-  const submitEdittedRef = (refer) => {
-    const totalReferees = [...reference.referees];
-    totalReferees[showEditModal - 1] = refer;
-    const newTotalReferees = { ...reference, referees: totalReferees };
-    setReference(newTotalReferees);
-    props.onUpdate({ references: newTotalReferees });
+  const submitEdittedRef = () => {
+    const totalReferees = [...data.referees];
+    totalReferees[showEditModal - 1] = editRef;
+    const newTotalReferees = { ...data, referees: totalReferees };
+    onUpdate({ references: newTotalReferees });
     setShowEditModal(false);
   }
 
   const deleteReferee = (index) => {
-    const totalReferees = [...reference.referees];
+    const totalReferees = [...data.referees];
     totalReferees.splice(index, 1);
-    const newtotalReferees = { ...reference, referees: totalReferees };
-    setReference(newtotalReferees);
-    props.onUpdate({ references: newtotalReferees });
+    const newtotalReferees = { ...data, referees: totalReferees };
+    onUpdate({ references: newtotalReferees });
   }
 
   return (
     <>
       <Alert variant="primary">
         <Alert.Heading>Create a Reference List!</Alert.Heading>
-        <p>
+        <h7>
           Many potential employers ask for a list of references in a job application or at the end of a job interview.
           That’s why it’s a good idea to have a list of references handy when you’re applying for a new job.
-        </p>
+        </h7>
       </Alert>
 
       <Form>
@@ -91,13 +80,13 @@ export default function ReferenceForm(props) {
             <Form.Label>Heading</Form.Label>
             <Form.Control type="text"
               placeholder="E.g. References"
-              value={(reference == null) ? "" : reference.heading}
+              value={data.heading}
               onChange={onHeadingChange} />
           </Form.Group>
         </Form.Row>
       </Form>
-      { (reference == null) ? null :
-        reference.referees.map((item, index) => {
+      {
+        data.referees.map((item, index) => {
           if (!item.name || !item.email) {
             return (
               <Card border="primary" style={{ width: '20rem', margin: '.5rem' }}>

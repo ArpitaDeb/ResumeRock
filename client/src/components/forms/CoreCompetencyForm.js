@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
@@ -8,7 +8,8 @@ import Card from 'react-bootstrap/Card';
 import CustomModal from "../CustomModal";
 import ReactStars from 'react-stars'
 
-export default function CoreCompetencyForm(props) {
+export default function CoreCompetencyForm({ data, onUpdate }) {
+  console.log("core", data);
   const ratingMap = {
     1: "Beginner",
     2: "Basic",
@@ -18,22 +19,14 @@ export default function CoreCompetencyForm(props) {
   }
 
   const [showAddModal, setShowAddModal] = useState(false);
-  // showEditModal conatins the id of the selected skill to be editted
+  // showEditModal contains the id of the selected skill to be edited
   const [showEditModal, setShowEditModal] = useState();
-  const [coreCompetencies, setCoreCompetencies] = useState({skills:[]});
   const [newSkill, setNewSkill] = useState({ name: "", rating: 1 });
   const [editSkill, setEditSkill] = useState({});
 
-  useEffect(() => {
-    if (props.data) {
-      setCoreCompetencies(props.data)
-    }
-  }, [props.data])
-
   const onHeadingChange = (event) => {
-    const newCoreCompetencies = { ...coreCompetencies, heading: event.target.value }
-    setCoreCompetencies(newCoreCompetencies);
-    props.onUpdate({ core_competencies: newCoreCompetencies });
+    const newData = { ...data, heading: event.target.value }
+    onUpdate({ core_competencies: newData });
   }
 
   const handleNewSkillChange = (event) => {
@@ -43,10 +36,10 @@ export default function CoreCompetencyForm(props) {
   }
 
   const saveNewSkill = (skill) => {
-    const allSkills = [...coreCompetencies.skills, skill]
-    const newCoreCompetencies = { ...coreCompetencies, skills: allSkills };
-    setCoreCompetencies(newCoreCompetencies);
-    props.onUpdate({ core_competencies: newCoreCompetencies });
+    const allSkills = [...data.skills, skill]
+    const newData = { ...data, skills: allSkills };
+
+    onUpdate({ core_competencies: newData });
     setShowAddModal(false);
     setNewSkill({ name: "", rating: 1 })
   }
@@ -58,34 +51,32 @@ export default function CoreCompetencyForm(props) {
   }
 
   const saveEdittedSkill = (skill) => {
-    const newSkills = [...coreCompetencies.skills];
+    const newSkills = [...data.skills];
     newSkills[showEditModal - 1] = skill;
-    const newCoreCompetencies = { ...coreCompetencies, skills: newSkills };
-    setCoreCompetencies(newCoreCompetencies);
-    props.onUpdate({ core_competencies: newCoreCompetencies });
+    const newData = { ...data, skills: newSkills };
+    onUpdate({ core_competencies: newData });
     setShowEditModal(false);
   }
 
 
   const deleteSkill = (index) => {
-    const newSkills = [...coreCompetencies.skills];
+    const newSkills = [...data.skills];
     newSkills.splice(index, 1)
-    const newCoreCompetencies = { ...coreCompetencies, skills: newSkills };
-    setCoreCompetencies(newCoreCompetencies);
-    props.onUpdate({ core_competencies: newCoreCompetencies });
+    const newData = { ...data, skills: newSkills };
+    onUpdate({ core_competencies: newData });
   }
 
   return (
     <>
       <Alert variant="primary">
         <Alert.Heading>Your skills show us what you got!</Alert.Heading>
-        <p>
+        <h7>
           Highlight your proficiency with different skills,
           platforms, and technologies that the company is asking
           for in the job description. This will help boost your
           chances of beating the resume scanning robots as well
           as increasing relevance with anyone reading your resume.
-        </p>
+        </h7>
       </Alert>
       <Form>
         <Form.Row>
@@ -93,13 +84,13 @@ export default function CoreCompetencyForm(props) {
             <Form.Label>Heading</Form.Label>
             <Form.Control type="text"
               placeholder="E.g. Core Competencies, Skills, Expertise"
-              value={(coreCompetencies == null) ? "" : coreCompetencies.heading}
+              value={data.heading}
               onChange={onHeadingChange} />
           </Form.Group>
         </Form.Row>
       </Form>
-      {(coreCompetencies == null) ? "" :
-        coreCompetencies.skills.map((item, index) => {
+      {
+        data.skills.map((item, index) => {
           return (
             <Card border="primary" style={{ width: '20rem', margin: '.5rem' }}>
               <Card.Body>
@@ -154,6 +145,7 @@ export default function CoreCompetencyForm(props) {
               <ReactStars
                 count={5}
                 size={24}
+                half={false}
                 color2={'#ffd700'}
                 onChange={(rating) => handleNewSkillChange({ target: { id: 'rating', value: rating } })}
                 value={newSkill.rating}

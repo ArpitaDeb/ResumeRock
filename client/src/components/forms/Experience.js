@@ -99,10 +99,10 @@ export default function Experience(props) {
     <>
       <Alert variant="primary">
         <Alert.Heading>Let’s work on your experience!</Alert.Heading>
-        <p>
+        <h7>
           Start with your most recent job and work backwards. You can include relevant
           volunteer work, internships, and extracurricular activities too.
-        </p>
+        </h7>
       </Alert>
 
       <Form>

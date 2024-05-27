@@ -17,6 +17,7 @@ export default function ContactsSection(props) {
         <div >{data.address_line1}</div>
         <span>{data.city}{(data.city && data.province) ? "," : ""} <span className="text-uppercase">{data.province}</span> {data.postal_code}</span>
         <div className="mt-3 mb-3">
+          <p>{data.linkedIn}</p>
           {data.phone_number}
         </div>
         {data.email}

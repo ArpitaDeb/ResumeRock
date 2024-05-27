@@ -35,18 +35,6 @@ export default function EducationForm(props) {
     setEducationDetails(newEducationToBeAdded);
   }
 
-  // function validate() {
-  //   if (!educationDetails.institution) {
-  //     return;
-  //   }
-  //   if (!educationDetails.fieldOfStudy) {
-  //     return;
-  //   }
-  //   if (!educationDetails.typeOfDegree) {
-  //     return;
-  //   }
-  //   submitNewEdInfo(educationDetails);
-  // }
   const submitNewEdInfo = (EdInfo) => {
     const totalEdInfo = [...educations.educationInfo, EdInfo]
     const newtotalEdInfo = { ...educations, educationInfo: totalEdInfo };
@@ -88,11 +76,11 @@ export default function EducationForm(props) {
     <>
       <Alert variant="primary">
         <Alert.Heading> Writing education in resume is mandatory!</Alert.Heading>
-        <p>
+        <h7>
           Share the degrees you’ve earned and schools you’ve attended.
           Remember, learning doesn’t stop when you graduate.
           This is a great place to add in any courses you’ve taken or certifications you’ve earned in the professional world as well!
-        </p>
+        </h7>
       </Alert>
 
       <Form>

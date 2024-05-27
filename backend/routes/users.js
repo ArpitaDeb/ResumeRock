@@ -1,90 +1,114 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = db => {
 
-  const getUserByEmail = function (email) {
-    const query = {
-      text: `SELECT * FROM users WHERE email = $1;`,
-      values: [email]
-    };
-    return db
-      .query(query)
-      .then(result => {
-        return result[0];
-      })
+// module.exports = (db) => {
+//   db.supabase
+//   .from('users')
+//   .select()
+//   .then(res => {
+//     console.log(res)
+// })
+// .catch(err => {
+//     console.error(err)
+// })
+module.exports = (db) => {
+  const getUserByEmail = async (email) => {
+    const { data, error } = await db.supabase
+      .from('users')
+      .select('*')
+      .eq('email', email)
+      .single();
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
   };
 
-  const registerUser = function (user) {
-    console.log('user', user.userName);
-    const query = {
-      text: `INSERT INTO users (userName, email, password) VALUES ($1, $2, $3) RETURNING *;`,
-      values: [user.userName, user.email, user.password]
-    };
-    return db
-      .query(query)
-      .then(rows => {
-        return rows[0];
-      })
+  const registerUser = async (user) => {
+    console.log('user', user.username, user.email,  user.password);
+    const { data, error } = await db.supabase
+      .from('users')
+      .insert([{ username: user.username, email: user.email, password: user.password }])
+      .select()
+      .single();
+
+    if (error) {
+      throw error;
+    }
+    console.log('New user created:', data);
+    return data;
   };
 
-  const createEmptyResume = function (userID) {
-    const query = {
-      text: `INSERT INTO resume (user_id) VALUES ($1) RETURNING *;`,
-      values: [userID]
-    };
-    console.log("Query to create empthy resume", query)
-    console.log("HERE!!!!!")
-    return db
-      .query(query)
+  const createEmptyResume = async (userID) => {
+    const { data, error } = await db.supabase
+      .from('resume')
+      .insert([{ user_id: userID }])
+      .single();
+
+    if (error) {
+      throw error;
+    }
+    console.log('Empty resume created for user:', data);
+    return data;
   };
 
-  router.post('/', (req, res) => {
-    // extract the data from req.body
-    const { userName, email, password } = req.body;
+  router.post('/', async (req, res) => {
+    const { username, email, password } = req.body;
     console.log("req.body:", req.body);
-    console.log({ userName }, { email }, { password });
-    // create an insert query in the db
-    const query = {
-      text: `INSERT INTO users (userName, email, password) VALUES ($1, $2, $3) RETURNING *;`,
-      values: [userName, email, password]
-    };
-    db
-      .query(query)
-      .then(result => res.json(result[0]))
-      .catch(err => console.log(err));
-    // return the newly created user back
+    console.log({ username }, { email }, { password });
+
+    try {
+      const { data, error } = await db.supabase
+        .from('users')
+        .insert([{ username, email, password }])
+        .single();
+
+      if (error) {
+        throw error;
+      }
+
+      res.json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    }
   });
 
-  // Handling the register form
-  router.post('/register', (req, res) => {
-    const { userName, email, password } = req.body;
-    if (!userName || !email || !password) {
+  router.post('/register', async (req, res) => {
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
       let templateVars = {
         errorMsg: "Please fill in all details to register"
       };
-      return res.json(templateVars)
-    };
-    const values = { userName, email, password };
-    registerUser(values)
-      .then((newUser) => {
-        createEmptyResume(newUser.id)
-        console.log("CREATE EMPTY RESUME")
-        return newUser
-      })
-      .then((newUser) => {
-        console.log('User Info: ', newUser);
-        req.session['user_id'] = newUser.id;
-        req.session.userName = newUser.userName;
-        return res.json({});
-      })
-      .catch((error) => {
-        console.log(error);
-        return res.status(422).json({ error: error.message });
-      });
+      return res.json(templateVars);
+    }
+
+    const values = { username, email, password };
+    
+    try {
+      const newUser = await registerUser(values);
+      console.error('User registration failed:', newUser);
+      if (!newUser || !newUser.id) {
+        throw new Error('User registration failed.');
+      }
+
+      await createEmptyResume(newUser.id);
+      console.log("CREATE EMPTY RESUME");
+
+      console.log('User Info: ', newUser);
+      req.session['user_id'] = newUser.id;
+      req.session.username = newUser.username;
+      res.json({});
+    } catch (error) {
+      console.log(error);
+      res.status(422).json({ error: error.message });
+    }
   });
 
-  router.post('/login', (req, res) => {
+  router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
       let templateVars = {
@@ -92,50 +116,64 @@ module.exports = db => {
         user: req.session
       };
       return res.status(401).json(templateVars);
-    };
-    getUserByEmail(email)
-      .then(user => {
-        if (!user) {
-          let templateVars = {
-            errorMsg: 'Email is not registered with us',
-            user: req.session
-          };
-          return res.status(401).json(templateVars);
-        } else if (user.password !== password) {
-          let templateVars = {
-            errorMsg: 'Invalid credentials,please try again',
-            user: req.session
-          };
-          return res.status(401).json(templateVars);
-        } else {
-          req.session['user_id'] = user.id;
-          req.session.userName = user.userName;
-          return res.json({});
-        }
-      }).catch((error) => {
-        console.log(error);
-        res.status(500).end();
-      });
+    }
+
+    try {
+      const user = await getUserByEmail(email);
+
+      if (!user) {
+        let templateVars = {
+          errorMsg: 'Email is not registered with us',
+          user: req.session
+        };
+        return res.status(401).json(templateVars);
+      } else if (user.password !== password) {
+        let templateVars = {
+          errorMsg: 'Invalid credentials, please try again',
+          user: req.session
+        };
+        return res.status(401).json(templateVars);
+      } else {
+        req.session['user_id'] = user.id;
+        req.session.username = user.username;
+        res.json({});
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).end();
+    }
   });
 
+  router.get('/', async (req, res) => {
+    const userID = req.session['user_id'];
 
-  router.get('/', (req, res) => {
-    const user_id = req.session['user_id'];
-    const query = {
-      text: 'SELECT * FROM users WHERE id = $1;',
-      values: [userID]
-    };
-    db.query(query)
-      .then(result => res.json(result))
-      .catch(err => console.log(err));
+    if (!userID) {
+      return res.status(400).send('User ID is not set in the session.');
+    }
 
+    try {
+      const { data, error } = await db.supabase
+        .from('users')
+        .select('*')
+        .eq('id', userID)
+        .single();
+
+      if (error) {
+        throw error;
+      }
+
+      res.json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    }
   });
-  router.get('/logout', (req,res)=>{
+
+  router.get('/logout', (req, res) => {
     req.session['user_id'] = null;
-    req.session.userName = null;
+    req.session.username = null;
     res.status(200).end();
-
-  })
+  });
 
   return router;
 };

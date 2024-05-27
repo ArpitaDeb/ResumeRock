@@ -54,3 +54,11 @@
   background: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
+@media print {
+  .non-printable {
+    display: none;
+  }
+  .printable {
+    display: block;
+  }
+}

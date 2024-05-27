@@ -4,14 +4,12 @@ import { ButtonGroup, Button } from "react-bootstrap";
 import "./preview.css"
 import fileDownload from 'js-file-download';
 import { Upload } from "./Upload";
-import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer'
 
 export default function Preview(props) {
 
   const [showUpload, setShowUpload] = useState(false);
   const [showMenu, setShowMenu] = useState(true);
   const [fullscreen, setFullscreen] = useState(false);
-  const ref = useRef(null)
 
   const showImportBtn = () => Object.keys(props.data).length === 0
 
@@ -27,13 +25,6 @@ export default function Preview(props) {
     e.target.style.display = 'none';
     setFullscreen(false);
   }
-  const MyDoc = () => (
-    <Document>
-      <Page>
-        <CustomerServiceTemplate ref={ref} data={props.data} style={{ textAlign: "center" }} />
-      </Page>
-    </Document>
-  )
 
   return (
     <>
