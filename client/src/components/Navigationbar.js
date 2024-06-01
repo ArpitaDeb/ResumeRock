@@ -10,7 +10,7 @@ import "./NavigationBar.css"
 import Landing from "../components/landingPage/Landing"
 import axios from 'axios';
 
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:8001';
 export default function Navigationbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);

@@ -9,7 +9,7 @@ import {
   Card,
   CardBody,
 } from "reactstrap";
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:8001';
 export default function Login(props) {
   const { setIsLoggedIn, onUpdate } = props
   const [email, setEmail] = useState("");

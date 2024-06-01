@@ -17,7 +17,7 @@ import Preview from "./preview";
 import { debounce } from "lodash";
 import initialResumeData from "./InitialResumeData"
 
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:8001';
 export default function ResumeBuilder(props) {
 
   const [selectedSection, setSelectedSection] = useState('personal_info');

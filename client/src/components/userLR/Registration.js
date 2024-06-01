@@ -9,7 +9,7 @@ import {
 } from "reactstrap";
 import avatar from "../../img/avatar.png";
 
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:8001';
 
 export default function Registration(props) {
   const [state, setState] = useState({
