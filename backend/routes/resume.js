@@ -2,9 +2,19 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.get('/', async (req, res) => {
+  // Middleware to check user session
+  const checkSession = (req, res, next) => {
     const userID = req.session.user_id;
-    
+    if (!userID) {
+      return res.status(400).send('User ID is not set in the session.');
+    }
+    next();
+  };
+
+  router.get('/', checkSession, async (req, res) => {
+    const userID = req.session.user_id;
+    console.log('Fetching resume for user ID:', userID);
+
     try {
       const { data, error } = await db.supabase
         .from('resume')
@@ -17,20 +27,15 @@ module.exports = (db) => {
 
       res.json(data);
     } catch (err) {
-      console.error(err);
+      console.error('Error fetching resume:', err);
       res.status(500).send('Internal Server Error');
     }
   });
-  
 
-  router.post('/', async (req, res) => {
-    
+  router.post('/', checkSession, async (req, res) => {
     const { resumeData } = req.body;
     const userID = req.session.user_id;
-
-    if (!userID) {
-      return res.status(400).send('User ID is not set in the session.');
-    }
+    console.log('Updating resume for user ID:', userID, 'with data:', resumeData);
 
     if (!resumeData) {
       return res.status(400).send('Resume data is not provided.');
@@ -46,13 +51,12 @@ module.exports = (db) => {
         throw error;
       }
 
-      res.status(200).send('All good!');
+      res.status(200).send('Resume updated successfully!');
     } catch (err) {
-      console.error(err);
+      console.error('Error updating resume:', err);
       res.status(500).send('Internal Server Error');
     }
   });
 
   return router;
-
 };

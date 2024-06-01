@@ -30,6 +30,10 @@ module.exports = (db) => {
   };
 
   const createEmptyResume = async (userID) => {
+    console.log('Creating empty resume for user ID:', userID);
+    if (!userID) {
+      throw new Error('User ID is undefined when creating empty resume');
+    }
     const { data, error } = await db.supabase
       .from('resume')
       .insert([{ user_id: userID }])
@@ -70,6 +74,7 @@ module.exports = (db) => {
     
     try {
       const newUser = await registerUser(values);
+      console.log('New User:', newUser);
       if (!newUser || !newUser.id) {
         throw new Error('User registration failed.');
       }
