@@ -9,7 +9,7 @@ import {
   Card,
   CardBody,
 } from "reactstrap";
-
+const baseURL = process.env.REACT_APP_API_URL;
 export default function Login(props) {
   const { setIsLoggedIn, onUpdate } = props
   const [email, setEmail] = useState("");
@@ -35,7 +35,7 @@ export default function Login(props) {
     event.preventDefault();
     if (validateForm) {
       axios.post(
-        '/users/login', { email: email, password: password }
+        `${baseURL}/users/login`, { email: email, password: password }
       ).then(() => {
         history.push('/');
         setIsLoggedIn(true);

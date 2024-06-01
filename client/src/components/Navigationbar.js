@@ -10,6 +10,7 @@ import "./NavigationBar.css"
 import Landing from "../components/landingPage/Landing"
 import axios from 'axios';
 
+const baseURL = process.env.REACT_APP_API_URL;
 export default function Navigationbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
@@ -18,7 +19,7 @@ export default function Navigationbar() {
   const handleLogout = (event) => {
     event.preventDefault();
     axios.get(
-      '/users/logout'
+      `${baseURL}/users/logout`
     ).then(() => {
       setIsLoggedIn(false);
       setIsRegistered(false);

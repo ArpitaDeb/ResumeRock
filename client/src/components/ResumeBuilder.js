@@ -17,12 +17,13 @@ import Preview from "./preview";
 import { debounce } from "lodash";
 import initialResumeData from "./InitialResumeData"
 
+const baseURL = process.env.REACT_APP_API_URL;
 export default function ResumeBuilder(props) {
 
   const [selectedSection, setSelectedSection] = useState('personal_info');
   const [resumeData, setResumeData] = useState(initialResumeData);
   const sendData = useCallback((newData) => {
-    axios.post('/resume', { resumeData: newData })
+    axios.post( `${baseURL}/resume`, { resumeData: newData })
       .then(() => {
         console.log("Sent data successfully!");
       })
@@ -48,7 +49,7 @@ export default function ResumeBuilder(props) {
 
   //Get the resume data
   useEffect(() => {
-    axios.get('/resume').then(response => {
+    axios.get( `${baseURL}/resume`).then(response => {
       setResumeData(response.data[0] ? response.data[0].resumedata : initialResumeData)
     });
   }, []);

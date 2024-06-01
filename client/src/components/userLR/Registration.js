@@ -9,6 +9,7 @@ import {
 } from "reactstrap";
 import avatar from "../../img/avatar.png";
 
+const baseURL = process.env.REACT_APP_API_URL;
 
 export default function Registration(props) {
   const [state, setState] = useState({
@@ -32,7 +33,7 @@ export default function Registration(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post(
-      '/users/register', { email: state.email, password: state.password, username: state.email }
+      `${baseURL}/users/register`, { email: state.email, password: state.password, username: state.email }
     ).then(() => {
       history.push('/');
       props.onUpdate(true);
